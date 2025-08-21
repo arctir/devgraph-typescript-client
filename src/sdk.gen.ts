@@ -2,8 +2,63 @@
 
 import type { Options as ClientOptions, TDataShape, Client } from './client';
 import type {
-  GetHealthHealthzGetData,
-  GetHealthHealthzGetResponses,
+  GetEntityDefinitionsData,
+  GetEntityDefinitionsResponses,
+  GetEntityDefinitionsErrors,
+  CreateEntityDefinitionData,
+  CreateEntityDefinitionResponses,
+  CreateEntityDefinitionErrors,
+  DeleteEntityDefinitionData,
+  DeleteEntityDefinitionResponses,
+  DeleteEntityDefinitionErrors,
+  CreateEntityData,
+  CreateEntityResponses,
+  CreateEntityErrors,
+  DeleteEntityData,
+  DeleteEntityResponses,
+  DeleteEntityErrors,
+  GetEntityData,
+  GetEntityResponses,
+  GetEntityErrors,
+  GetEntitiesData,
+  GetEntitiesResponses,
+  GetEntitiesErrors,
+  DeleteEntityRelationData,
+  DeleteEntityRelationResponses,
+  DeleteEntityRelationErrors,
+  CreateEntityRelationData,
+  CreateEntityRelationResponses,
+  CreateEntityRelationErrors,
+  CreateChatTitleData,
+  CreateChatTitleResponses,
+  CreateChatTitleErrors,
+  GetChatsData,
+  GetChatsResponses,
+  GetChatsErrors,
+  CreateChatData,
+  CreateChatResponses,
+  CreateChatErrors,
+  DeleteChatData,
+  DeleteChatResponses,
+  DeleteChatErrors,
+  GetChatData,
+  GetChatResponses,
+  GetChatErrors,
+  UpdateChatData,
+  UpdateChatResponses,
+  UpdateChatErrors,
+  GetChatMessagesData,
+  GetChatMessagesResponses,
+  GetChatMessagesErrors,
+  PostChatMessagesData,
+  PostChatMessagesResponses,
+  PostChatMessagesErrors,
+  PostClerkWebhookData,
+  PostClerkWebhookResponses,
+  PostClerkWebhookErrors,
+  PostStripeWebhookData,
+  PostStripeWebhookResponses,
+  PostStripeWebhookErrors,
   GetEnvironmentsData,
   GetEnvironmentsResponses,
   GetEnvironmentsErrors,
@@ -16,12 +71,33 @@ import type {
   GetSubscriptionsData,
   GetSubscriptionsResponses,
   GetSubscriptionsErrors,
-  GetTokensSystemApiV1TokensGetData,
-  GetTokensSystemApiV1TokensGetResponses,
-  GetTokensSystemApiV1TokensGetErrors,
+  GetTokensData,
+  GetTokensResponses,
+  GetTokensErrors,
   CreateTokenData,
   CreateTokenResponses,
   CreateTokenErrors,
+  ListEnvironmentUsersData,
+  ListEnvironmentUsersResponses,
+  ListEnvironmentUsersErrors,
+  CreateEnvironmentUserData,
+  CreateEnvironmentUserResponses,
+  CreateEnvironmentUserErrors,
+  DeleteEnvironmentUserData,
+  DeleteEnvironmentUserResponses,
+  DeleteEnvironmentUserErrors,
+  GetEnvironmentUserData,
+  GetEnvironmentUserResponses,
+  GetEnvironmentUserErrors,
+  UpdateEnvironmentUserData,
+  UpdateEnvironmentUserResponses,
+  UpdateEnvironmentUserErrors,
+  InviteEnvironmentUserData,
+  InviteEnvironmentUserResponses,
+  InviteEnvironmentUserErrors,
+  BulkInviteEnvironmentUsersData,
+  BulkInviteEnvironmentUsersResponses,
+  BulkInviteEnvironmentUsersErrors,
   GetModelprovidersData,
   GetModelprovidersResponses,
   GetModelprovidersErrors,
@@ -58,54 +134,33 @@ import type {
   GetModelData,
   GetModelResponses,
   GetModelErrors,
-  GetEntityDefinitionsData,
-  GetEntityDefinitionsResponses,
-  GetEntityDefinitionsErrors,
-  CreateEntityDefinitionData,
-  CreateEntityDefinitionResponses,
-  CreateEntityDefinitionErrors,
-  CreateEntityData,
-  CreateEntityResponses,
-  CreateEntityErrors,
-  GetEntityData,
-  GetEntityResponses,
-  GetEntityErrors,
-  GetEntitiesData,
-  GetEntitiesResponses,
-  GetEntitiesErrors,
-  CreateEntityRelationData,
-  CreateEntityRelationResponses,
-  CreateEntityRelationErrors,
-  CreateChatTitleData,
-  CreateChatTitleResponses,
-  CreateChatTitleErrors,
-  GetChatsData,
-  GetChatsResponses,
-  GetChatsErrors,
-  CreateChatData,
-  CreateChatResponses,
-  CreateChatErrors,
-  DeleteChatData,
-  DeleteChatResponses,
-  DeleteChatErrors,
-  GetChatData,
-  GetChatResponses,
-  GetChatErrors,
-  UpdateChatData,
-  UpdateChatResponses,
-  UpdateChatErrors,
-  GetChatMessagesData,
-  GetChatMessagesResponses,
-  GetChatMessagesErrors,
-  PostChatMessagesData,
-  PostChatMessagesResponses,
-  PostChatMessagesErrors,
-  PostClerkWebhookData,
-  PostClerkWebhookResponses,
-  PostClerkWebhookErrors,
-  PostStripeWebhookData,
-  PostStripeWebhookResponses,
-  PostStripeWebhookErrors,
+  ListOauthServicesApiV1OauthServicesGetData,
+  ListOauthServicesApiV1OauthServicesGetResponses,
+  ListOauthServicesApiV1OauthServicesGetErrors,
+  CreateOauthServiceApiV1OauthServicesPostData,
+  CreateOauthServiceApiV1OauthServicesPostResponses,
+  CreateOauthServiceApiV1OauthServicesPostErrors,
+  DeleteOauthServiceApiV1OauthServicesServiceIdDeleteData,
+  DeleteOauthServiceApiV1OauthServicesServiceIdDeleteResponses,
+  DeleteOauthServiceApiV1OauthServicesServiceIdDeleteErrors,
+  GetOauthServiceApiV1OauthServicesServiceIdGetData,
+  GetOauthServiceApiV1OauthServicesServiceIdGetResponses,
+  GetOauthServiceApiV1OauthServicesServiceIdGetErrors,
+  UpdateOauthServiceApiV1OauthServicesServiceIdPutData,
+  UpdateOauthServiceApiV1OauthServicesServiceIdPutResponses,
+  UpdateOauthServiceApiV1OauthServicesServiceIdPutErrors,
+  GetAuthorizationUrlApiV1OauthAuthorizePostData,
+  GetAuthorizationUrlApiV1OauthAuthorizePostResponses,
+  GetAuthorizationUrlApiV1OauthAuthorizePostErrors,
+  ExchangeCodeForTokenApiV1OauthTokenPostData,
+  ExchangeCodeForTokenApiV1OauthTokenPostResponses,
+  ExchangeCodeForTokenApiV1OauthTokenPostErrors,
+  ListUserTokensApiV1OauthTokensGetData,
+  ListUserTokensApiV1OauthTokensGetResponses,
+  ListUserTokensApiV1OauthTokensGetErrors,
+  RevokeTokenApiV1OauthTokensServiceNameDeleteData,
+  RevokeTokenApiV1OauthTokensServiceNameDeleteResponses,
+  RevokeTokenApiV1OauthTokensServiceNameDeleteErrors,
 } from './types.gen';
 import { client as _heyApiClient } from './client.gen';
 
@@ -127,17 +182,427 @@ export type Options<
 };
 
 /**
- * Perform a Health Check
+ * Retrieve all entity definitions with their versions
+ * Fetches a list of all entity definitions and their associated versions from the database. Requires 'list:entitydefinitions' permission.
  */
-export const getHealthHealthzGet = <ThrowOnError extends boolean = false>(
-  options?: Options<GetHealthHealthzGetData, ThrowOnError>
+export const getEntityDefinitions = <ThrowOnError extends boolean = false>(
+  options?: Options<GetEntityDefinitionsData, ThrowOnError>
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    GetHealthHealthzGetResponses,
-    unknown,
+    GetEntityDefinitionsResponses,
+    GetEntityDefinitionsErrors,
     ThrowOnError
   >({
-    url: '/healthz',
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/entities/definitions',
+    ...options,
+  });
+};
+
+/**
+ * Create Entity Definition
+ */
+export const createEntityDefinition = <ThrowOnError extends boolean = false>(
+  options: Options<CreateEntityDefinitionData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    CreateEntityDefinitionResponses,
+    CreateEntityDefinitionErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/entities/definitions',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Delete an entity definition
+ * Deletes an entity definition and all its versions. Requires 'delete:entitydefinitions' permission.
+ */
+export const deleteEntityDefinition = <ThrowOnError extends boolean = false>(
+  options: Options<DeleteEntityDefinitionData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).delete<
+    DeleteEntityDefinitionResponses,
+    DeleteEntityDefinitionErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/entities/definitions/{definition_id}',
+    ...options,
+  });
+};
+
+/**
+ * Create a resource based on an entity definition
+ * Creates a new entity based on the specified group, version, namespace, and kind. Requires 'create:entities' permission.
+ */
+export const createEntity = <ThrowOnError extends boolean = false>(
+  options: Options<CreateEntityData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    CreateEntityResponses,
+    CreateEntityErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/entities/{group}/{version}/namespace/{namespace}/{plural}',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Delete a specific entity
+ * Deletes a specific entity from the knowledge graph. Requires 'delete:entities' permission.
+ */
+export const deleteEntity = <ThrowOnError extends boolean = false>(
+  options: Options<DeleteEntityData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).delete<
+    DeleteEntityResponses,
+    DeleteEntityErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/entities/{group}/{version}/{kind}/{namespace}/{name}',
+    ...options,
+  });
+};
+
+/**
+ * Retrieve a specific entity by name
+ * Fetches a specific entity based on group, version, namespace, plural, and name. Requires 'read:entities' permission.
+ */
+export const getEntity = <ThrowOnError extends boolean = false>(
+  options: Options<GetEntityData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).get<GetEntityResponses, GetEntityErrors, ThrowOnError>({
+    url: '/api/v1/entities/{group}/{version}/{kind}/{namespace}/{name}',
+    ...options,
+  });
+};
+
+/**
+ * Query entities with optional field selectors
+ * Retrieves entities from the knowledge graph, optionally filtered by field selectors. Field selectors use dot notation for nested properties (e.g., 'spec.metadata.owner=team-a'). Requires 'read:entities' permission.
+ */
+export const getEntities = <ThrowOnError extends boolean = false>(
+  options?: Options<GetEntitiesData, ThrowOnError>
+) => {
+  return (options?.client ?? _heyApiClient).get<
+    GetEntitiesResponses,
+    GetEntitiesErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/entities/',
+    ...options,
+  });
+};
+
+/**
+ * Delete a relation between entities
+ * Deletes a specific relation between two entities. Requires 'delete:entityrelations' permission.
+ */
+export const deleteEntityRelation = <ThrowOnError extends boolean = false>(
+  options: Options<DeleteEntityRelationData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).delete<
+    DeleteEntityRelationResponses,
+    DeleteEntityRelationErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/entities/relations',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Create Entity Relation
+ */
+export const createEntityRelation = <ThrowOnError extends boolean = false>(
+  options: Options<CreateEntityRelationData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    CreateEntityRelationResponses,
+    CreateEntityRelationErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/entities/relations',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Post Chat Title
+ * Generate a title for a chat based on the first message.
+ */
+export const createChatTitle = <ThrowOnError extends boolean = false>(
+  options: Options<CreateChatTitleData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    CreateChatTitleResponses,
+    CreateChatTitleErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/chat/title',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Get Chats
+ */
+export const getChats = <ThrowOnError extends boolean = false>(
+  options?: Options<GetChatsData, ThrowOnError>
+) => {
+  return (options?.client ?? _heyApiClient).get<GetChatsResponses, GetChatsErrors, ThrowOnError>({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/chat/',
+    ...options,
+  });
+};
+
+/**
+ * Create Chat
+ */
+export const createChat = <ThrowOnError extends boolean = false>(
+  options: Options<CreateChatData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    CreateChatResponses,
+    CreateChatErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/chat/',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Delete Chat
+ */
+export const deleteChat = <ThrowOnError extends boolean = false>(
+  options: Options<DeleteChatData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).delete<
+    DeleteChatResponses,
+    DeleteChatErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/chat/{chat_id}',
+    ...options,
+  });
+};
+
+/**
+ * Get Chat
+ */
+export const getChat = <ThrowOnError extends boolean = false>(
+  options: Options<GetChatData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).get<GetChatResponses, GetChatErrors, ThrowOnError>({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/chat/{chat_id}',
+    ...options,
+  });
+};
+
+/**
+ * Update Chat
+ */
+export const updateChat = <ThrowOnError extends boolean = false>(
+  options: Options<UpdateChatData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).put<UpdateChatResponses, UpdateChatErrors, ThrowOnError>(
+    {
+      security: [
+        {
+          scheme: 'bearer',
+          type: 'http',
+        },
+      ],
+      url: '/api/v1/chat/{chat_id}',
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        ...options.headers,
+      },
+    }
+  );
+};
+
+/**
+ * Get Chat Messages
+ */
+export const getChatMessages = <ThrowOnError extends boolean = false>(
+  options: Options<GetChatMessagesData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).get<
+    GetChatMessagesResponses,
+    GetChatMessagesErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/chat/{chat_id}/messages',
+    ...options,
+  });
+};
+
+/**
+ * Post Chat Messages
+ */
+export const postChatMessages = <ThrowOnError extends boolean = false>(
+  options: Options<PostChatMessagesData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    PostChatMessagesResponses,
+    PostChatMessagesErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/chat/{chat_id}/messages',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Post Clerk Webhook
+ */
+export const postClerkWebhook = <ThrowOnError extends boolean = false>(
+  options: Options<PostClerkWebhookData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    PostClerkWebhookResponses,
+    PostClerkWebhookErrors,
+    ThrowOnError
+  >({
+    url: '/system/api/v1/webhooks/clerk',
+    ...options,
+  });
+};
+
+/**
+ * Post Stripe Webhook
+ */
+export const postStripeWebhook = <ThrowOnError extends boolean = false>(
+  options: Options<PostStripeWebhookData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    PostStripeWebhookResponses,
+    PostStripeWebhookErrors,
+    ThrowOnError
+  >({
+    url: '/system/api/v1/webhooks/stripe',
     ...options,
   });
 };
@@ -238,14 +703,10 @@ export const getSubscriptions = <ThrowOnError extends boolean = false>(
  * Get Tokens
  * Get all API tokens for the authenticated user.
  */
-export const getTokensSystemApiV1TokensGet = <ThrowOnError extends boolean = false>(
-  options?: Options<GetTokensSystemApiV1TokensGetData, ThrowOnError>
+export const getTokens = <ThrowOnError extends boolean = false>(
+  options?: Options<GetTokensData, ThrowOnError>
 ) => {
-  return (options?.client ?? _heyApiClient).get<
-    GetTokensSystemApiV1TokensGetResponses,
-    GetTokensSystemApiV1TokensGetErrors,
-    ThrowOnError
-  >({
+  return (options?.client ?? _heyApiClient).get<GetTokensResponses, GetTokensErrors, ThrowOnError>({
     security: [
       {
         scheme: 'bearer',
@@ -275,6 +736,183 @@ export const createToken = <ThrowOnError extends boolean = false>(
       },
     ],
     url: '/system/api/v1/tokens',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * List Environment Users
+ * List all users in an environment (organization members).
+ */
+export const listEnvironmentUsers = <ThrowOnError extends boolean = false>(
+  options: Options<ListEnvironmentUsersData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).get<
+    ListEnvironmentUsersResponses,
+    ListEnvironmentUsersErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/environments/{environment_id}/users',
+    ...options,
+  });
+};
+
+/**
+ * Create Environment User
+ * Create a new environment user by adding them to the Clerk organization.
+ */
+export const createEnvironmentUser = <ThrowOnError extends boolean = false>(
+  options: Options<CreateEnvironmentUserData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    CreateEnvironmentUserResponses,
+    CreateEnvironmentUserErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/environments/{environment_id}/users',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Delete Environment User
+ * Remove a user from an environment (organization).
+ */
+export const deleteEnvironmentUser = <ThrowOnError extends boolean = false>(
+  options: Options<DeleteEnvironmentUserData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).delete<
+    DeleteEnvironmentUserResponses,
+    DeleteEnvironmentUserErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/environments/{environment_id}/users/{user_id}',
+    ...options,
+  });
+};
+
+/**
+ * Get Environment User
+ * Get a specific environment user.
+ */
+export const getEnvironmentUser = <ThrowOnError extends boolean = false>(
+  options: Options<GetEnvironmentUserData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).get<
+    GetEnvironmentUserResponses,
+    GetEnvironmentUserErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/environments/{environment_id}/users/{user_id}',
+    ...options,
+  });
+};
+
+/**
+ * Update Environment User
+ * Update an environment user's role.
+ */
+export const updateEnvironmentUser = <ThrowOnError extends boolean = false>(
+  options: Options<UpdateEnvironmentUserData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).put<
+    UpdateEnvironmentUserResponses,
+    UpdateEnvironmentUserErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/environments/{environment_id}/users/{user_id}',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Invite Environment User
+ * Invite a user to an environment (organization).
+ */
+export const inviteEnvironmentUser = <ThrowOnError extends boolean = false>(
+  options: Options<InviteEnvironmentUserData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    InviteEnvironmentUserResponses,
+    InviteEnvironmentUserErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/environments/{environment_id}/users/invite',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Bulk Invite Environment Users
+ * Bulk invite multiple users to an environment (organization).
+ */
+export const bulkInviteEnvironmentUsers = <ThrowOnError extends boolean = false>(
+  options: Options<BulkInviteEnvironmentUsersData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    BulkInviteEnvironmentUsersResponses,
+    BulkInviteEnvironmentUsersErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/environments/{environment_id}/users/bulk-invite',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -564,15 +1202,14 @@ export const getModel = <ThrowOnError extends boolean = false>(
 };
 
 /**
- * Retrieve all entity definitions with their versions
- * Fetches a list of all entity definitions and their associated versions from the database. Requires 'list:entitydefinitions' permission.
+ * List Oauth Services
  */
-export const getEntityDefinitions = <ThrowOnError extends boolean = false>(
-  options?: Options<GetEntityDefinitionsData, ThrowOnError>
+export const listOauthServicesApiV1OauthServicesGet = <ThrowOnError extends boolean = false>(
+  options?: Options<ListOauthServicesApiV1OauthServicesGetData, ThrowOnError>
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    GetEntityDefinitionsResponses,
-    GetEntityDefinitionsErrors,
+    ListOauthServicesApiV1OauthServicesGetResponses,
+    ListOauthServicesApiV1OauthServicesGetErrors,
     ThrowOnError
   >({
     security: [
@@ -581,20 +1218,20 @@ export const getEntityDefinitions = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/entities/definitions',
+    url: '/api/v1/oauth/services',
     ...options,
   });
 };
 
 /**
- * Create Entity Definition
+ * Create Oauth Service
  */
-export const createEntityDefinition = <ThrowOnError extends boolean = false>(
-  options: Options<CreateEntityDefinitionData, ThrowOnError>
+export const createOauthServiceApiV1OauthServicesPost = <ThrowOnError extends boolean = false>(
+  options: Options<CreateOauthServiceApiV1OauthServicesPostData, ThrowOnError>
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateEntityDefinitionResponses,
-    CreateEntityDefinitionErrors,
+    CreateOauthServiceApiV1OauthServicesPostResponses,
+    CreateOauthServiceApiV1OauthServicesPostErrors,
     ThrowOnError
   >({
     security: [
@@ -603,7 +1240,7 @@ export const createEntityDefinition = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/entities/definitions',
+    url: '/api/v1/oauth/services',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -613,172 +1250,16 @@ export const createEntityDefinition = <ThrowOnError extends boolean = false>(
 };
 
 /**
- * Create a resource based on an entity definition
- * Creates a new entity based on the specified group, version, namespace, and kind. Requires 'create:entities' permission.
+ * Delete Oauth Service
  */
-export const createEntity = <ThrowOnError extends boolean = false>(
-  options: Options<CreateEntityData, ThrowOnError>
-) => {
-  return (options.client ?? _heyApiClient).post<
-    CreateEntityResponses,
-    CreateEntityErrors,
-    ThrowOnError
-  >({
-    security: [
-      {
-        scheme: 'bearer',
-        type: 'http',
-      },
-    ],
-    url: '/api/v1/entities/{group}/{version}/namespace/{namespace}/{plural}',
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
-  });
-};
-
-/**
- * Retrieve a specific entity by name
- * Fetches a specific entity based on group, version, namespace, plural, and name. Requires 'read:entities' permission.
- */
-export const getEntity = <ThrowOnError extends boolean = false>(
-  options: Options<GetEntityData, ThrowOnError>
-) => {
-  return (options.client ?? _heyApiClient).get<GetEntityResponses, GetEntityErrors, ThrowOnError>({
-    url: '/api/v1/entities/{group}/{version}/{kind}/{namespace}/{name}',
-    ...options,
-  });
-};
-
-/**
- * Get Entities
- */
-export const getEntities = <ThrowOnError extends boolean = false>(
-  options?: Options<GetEntitiesData, ThrowOnError>
-) => {
-  return (options?.client ?? _heyApiClient).get<
-    GetEntitiesResponses,
-    GetEntitiesErrors,
-    ThrowOnError
-  >({
-    security: [
-      {
-        scheme: 'bearer',
-        type: 'http',
-      },
-    ],
-    url: '/api/v1/entities/',
-    ...options,
-  });
-};
-
-/**
- * Create Entity Relation
- */
-export const createEntityRelation = <ThrowOnError extends boolean = false>(
-  options: Options<CreateEntityRelationData, ThrowOnError>
-) => {
-  return (options.client ?? _heyApiClient).post<
-    CreateEntityRelationResponses,
-    CreateEntityRelationErrors,
-    ThrowOnError
-  >({
-    security: [
-      {
-        scheme: 'bearer',
-        type: 'http',
-      },
-    ],
-    url: '/api/v1/entities/relations',
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
-  });
-};
-
-/**
- * Post Chat Title
- */
-export const createChatTitle = <ThrowOnError extends boolean = false>(
-  options: Options<CreateChatTitleData, ThrowOnError>
-) => {
-  return (options.client ?? _heyApiClient).post<
-    CreateChatTitleResponses,
-    CreateChatTitleErrors,
-    ThrowOnError
-  >({
-    security: [
-      {
-        scheme: 'bearer',
-        type: 'http',
-      },
-    ],
-    url: '/api/v1/chat/title',
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
-  });
-};
-
-/**
- * Get Chats
- */
-export const getChats = <ThrowOnError extends boolean = false>(
-  options?: Options<GetChatsData, ThrowOnError>
-) => {
-  return (options?.client ?? _heyApiClient).get<GetChatsResponses, GetChatsErrors, ThrowOnError>({
-    security: [
-      {
-        scheme: 'bearer',
-        type: 'http',
-      },
-    ],
-    url: '/api/v1/chat/',
-    ...options,
-  });
-};
-
-/**
- * Create Chat
- */
-export const createChat = <ThrowOnError extends boolean = false>(
-  options: Options<CreateChatData, ThrowOnError>
-) => {
-  return (options.client ?? _heyApiClient).post<
-    CreateChatResponses,
-    CreateChatErrors,
-    ThrowOnError
-  >({
-    security: [
-      {
-        scheme: 'bearer',
-        type: 'http',
-      },
-    ],
-    url: '/api/v1/chat/',
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
-  });
-};
-
-/**
- * Delete Chat
- */
-export const deleteChat = <ThrowOnError extends boolean = false>(
-  options: Options<DeleteChatData, ThrowOnError>
+export const deleteOauthServiceApiV1OauthServicesServiceIdDelete = <
+  ThrowOnError extends boolean = false,
+>(
+  options: Options<DeleteOauthServiceApiV1OauthServicesServiceIdDeleteData, ThrowOnError>
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    DeleteChatResponses,
-    DeleteChatErrors,
+    DeleteOauthServiceApiV1OauthServicesServiceIdDeleteResponses,
+    DeleteOauthServiceApiV1OauthServicesServiceIdDeleteErrors,
     ThrowOnError
   >({
     security: [
@@ -787,62 +1268,20 @@ export const deleteChat = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/chat/{chat_id}',
+    url: '/api/v1/oauth/services/{service_id}',
     ...options,
   });
 };
 
 /**
- * Get Chat
+ * Get Oauth Service
  */
-export const getChat = <ThrowOnError extends boolean = false>(
-  options: Options<GetChatData, ThrowOnError>
-) => {
-  return (options.client ?? _heyApiClient).get<GetChatResponses, GetChatErrors, ThrowOnError>({
-    security: [
-      {
-        scheme: 'bearer',
-        type: 'http',
-      },
-    ],
-    url: '/api/v1/chat/{chat_id}',
-    ...options,
-  });
-};
-
-/**
- * Update Chat
- */
-export const updateChat = <ThrowOnError extends boolean = false>(
-  options: Options<UpdateChatData, ThrowOnError>
-) => {
-  return (options.client ?? _heyApiClient).put<UpdateChatResponses, UpdateChatErrors, ThrowOnError>(
-    {
-      security: [
-        {
-          scheme: 'bearer',
-          type: 'http',
-        },
-      ],
-      url: '/api/v1/chat/{chat_id}',
-      ...options,
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers,
-      },
-    }
-  );
-};
-
-/**
- * Get Chat Messages
- */
-export const getChatMessages = <ThrowOnError extends boolean = false>(
-  options: Options<GetChatMessagesData, ThrowOnError>
+export const getOauthServiceApiV1OauthServicesServiceIdGet = <ThrowOnError extends boolean = false>(
+  options: Options<GetOauthServiceApiV1OauthServicesServiceIdGetData, ThrowOnError>
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetChatMessagesResponses,
-    GetChatMessagesErrors,
+    GetOauthServiceApiV1OauthServicesServiceIdGetResponses,
+    GetOauthServiceApiV1OauthServicesServiceIdGetErrors,
     ThrowOnError
   >({
     security: [
@@ -851,20 +1290,22 @@ export const getChatMessages = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/chat/{chat_id}/messages',
+    url: '/api/v1/oauth/services/{service_id}',
     ...options,
   });
 };
 
 /**
- * Post Chat Messages
+ * Update Oauth Service
  */
-export const postChatMessages = <ThrowOnError extends boolean = false>(
-  options: Options<PostChatMessagesData, ThrowOnError>
+export const updateOauthServiceApiV1OauthServicesServiceIdPut = <
+  ThrowOnError extends boolean = false,
+>(
+  options: Options<UpdateOauthServiceApiV1OauthServicesServiceIdPutData, ThrowOnError>
 ) => {
-  return (options.client ?? _heyApiClient).post<
-    PostChatMessagesResponses,
-    PostChatMessagesErrors,
+  return (options.client ?? _heyApiClient).put<
+    UpdateOauthServiceApiV1OauthServicesServiceIdPutResponses,
+    UpdateOauthServiceApiV1OauthServicesServiceIdPutErrors,
     ThrowOnError
   >({
     security: [
@@ -873,7 +1314,7 @@ export const postChatMessages = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/chat/{chat_id}/messages',
+    url: '/api/v1/oauth/services/{service_id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -883,33 +1324,97 @@ export const postChatMessages = <ThrowOnError extends boolean = false>(
 };
 
 /**
- * Post Clerk Webhook
+ * Get Authorization Url
  */
-export const postClerkWebhook = <ThrowOnError extends boolean = false>(
-  options: Options<PostClerkWebhookData, ThrowOnError>
+export const getAuthorizationUrlApiV1OauthAuthorizePost = <ThrowOnError extends boolean = false>(
+  options: Options<GetAuthorizationUrlApiV1OauthAuthorizePostData, ThrowOnError>
 ) => {
   return (options.client ?? _heyApiClient).post<
-    PostClerkWebhookResponses,
-    PostClerkWebhookErrors,
+    GetAuthorizationUrlApiV1OauthAuthorizePostResponses,
+    GetAuthorizationUrlApiV1OauthAuthorizePostErrors,
     ThrowOnError
   >({
-    url: '/system/api/v1/webhooks/clerk',
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/oauth/authorize',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Exchange Code For Token
+ */
+export const exchangeCodeForTokenApiV1OauthTokenPost = <ThrowOnError extends boolean = false>(
+  options: Options<ExchangeCodeForTokenApiV1OauthTokenPostData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    ExchangeCodeForTokenApiV1OauthTokenPostResponses,
+    ExchangeCodeForTokenApiV1OauthTokenPostErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/oauth/token',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * List User Tokens
+ */
+export const listUserTokensApiV1OauthTokensGet = <ThrowOnError extends boolean = false>(
+  options?: Options<ListUserTokensApiV1OauthTokensGetData, ThrowOnError>
+) => {
+  return (options?.client ?? _heyApiClient).get<
+    ListUserTokensApiV1OauthTokensGetResponses,
+    ListUserTokensApiV1OauthTokensGetErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/oauth/tokens',
     ...options,
   });
 };
 
 /**
- * Post Stripe Webhook
+ * Revoke Token
  */
-export const postStripeWebhook = <ThrowOnError extends boolean = false>(
-  options: Options<PostStripeWebhookData, ThrowOnError>
+export const revokeTokenApiV1OauthTokensServiceNameDelete = <ThrowOnError extends boolean = false>(
+  options: Options<RevokeTokenApiV1OauthTokensServiceNameDeleteData, ThrowOnError>
 ) => {
-  return (options.client ?? _heyApiClient).post<
-    PostStripeWebhookResponses,
-    PostStripeWebhookErrors,
+  return (options.client ?? _heyApiClient).delete<
+    RevokeTokenApiV1OauthTokensServiceNameDeleteResponses,
+    RevokeTokenApiV1OauthTokensServiceNameDeleteErrors,
     ThrowOnError
   >({
-    url: '/system/api/v1/webhooks/stripe',
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/oauth/tokens/{service_name}',
     ...options,
   });
 };
