@@ -625,6 +625,10 @@ export type McpEndpointCreate = {
    * Supports Resources
    */
   supports_resources?: boolean;
+  /**
+   * Oauth Service Id
+   */
+  oauth_service_id?: string | null;
 };
 
 /**
@@ -661,6 +665,46 @@ export type McpEndpointResponse = {
    * Supports Resources
    */
   supports_resources?: boolean;
+  /**
+   * Oauth Service Id
+   */
+  oauth_service_id?: string | null;
+};
+
+/**
+ * MCPEndpointUpdate
+ */
+export type McpEndpointUpdate = {
+  /**
+   * Name
+   */
+  name?: string | null;
+  /**
+   * Url
+   */
+  url?: string | null;
+  /**
+   * Description
+   */
+  description?: string | null;
+  /**
+   * Headers
+   */
+  headers?: {
+    [key: string]: string;
+  } | null;
+  /**
+   * Devgraph Auth
+   */
+  devgraph_auth?: boolean | null;
+  /**
+   * Supports Resources
+   */
+  supports_resources?: boolean | null;
+  /**
+   * Oauth Service Id
+   */
+  oauth_service_id?: string | null;
 };
 
 /**
@@ -743,9 +787,9 @@ export type ModelResponse = {
  */
 export type OAuthAuthorizationRequest = {
   /**
-   * Service Name
+   * Service Id
    */
-  service_name: string;
+  service_id: string;
   /**
    * Scopes
    */
@@ -979,9 +1023,9 @@ export type OAuthServiceUpdate = {
  */
 export type OAuthTokenExchange = {
   /**
-   * Service Name
+   * Service Id
    */
-  service_name: string;
+  service_id: string;
   /**
    * Code
    */
@@ -2597,6 +2641,41 @@ export type GetMcpendpointResponses = {
 
 export type GetMcpendpointResponse = GetMcpendpointResponses[keyof GetMcpendpointResponses];
 
+export type UpdateMcpendpointData = {
+  body: McpEndpointUpdate;
+  path: {
+    /**
+     * Mcpendpoint Id
+     */
+    mcpendpoint_id: string;
+  };
+  query?: never;
+  url: '/system/api/v1/mcpendpoints/{mcpendpoint_id}';
+};
+
+export type UpdateMcpendpointErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type UpdateMcpendpointError = UpdateMcpendpointErrors[keyof UpdateMcpendpointErrors];
+
+export type UpdateMcpendpointResponses = {
+  /**
+   * Successful Response
+   */
+  200: McpEndpointResponse;
+};
+
+export type UpdateMcpendpointResponse =
+  UpdateMcpendpointResponses[keyof UpdateMcpendpointResponses];
+
 export type GetModelsData = {
   body?: never;
   path?: never;
@@ -2718,7 +2797,7 @@ export type GetModelResponses = {
 
 export type GetModelResponse = GetModelResponses[keyof GetModelResponses];
 
-export type ListOauthServicesApiV1OauthServicesGetData = {
+export type ListOauthServicesData = {
   body?: never;
   path?: never;
   query?: {
@@ -2731,7 +2810,7 @@ export type ListOauthServicesApiV1OauthServicesGetData = {
   url: '/api/v1/oauth/services';
 };
 
-export type ListOauthServicesApiV1OauthServicesGetErrors = {
+export type ListOauthServicesErrors = {
   /**
    * Not found
    */
@@ -2742,27 +2821,26 @@ export type ListOauthServicesApiV1OauthServicesGetErrors = {
   422: HttpValidationError;
 };
 
-export type ListOauthServicesApiV1OauthServicesGetError =
-  ListOauthServicesApiV1OauthServicesGetErrors[keyof ListOauthServicesApiV1OauthServicesGetErrors];
+export type ListOauthServicesError = ListOauthServicesErrors[keyof ListOauthServicesErrors];
 
-export type ListOauthServicesApiV1OauthServicesGetResponses = {
+export type ListOauthServicesResponses = {
   /**
    * Successful Response
    */
   200: OAuthServiceListResponse;
 };
 
-export type ListOauthServicesApiV1OauthServicesGetResponse =
-  ListOauthServicesApiV1OauthServicesGetResponses[keyof ListOauthServicesApiV1OauthServicesGetResponses];
+export type ListOauthServicesResponse =
+  ListOauthServicesResponses[keyof ListOauthServicesResponses];
 
-export type CreateOauthServiceApiV1OauthServicesPostData = {
+export type CreateOauthServiceData = {
   body: OAuthServiceCreate;
   path?: never;
   query?: never;
   url: '/api/v1/oauth/services';
 };
 
-export type CreateOauthServiceApiV1OauthServicesPostErrors = {
+export type CreateOauthServiceErrors = {
   /**
    * Not found
    */
@@ -2773,20 +2851,19 @@ export type CreateOauthServiceApiV1OauthServicesPostErrors = {
   422: HttpValidationError;
 };
 
-export type CreateOauthServiceApiV1OauthServicesPostError =
-  CreateOauthServiceApiV1OauthServicesPostErrors[keyof CreateOauthServiceApiV1OauthServicesPostErrors];
+export type CreateOauthServiceError = CreateOauthServiceErrors[keyof CreateOauthServiceErrors];
 
-export type CreateOauthServiceApiV1OauthServicesPostResponses = {
+export type CreateOauthServiceResponses = {
   /**
    * Successful Response
    */
-  200: OAuthServiceResponse;
+  201: OAuthServiceResponse;
 };
 
-export type CreateOauthServiceApiV1OauthServicesPostResponse =
-  CreateOauthServiceApiV1OauthServicesPostResponses[keyof CreateOauthServiceApiV1OauthServicesPostResponses];
+export type CreateOauthServiceResponse =
+  CreateOauthServiceResponses[keyof CreateOauthServiceResponses];
 
-export type DeleteOauthServiceApiV1OauthServicesServiceIdDeleteData = {
+export type DeleteOauthServiceData = {
   body?: never;
   path: {
     /**
@@ -2798,7 +2875,7 @@ export type DeleteOauthServiceApiV1OauthServicesServiceIdDeleteData = {
   url: '/api/v1/oauth/services/{service_id}';
 };
 
-export type DeleteOauthServiceApiV1OauthServicesServiceIdDeleteErrors = {
+export type DeleteOauthServiceErrors = {
   /**
    * Not found
    */
@@ -2809,17 +2886,19 @@ export type DeleteOauthServiceApiV1OauthServicesServiceIdDeleteErrors = {
   422: HttpValidationError;
 };
 
-export type DeleteOauthServiceApiV1OauthServicesServiceIdDeleteError =
-  DeleteOauthServiceApiV1OauthServicesServiceIdDeleteErrors[keyof DeleteOauthServiceApiV1OauthServicesServiceIdDeleteErrors];
+export type DeleteOauthServiceError = DeleteOauthServiceErrors[keyof DeleteOauthServiceErrors];
 
-export type DeleteOauthServiceApiV1OauthServicesServiceIdDeleteResponses = {
+export type DeleteOauthServiceResponses = {
   /**
    * Successful Response
    */
-  200: unknown;
+  204: void;
 };
 
-export type GetOauthServiceApiV1OauthServicesServiceIdGetData = {
+export type DeleteOauthServiceResponse =
+  DeleteOauthServiceResponses[keyof DeleteOauthServiceResponses];
+
+export type GetOauthServiceData = {
   body?: never;
   path: {
     /**
@@ -2831,7 +2910,7 @@ export type GetOauthServiceApiV1OauthServicesServiceIdGetData = {
   url: '/api/v1/oauth/services/{service_id}';
 };
 
-export type GetOauthServiceApiV1OauthServicesServiceIdGetErrors = {
+export type GetOauthServiceErrors = {
   /**
    * Not found
    */
@@ -2842,20 +2921,18 @@ export type GetOauthServiceApiV1OauthServicesServiceIdGetErrors = {
   422: HttpValidationError;
 };
 
-export type GetOauthServiceApiV1OauthServicesServiceIdGetError =
-  GetOauthServiceApiV1OauthServicesServiceIdGetErrors[keyof GetOauthServiceApiV1OauthServicesServiceIdGetErrors];
+export type GetOauthServiceError = GetOauthServiceErrors[keyof GetOauthServiceErrors];
 
-export type GetOauthServiceApiV1OauthServicesServiceIdGetResponses = {
+export type GetOauthServiceResponses = {
   /**
    * Successful Response
    */
   200: OAuthServiceResponse;
 };
 
-export type GetOauthServiceApiV1OauthServicesServiceIdGetResponse =
-  GetOauthServiceApiV1OauthServicesServiceIdGetResponses[keyof GetOauthServiceApiV1OauthServicesServiceIdGetResponses];
+export type GetOauthServiceResponse = GetOauthServiceResponses[keyof GetOauthServiceResponses];
 
-export type UpdateOauthServiceApiV1OauthServicesServiceIdPutData = {
+export type UpdateOauthServiceData = {
   body: OAuthServiceUpdate;
   path: {
     /**
@@ -2867,7 +2944,7 @@ export type UpdateOauthServiceApiV1OauthServicesServiceIdPutData = {
   url: '/api/v1/oauth/services/{service_id}';
 };
 
-export type UpdateOauthServiceApiV1OauthServicesServiceIdPutErrors = {
+export type UpdateOauthServiceErrors = {
   /**
    * Not found
    */
@@ -2878,27 +2955,26 @@ export type UpdateOauthServiceApiV1OauthServicesServiceIdPutErrors = {
   422: HttpValidationError;
 };
 
-export type UpdateOauthServiceApiV1OauthServicesServiceIdPutError =
-  UpdateOauthServiceApiV1OauthServicesServiceIdPutErrors[keyof UpdateOauthServiceApiV1OauthServicesServiceIdPutErrors];
+export type UpdateOauthServiceError = UpdateOauthServiceErrors[keyof UpdateOauthServiceErrors];
 
-export type UpdateOauthServiceApiV1OauthServicesServiceIdPutResponses = {
+export type UpdateOauthServiceResponses = {
   /**
    * Successful Response
    */
   200: OAuthServiceResponse;
 };
 
-export type UpdateOauthServiceApiV1OauthServicesServiceIdPutResponse =
-  UpdateOauthServiceApiV1OauthServicesServiceIdPutResponses[keyof UpdateOauthServiceApiV1OauthServicesServiceIdPutResponses];
+export type UpdateOauthServiceResponse =
+  UpdateOauthServiceResponses[keyof UpdateOauthServiceResponses];
 
-export type GetAuthorizationUrlApiV1OauthAuthorizePostData = {
+export type GetOauthAuthorizationUrlData = {
   body: OAuthAuthorizationRequest;
   path?: never;
   query?: never;
   url: '/api/v1/oauth/authorize';
 };
 
-export type GetAuthorizationUrlApiV1OauthAuthorizePostErrors = {
+export type GetOauthAuthorizationUrlErrors = {
   /**
    * Not found
    */
@@ -2909,27 +2985,27 @@ export type GetAuthorizationUrlApiV1OauthAuthorizePostErrors = {
   422: HttpValidationError;
 };
 
-export type GetAuthorizationUrlApiV1OauthAuthorizePostError =
-  GetAuthorizationUrlApiV1OauthAuthorizePostErrors[keyof GetAuthorizationUrlApiV1OauthAuthorizePostErrors];
+export type GetOauthAuthorizationUrlError =
+  GetOauthAuthorizationUrlErrors[keyof GetOauthAuthorizationUrlErrors];
 
-export type GetAuthorizationUrlApiV1OauthAuthorizePostResponses = {
+export type GetOauthAuthorizationUrlResponses = {
   /**
    * Successful Response
    */
   200: OAuthAuthorizationResponse;
 };
 
-export type GetAuthorizationUrlApiV1OauthAuthorizePostResponse =
-  GetAuthorizationUrlApiV1OauthAuthorizePostResponses[keyof GetAuthorizationUrlApiV1OauthAuthorizePostResponses];
+export type GetOauthAuthorizationUrlResponse =
+  GetOauthAuthorizationUrlResponses[keyof GetOauthAuthorizationUrlResponses];
 
-export type ExchangeCodeForTokenApiV1OauthTokenPostData = {
+export type ExchangeOauthTokenData = {
   body: OAuthTokenExchange;
   path?: never;
   query?: never;
   url: '/api/v1/oauth/token';
 };
 
-export type ExchangeCodeForTokenApiV1OauthTokenPostErrors = {
+export type ExchangeOauthTokenErrors = {
   /**
    * Not found
    */
@@ -2940,41 +3016,40 @@ export type ExchangeCodeForTokenApiV1OauthTokenPostErrors = {
   422: HttpValidationError;
 };
 
-export type ExchangeCodeForTokenApiV1OauthTokenPostError =
-  ExchangeCodeForTokenApiV1OauthTokenPostErrors[keyof ExchangeCodeForTokenApiV1OauthTokenPostErrors];
+export type ExchangeOauthTokenError = ExchangeOauthTokenErrors[keyof ExchangeOauthTokenErrors];
 
-export type ExchangeCodeForTokenApiV1OauthTokenPostResponses = {
+export type ExchangeOauthTokenResponses = {
   /**
    * Successful Response
    */
   200: OAuthTokenResponse;
 };
 
-export type ExchangeCodeForTokenApiV1OauthTokenPostResponse =
-  ExchangeCodeForTokenApiV1OauthTokenPostResponses[keyof ExchangeCodeForTokenApiV1OauthTokenPostResponses];
+export type ExchangeOauthTokenResponse =
+  ExchangeOauthTokenResponses[keyof ExchangeOauthTokenResponses];
 
-export type ListUserTokensApiV1OauthTokensGetData = {
+export type ListOauthTokensData = {
   body?: never;
   path?: never;
   query?: never;
   url: '/api/v1/oauth/tokens';
 };
 
-export type ListUserTokensApiV1OauthTokensGetErrors = {
+export type ListOauthTokensErrors = {
   /**
    * Not found
    */
   404: unknown;
 };
 
-export type ListUserTokensApiV1OauthTokensGetResponses = {
+export type ListOauthTokensResponses = {
   /**
    * Successful Response
    */
   200: unknown;
 };
 
-export type RevokeTokenApiV1OauthTokensServiceNameDeleteData = {
+export type RevokeOauthTokenData = {
   body?: never;
   path: {
     /**
@@ -2986,7 +3061,7 @@ export type RevokeTokenApiV1OauthTokensServiceNameDeleteData = {
   url: '/api/v1/oauth/tokens/{service_name}';
 };
 
-export type RevokeTokenApiV1OauthTokensServiceNameDeleteErrors = {
+export type RevokeOauthTokenErrors = {
   /**
    * Not found
    */
@@ -2997,15 +3072,16 @@ export type RevokeTokenApiV1OauthTokensServiceNameDeleteErrors = {
   422: HttpValidationError;
 };
 
-export type RevokeTokenApiV1OauthTokensServiceNameDeleteError =
-  RevokeTokenApiV1OauthTokensServiceNameDeleteErrors[keyof RevokeTokenApiV1OauthTokensServiceNameDeleteErrors];
+export type RevokeOauthTokenError = RevokeOauthTokenErrors[keyof RevokeOauthTokenErrors];
 
-export type RevokeTokenApiV1OauthTokensServiceNameDeleteResponses = {
+export type RevokeOauthTokenResponses = {
   /**
    * Successful Response
    */
-  200: unknown;
+  204: void;
 };
+
+export type RevokeOauthTokenResponse = RevokeOauthTokenResponses[keyof RevokeOauthTokenResponses];
 
 export type ClientOptions = {
   baseUrl: `${string}://${string}` | (string & {});

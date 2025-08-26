@@ -122,6 +122,9 @@ import type {
   GetMcpendpointData,
   GetMcpendpointResponses,
   GetMcpendpointErrors,
+  UpdateMcpendpointData,
+  UpdateMcpendpointResponses,
+  UpdateMcpendpointErrors,
   GetModelsData,
   GetModelsResponses,
   GetModelsErrors,
@@ -134,33 +137,33 @@ import type {
   GetModelData,
   GetModelResponses,
   GetModelErrors,
-  ListOauthServicesApiV1OauthServicesGetData,
-  ListOauthServicesApiV1OauthServicesGetResponses,
-  ListOauthServicesApiV1OauthServicesGetErrors,
-  CreateOauthServiceApiV1OauthServicesPostData,
-  CreateOauthServiceApiV1OauthServicesPostResponses,
-  CreateOauthServiceApiV1OauthServicesPostErrors,
-  DeleteOauthServiceApiV1OauthServicesServiceIdDeleteData,
-  DeleteOauthServiceApiV1OauthServicesServiceIdDeleteResponses,
-  DeleteOauthServiceApiV1OauthServicesServiceIdDeleteErrors,
-  GetOauthServiceApiV1OauthServicesServiceIdGetData,
-  GetOauthServiceApiV1OauthServicesServiceIdGetResponses,
-  GetOauthServiceApiV1OauthServicesServiceIdGetErrors,
-  UpdateOauthServiceApiV1OauthServicesServiceIdPutData,
-  UpdateOauthServiceApiV1OauthServicesServiceIdPutResponses,
-  UpdateOauthServiceApiV1OauthServicesServiceIdPutErrors,
-  GetAuthorizationUrlApiV1OauthAuthorizePostData,
-  GetAuthorizationUrlApiV1OauthAuthorizePostResponses,
-  GetAuthorizationUrlApiV1OauthAuthorizePostErrors,
-  ExchangeCodeForTokenApiV1OauthTokenPostData,
-  ExchangeCodeForTokenApiV1OauthTokenPostResponses,
-  ExchangeCodeForTokenApiV1OauthTokenPostErrors,
-  ListUserTokensApiV1OauthTokensGetData,
-  ListUserTokensApiV1OauthTokensGetResponses,
-  ListUserTokensApiV1OauthTokensGetErrors,
-  RevokeTokenApiV1OauthTokensServiceNameDeleteData,
-  RevokeTokenApiV1OauthTokensServiceNameDeleteResponses,
-  RevokeTokenApiV1OauthTokensServiceNameDeleteErrors,
+  ListOauthServicesData,
+  ListOauthServicesResponses,
+  ListOauthServicesErrors,
+  CreateOauthServiceData,
+  CreateOauthServiceResponses,
+  CreateOauthServiceErrors,
+  DeleteOauthServiceData,
+  DeleteOauthServiceResponses,
+  DeleteOauthServiceErrors,
+  GetOauthServiceData,
+  GetOauthServiceResponses,
+  GetOauthServiceErrors,
+  UpdateOauthServiceData,
+  UpdateOauthServiceResponses,
+  UpdateOauthServiceErrors,
+  GetOauthAuthorizationUrlData,
+  GetOauthAuthorizationUrlResponses,
+  GetOauthAuthorizationUrlErrors,
+  ExchangeOauthTokenData,
+  ExchangeOauthTokenResponses,
+  ExchangeOauthTokenErrors,
+  ListOauthTokensData,
+  ListOauthTokensResponses,
+  ListOauthTokensErrors,
+  RevokeOauthTokenData,
+  RevokeOauthTokenResponses,
+  RevokeOauthTokenErrors,
 } from './types.gen';
 import { client as _heyApiClient } from './client.gen';
 
@@ -1114,6 +1117,33 @@ export const getMcpendpoint = <ThrowOnError extends boolean = false>(
 };
 
 /**
+ * Update Mcpendpoint
+ * Update a specific MCP Endpoint configuration by ID.
+ */
+export const updateMcpendpoint = <ThrowOnError extends boolean = false>(
+  options: Options<UpdateMcpendpointData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).put<
+    UpdateMcpendpointResponses,
+    UpdateMcpendpointErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/mcpendpoints/{mcpendpoint_id}',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
  * Get Models
  * List all model configurations for the authenticated user and environment.
  */
@@ -1204,12 +1234,12 @@ export const getModel = <ThrowOnError extends boolean = false>(
 /**
  * List Oauth Services
  */
-export const listOauthServicesApiV1OauthServicesGet = <ThrowOnError extends boolean = false>(
-  options?: Options<ListOauthServicesApiV1OauthServicesGetData, ThrowOnError>
+export const listOauthServices = <ThrowOnError extends boolean = false>(
+  options?: Options<ListOauthServicesData, ThrowOnError>
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    ListOauthServicesApiV1OauthServicesGetResponses,
-    ListOauthServicesApiV1OauthServicesGetErrors,
+    ListOauthServicesResponses,
+    ListOauthServicesErrors,
     ThrowOnError
   >({
     security: [
@@ -1226,12 +1256,12 @@ export const listOauthServicesApiV1OauthServicesGet = <ThrowOnError extends bool
 /**
  * Create Oauth Service
  */
-export const createOauthServiceApiV1OauthServicesPost = <ThrowOnError extends boolean = false>(
-  options: Options<CreateOauthServiceApiV1OauthServicesPostData, ThrowOnError>
+export const createOauthService = <ThrowOnError extends boolean = false>(
+  options: Options<CreateOauthServiceData, ThrowOnError>
 ) => {
   return (options.client ?? _heyApiClient).post<
-    CreateOauthServiceApiV1OauthServicesPostResponses,
-    CreateOauthServiceApiV1OauthServicesPostErrors,
+    CreateOauthServiceResponses,
+    CreateOauthServiceErrors,
     ThrowOnError
   >({
     security: [
@@ -1252,14 +1282,12 @@ export const createOauthServiceApiV1OauthServicesPost = <ThrowOnError extends bo
 /**
  * Delete Oauth Service
  */
-export const deleteOauthServiceApiV1OauthServicesServiceIdDelete = <
-  ThrowOnError extends boolean = false,
->(
-  options: Options<DeleteOauthServiceApiV1OauthServicesServiceIdDeleteData, ThrowOnError>
+export const deleteOauthService = <ThrowOnError extends boolean = false>(
+  options: Options<DeleteOauthServiceData, ThrowOnError>
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    DeleteOauthServiceApiV1OauthServicesServiceIdDeleteResponses,
-    DeleteOauthServiceApiV1OauthServicesServiceIdDeleteErrors,
+    DeleteOauthServiceResponses,
+    DeleteOauthServiceErrors,
     ThrowOnError
   >({
     security: [
@@ -1276,12 +1304,12 @@ export const deleteOauthServiceApiV1OauthServicesServiceIdDelete = <
 /**
  * Get Oauth Service
  */
-export const getOauthServiceApiV1OauthServicesServiceIdGet = <ThrowOnError extends boolean = false>(
-  options: Options<GetOauthServiceApiV1OauthServicesServiceIdGetData, ThrowOnError>
+export const getOauthService = <ThrowOnError extends boolean = false>(
+  options: Options<GetOauthServiceData, ThrowOnError>
 ) => {
   return (options.client ?? _heyApiClient).get<
-    GetOauthServiceApiV1OauthServicesServiceIdGetResponses,
-    GetOauthServiceApiV1OauthServicesServiceIdGetErrors,
+    GetOauthServiceResponses,
+    GetOauthServiceErrors,
     ThrowOnError
   >({
     security: [
@@ -1298,14 +1326,12 @@ export const getOauthServiceApiV1OauthServicesServiceIdGet = <ThrowOnError exten
 /**
  * Update Oauth Service
  */
-export const updateOauthServiceApiV1OauthServicesServiceIdPut = <
-  ThrowOnError extends boolean = false,
->(
-  options: Options<UpdateOauthServiceApiV1OauthServicesServiceIdPutData, ThrowOnError>
+export const updateOauthService = <ThrowOnError extends boolean = false>(
+  options: Options<UpdateOauthServiceData, ThrowOnError>
 ) => {
   return (options.client ?? _heyApiClient).put<
-    UpdateOauthServiceApiV1OauthServicesServiceIdPutResponses,
-    UpdateOauthServiceApiV1OauthServicesServiceIdPutErrors,
+    UpdateOauthServiceResponses,
+    UpdateOauthServiceErrors,
     ThrowOnError
   >({
     security: [
@@ -1326,12 +1352,12 @@ export const updateOauthServiceApiV1OauthServicesServiceIdPut = <
 /**
  * Get Authorization Url
  */
-export const getAuthorizationUrlApiV1OauthAuthorizePost = <ThrowOnError extends boolean = false>(
-  options: Options<GetAuthorizationUrlApiV1OauthAuthorizePostData, ThrowOnError>
+export const getOauthAuthorizationUrl = <ThrowOnError extends boolean = false>(
+  options: Options<GetOauthAuthorizationUrlData, ThrowOnError>
 ) => {
   return (options.client ?? _heyApiClient).post<
-    GetAuthorizationUrlApiV1OauthAuthorizePostResponses,
-    GetAuthorizationUrlApiV1OauthAuthorizePostErrors,
+    GetOauthAuthorizationUrlResponses,
+    GetOauthAuthorizationUrlErrors,
     ThrowOnError
   >({
     security: [
@@ -1352,12 +1378,12 @@ export const getAuthorizationUrlApiV1OauthAuthorizePost = <ThrowOnError extends 
 /**
  * Exchange Code For Token
  */
-export const exchangeCodeForTokenApiV1OauthTokenPost = <ThrowOnError extends boolean = false>(
-  options: Options<ExchangeCodeForTokenApiV1OauthTokenPostData, ThrowOnError>
+export const exchangeOauthToken = <ThrowOnError extends boolean = false>(
+  options: Options<ExchangeOauthTokenData, ThrowOnError>
 ) => {
   return (options.client ?? _heyApiClient).post<
-    ExchangeCodeForTokenApiV1OauthTokenPostResponses,
-    ExchangeCodeForTokenApiV1OauthTokenPostErrors,
+    ExchangeOauthTokenResponses,
+    ExchangeOauthTokenErrors,
     ThrowOnError
   >({
     security: [
@@ -1378,12 +1404,12 @@ export const exchangeCodeForTokenApiV1OauthTokenPost = <ThrowOnError extends boo
 /**
  * List User Tokens
  */
-export const listUserTokensApiV1OauthTokensGet = <ThrowOnError extends boolean = false>(
-  options?: Options<ListUserTokensApiV1OauthTokensGetData, ThrowOnError>
+export const listOauthTokens = <ThrowOnError extends boolean = false>(
+  options?: Options<ListOauthTokensData, ThrowOnError>
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    ListUserTokensApiV1OauthTokensGetResponses,
-    ListUserTokensApiV1OauthTokensGetErrors,
+    ListOauthTokensResponses,
+    ListOauthTokensErrors,
     ThrowOnError
   >({
     security: [
@@ -1400,12 +1426,12 @@ export const listUserTokensApiV1OauthTokensGet = <ThrowOnError extends boolean =
 /**
  * Revoke Token
  */
-export const revokeTokenApiV1OauthTokensServiceNameDelete = <ThrowOnError extends boolean = false>(
-  options: Options<RevokeTokenApiV1OauthTokensServiceNameDeleteData, ThrowOnError>
+export const revokeOauthToken = <ThrowOnError extends boolean = false>(
+  options: Options<RevokeOauthTokenData, ThrowOnError>
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    RevokeTokenApiV1OauthTokensServiceNameDeleteResponses,
-    RevokeTokenApiV1OauthTokensServiceNameDeleteErrors,
+    RevokeOauthTokenResponses,
+    RevokeOauthTokenErrors,
     ThrowOnError
   >({
     security: [
