@@ -140,6 +140,21 @@ import type {
   GetModelData,
   GetModelResponses,
   GetModelErrors,
+  ListPromptsData,
+  ListPromptsResponses,
+  ListPromptsErrors,
+  CreatePromptData,
+  CreatePromptResponses,
+  CreatePromptErrors,
+  DeletePromptData,
+  DeletePromptResponses,
+  DeletePromptErrors,
+  GetPromptData,
+  GetPromptResponses,
+  GetPromptErrors,
+  UpdatePromptData,
+  UpdatePromptResponses,
+  UpdatePromptErrors,
   ListOauthServicesData,
   ListOauthServicesResponses,
   ListOauthServicesErrors,
@@ -1254,6 +1269,125 @@ export const getModel = <ThrowOnError extends boolean = false>(
     ],
     url: '/system/api/v1/models/{model_name}',
     ...options,
+  });
+};
+
+/**
+ * List Prompts
+ * List all prompts for the environment.
+ */
+export const listPrompts = <ThrowOnError extends boolean = false>(
+  options?: Options<ListPromptsData, ThrowOnError>
+) => {
+  return (options?.client ?? _heyApiClient).get<
+    ListPromptsResponses,
+    ListPromptsErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/prompts',
+    ...options,
+  });
+};
+
+/**
+ * Create Prompt
+ * Create a new prompt for the environment.
+ */
+export const createPrompt = <ThrowOnError extends boolean = false>(
+  options: Options<CreatePromptData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    CreatePromptResponses,
+    CreatePromptErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/prompts',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Delete Prompt
+ * Delete a specific prompt.
+ */
+export const deletePrompt = <ThrowOnError extends boolean = false>(
+  options: Options<DeletePromptData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).delete<
+    DeletePromptResponses,
+    DeletePromptErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/prompts/{prompt_name}',
+    ...options,
+  });
+};
+
+/**
+ * Get Prompt
+ * Get a specific prompt.
+ */
+export const getPrompt = <ThrowOnError extends boolean = false>(
+  options: Options<GetPromptData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).get<GetPromptResponses, GetPromptErrors, ThrowOnError>({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/prompts/{prompt_name}',
+    ...options,
+  });
+};
+
+/**
+ * Update Prompt
+ * Update a specific prompt.
+ */
+export const updatePrompt = <ThrowOnError extends boolean = false>(
+  options: Options<UpdatePromptData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).put<
+    UpdatePromptResponses,
+    UpdatePromptErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/prompts/{prompt_name}',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
   });
 };
 

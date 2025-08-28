@@ -629,6 +629,14 @@ export type McpEndpointCreate = {
    * Oauth Service Id
    */
   oauth_service_id?: string | null;
+  /**
+   * Immutable
+   */
+  immutable?: boolean;
+  /**
+   * Active
+   */
+  active?: boolean;
 };
 
 /**
@@ -669,6 +677,14 @@ export type McpEndpointResponse = {
    * Oauth Service Id
    */
   oauth_service_id?: string | null;
+  /**
+   * Immutable
+   */
+  immutable?: boolean;
+  /**
+   * Active
+   */
+  active?: boolean;
 };
 
 /**
@@ -705,6 +721,14 @@ export type McpEndpointUpdate = {
    * Oauth Service Id
    */
   oauth_service_id?: string | null;
+  /**
+   * Immutable
+   */
+  immutable?: boolean | null;
+  /**
+   * Active
+   */
+  active?: boolean | null;
 };
 
 /**
@@ -1146,6 +1170,96 @@ export type PendingInvitationResponse = {
    * Expires At
    */
   expires_at?: number | null;
+};
+
+/**
+ * PromptCreate
+ */
+export type PromptCreate = {
+  /**
+   * Name
+   */
+  name: string;
+  /**
+   * Content
+   */
+  content: string;
+  /**
+   * Description
+   */
+  description?: string | null;
+  /**
+   * Active
+   */
+  active?: boolean;
+  /**
+   * Is Default
+   */
+  is_default?: boolean;
+};
+
+/**
+ * PromptResponse
+ */
+export type PromptResponse = {
+  /**
+   * Id
+   */
+  id: string;
+  /**
+   * Name
+   */
+  name: string;
+  /**
+   * Content
+   */
+  content: string;
+  /**
+   * Description
+   */
+  description?: string | null;
+  /**
+   * Active
+   */
+  active?: boolean;
+  /**
+   * Is Default
+   */
+  is_default?: boolean;
+  /**
+   * Environment Id
+   */
+  environment_id: string;
+  /**
+   * Created At
+   */
+  created_at: string;
+  /**
+   * Updated At
+   */
+  updated_at: string;
+};
+
+/**
+ * PromptUpdate
+ */
+export type PromptUpdate = {
+  /**
+   * Content
+   */
+  content?: string | null;
+  /**
+   * Description
+   */
+  description?: string | null;
+  /**
+   * Active
+   */
+  active?: boolean | null;
+  /**
+   * Is Default
+   */
+  is_default?: boolean | null;
 };
 
 /**
@@ -2867,6 +2981,170 @@ export type GetModelResponses = {
 };
 
 export type GetModelResponse = GetModelResponses[keyof GetModelResponses];
+
+export type ListPromptsData = {
+  body?: never;
+  path?: never;
+  query?: {
+    /**
+     * Active
+     */
+    active?: boolean | null;
+  };
+  url: '/system/api/v1/prompts';
+};
+
+export type ListPromptsErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type ListPromptsError = ListPromptsErrors[keyof ListPromptsErrors];
+
+export type ListPromptsResponses = {
+  /**
+   * Response List Prompts
+   * Successful Response
+   */
+  200: Array<PromptResponse>;
+};
+
+export type ListPromptsResponse = ListPromptsResponses[keyof ListPromptsResponses];
+
+export type CreatePromptData = {
+  body: PromptCreate;
+  path?: never;
+  query?: never;
+  url: '/system/api/v1/prompts';
+};
+
+export type CreatePromptErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type CreatePromptError = CreatePromptErrors[keyof CreatePromptErrors];
+
+export type CreatePromptResponses = {
+  /**
+   * Successful Response
+   */
+  200: PromptResponse;
+};
+
+export type CreatePromptResponse = CreatePromptResponses[keyof CreatePromptResponses];
+
+export type DeletePromptData = {
+  body?: never;
+  path: {
+    /**
+     * Prompt Name
+     */
+    prompt_name: string;
+  };
+  query?: never;
+  url: '/system/api/v1/prompts/{prompt_name}';
+};
+
+export type DeletePromptErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type DeletePromptError = DeletePromptErrors[keyof DeletePromptErrors];
+
+export type DeletePromptResponses = {
+  /**
+   * Successful Response
+   */
+  200: unknown;
+};
+
+export type GetPromptData = {
+  body?: never;
+  path: {
+    /**
+     * Prompt Name
+     */
+    prompt_name: string;
+  };
+  query?: never;
+  url: '/system/api/v1/prompts/{prompt_name}';
+};
+
+export type GetPromptErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type GetPromptError = GetPromptErrors[keyof GetPromptErrors];
+
+export type GetPromptResponses = {
+  /**
+   * Successful Response
+   */
+  200: PromptResponse;
+};
+
+export type GetPromptResponse = GetPromptResponses[keyof GetPromptResponses];
+
+export type UpdatePromptData = {
+  body: PromptUpdate;
+  path: {
+    /**
+     * Prompt Name
+     */
+    prompt_name: string;
+  };
+  query?: never;
+  url: '/system/api/v1/prompts/{prompt_name}';
+};
+
+export type UpdatePromptErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type UpdatePromptError = UpdatePromptErrors[keyof UpdatePromptErrors];
+
+export type UpdatePromptResponses = {
+  /**
+   * Successful Response
+   */
+  200: PromptResponse;
+};
+
+export type UpdatePromptResponse = UpdatePromptResponses[keyof UpdatePromptResponses];
 
 export type ListOauthServicesData = {
   body?: never;
