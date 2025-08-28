@@ -2236,6 +2236,43 @@ export type CreateEnvironmentUserResponses = {
 export type CreateEnvironmentUserResponse =
   CreateEnvironmentUserResponses[keyof CreateEnvironmentUserResponses];
 
+export type GetPendingInvitationsData = {
+  body?: never;
+  path: {
+    /**
+     * Environment Id
+     */
+    environment_id: string;
+  };
+  query?: never;
+  url: '/system/api/v1/environments/{environment_id}/users/pending';
+};
+
+export type GetPendingInvitationsErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type GetPendingInvitationsError =
+  GetPendingInvitationsErrors[keyof GetPendingInvitationsErrors];
+
+export type GetPendingInvitationsResponses = {
+  /**
+   * Response Get Pending Invitations
+   * Successful Response
+   */
+  200: Array<PendingInvitationResponse>;
+};
+
+export type GetPendingInvitationsResponse =
+  GetPendingInvitationsResponses[keyof GetPendingInvitationsResponses];
+
 export type DeleteEnvironmentUserData = {
   body?: never;
   path: {
@@ -2427,43 +2464,6 @@ export type BulkInviteEnvironmentUsersResponses = {
 
 export type BulkInviteEnvironmentUsersResponse =
   BulkInviteEnvironmentUsersResponses[keyof BulkInviteEnvironmentUsersResponses];
-
-export type GetPendingInvitationsData = {
-  body?: never;
-  path: {
-    /**
-     * Environment Id
-     */
-    environment_id: string;
-  };
-  query?: never;
-  url: '/system/api/v1/environments/{environment_id}/users/pending';
-};
-
-export type GetPendingInvitationsErrors = {
-  /**
-   * Not found
-   */
-  404: unknown;
-  /**
-   * Validation Error
-   */
-  422: HttpValidationError;
-};
-
-export type GetPendingInvitationsError =
-  GetPendingInvitationsErrors[keyof GetPendingInvitationsErrors];
-
-export type GetPendingInvitationsResponses = {
-  /**
-   * Response Get Pending Invitations
-   * Successful Response
-   */
-  200: Array<PendingInvitationResponse>;
-};
-
-export type GetPendingInvitationsResponse =
-  GetPendingInvitationsResponses[keyof GetPendingInvitationsResponses];
 
 export type GetModelprovidersData = {
   body?: never;

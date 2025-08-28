@@ -83,6 +83,9 @@ import type {
   CreateEnvironmentUserData,
   CreateEnvironmentUserResponses,
   CreateEnvironmentUserErrors,
+  GetPendingInvitationsData,
+  GetPendingInvitationsResponses,
+  GetPendingInvitationsErrors,
   DeleteEnvironmentUserData,
   DeleteEnvironmentUserResponses,
   DeleteEnvironmentUserErrors,
@@ -98,9 +101,6 @@ import type {
   BulkInviteEnvironmentUsersData,
   BulkInviteEnvironmentUsersResponses,
   BulkInviteEnvironmentUsersErrors,
-  GetPendingInvitationsData,
-  GetPendingInvitationsResponses,
-  GetPendingInvitationsErrors,
   GetModelprovidersData,
   GetModelprovidersResponses,
   GetModelprovidersErrors,
@@ -801,6 +801,29 @@ export const createEnvironmentUser = <ThrowOnError extends boolean = false>(
 };
 
 /**
+ * Get Pending Invitations
+ * Get all pending invitations for an environment (users who have been invited but haven't joined yet).
+ */
+export const getPendingInvitations = <ThrowOnError extends boolean = false>(
+  options: Options<GetPendingInvitationsData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).get<
+    GetPendingInvitationsResponses,
+    GetPendingInvitationsErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/environments/{environment_id}/users/pending',
+    ...options,
+  });
+};
+
+/**
  * Delete Environment User
  * Remove a user from an environment (organization).
  */
@@ -924,29 +947,6 @@ export const bulkInviteEnvironmentUsers = <ThrowOnError extends boolean = false>
       'Content-Type': 'application/json',
       ...options.headers,
     },
-  });
-};
-
-/**
- * Get Pending Invitations
- * Get all pending invitations for an environment (users who have been invited but haven't joined yet).
- */
-export const getPendingInvitations = <ThrowOnError extends boolean = false>(
-  options: Options<GetPendingInvitationsData, ThrowOnError>
-) => {
-  return (options.client ?? _heyApiClient).get<
-    GetPendingInvitationsResponses,
-    GetPendingInvitationsErrors,
-    ThrowOnError
-  >({
-    security: [
-      {
-        scheme: 'bearer',
-        type: 'http',
-      },
-    ],
-    url: '/system/api/v1/environments/{environment_id}/users/pending',
-    ...options,
   });
 };
 
