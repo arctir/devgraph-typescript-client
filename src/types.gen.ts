@@ -528,7 +528,7 @@ export type EnvironmentUserCreate = {
   /**
    * Role
    */
-  role?: string;
+  role?: 'member' | 'admin';
 };
 
 /**
@@ -542,7 +542,7 @@ export type EnvironmentUserInvite = {
   /**
    * Role
    */
-  role?: string;
+  role?: 'member' | 'admin';
 };
 
 /**
@@ -582,7 +582,7 @@ export type EnvironmentUserUpdate = {
   /**
    * Role
    */
-  role: string;
+  role: 'member' | 'admin';
 };
 
 /**
@@ -1112,6 +1112,40 @@ export type OpenAiModelProviderResponse = {
    * Default
    */
   default?: boolean;
+};
+
+/**
+ * PendingInvitationResponse
+ */
+export type PendingInvitationResponse = {
+  /**
+   * Id
+   */
+  id: string;
+  /**
+   * Email Address
+   */
+  email_address: string;
+  /**
+   * Role
+   */
+  role: string;
+  /**
+   * Status
+   */
+  status: string;
+  /**
+   * Created At
+   */
+  created_at: number;
+  /**
+   * Updated At
+   */
+  updated_at: number;
+  /**
+   * Expires At
+   */
+  expires_at?: number | null;
 };
 
 /**
@@ -2393,6 +2427,43 @@ export type BulkInviteEnvironmentUsersResponses = {
 
 export type BulkInviteEnvironmentUsersResponse =
   BulkInviteEnvironmentUsersResponses[keyof BulkInviteEnvironmentUsersResponses];
+
+export type GetPendingInvitationsData = {
+  body?: never;
+  path: {
+    /**
+     * Environment Id
+     */
+    environment_id: string;
+  };
+  query?: never;
+  url: '/system/api/v1/environments/{environment_id}/users/pending';
+};
+
+export type GetPendingInvitationsErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type GetPendingInvitationsError =
+  GetPendingInvitationsErrors[keyof GetPendingInvitationsErrors];
+
+export type GetPendingInvitationsResponses = {
+  /**
+   * Response Get Pending Invitations
+   * Successful Response
+   */
+  200: Array<PendingInvitationResponse>;
+};
+
+export type GetPendingInvitationsResponse =
+  GetPendingInvitationsResponses[keyof GetPendingInvitationsResponses];
 
 export type GetModelprovidersData = {
   body?: never;
