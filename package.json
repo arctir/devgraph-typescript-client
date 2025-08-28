@@ -1,6 +1,6 @@
 {
   "name": "@arctir/devgraph-typescript-client",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "description": "TypeScript client for teh Devgraph API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
