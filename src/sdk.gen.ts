@@ -146,6 +146,9 @@ import type {
   CreatePromptData,
   CreatePromptResponses,
   CreatePromptErrors,
+  GetSystemDefaultPromptData,
+  GetSystemDefaultPromptResponses,
+  GetSystemDefaultPromptErrors,
   DeletePromptData,
   DeletePromptResponses,
   DeletePromptErrors,
@@ -1319,6 +1322,29 @@ export const createPrompt = <ThrowOnError extends boolean = false>(
       'Content-Type': 'application/json',
       ...options.headers,
     },
+  });
+};
+
+/**
+ * Get System Default Prompt
+ * Get the built-in system default prompt.
+ */
+export const getSystemDefaultPrompt = <ThrowOnError extends boolean = false>(
+  options?: Options<GetSystemDefaultPromptData, ThrowOnError>
+) => {
+  return (options?.client ?? _heyApiClient).get<
+    GetSystemDefaultPromptResponses,
+    GetSystemDefaultPromptErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/prompts/system-default',
+    ...options,
   });
 };
 

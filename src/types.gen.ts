@@ -3046,6 +3046,30 @@ export type CreatePromptResponses = {
 
 export type CreatePromptResponse = CreatePromptResponses[keyof CreatePromptResponses];
 
+export type GetSystemDefaultPromptData = {
+  body?: never;
+  path?: never;
+  query?: never;
+  url: '/system/api/v1/prompts/system-default';
+};
+
+export type GetSystemDefaultPromptErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+};
+
+export type GetSystemDefaultPromptResponses = {
+  /**
+   * Successful Response
+   */
+  200: PromptResponse;
+};
+
+export type GetSystemDefaultPromptResponse =
+  GetSystemDefaultPromptResponses[keyof GetSystemDefaultPromptResponses];
+
 export type DeletePromptData = {
   body?: never;
   path: {
