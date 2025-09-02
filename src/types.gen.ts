@@ -2990,6 +2990,10 @@ export type ListPromptsData = {
      * Active
      */
     active?: boolean | null;
+    /**
+     * Name
+     */
+    name?: string | null;
   };
   url: '/system/api/v1/prompts';
 };
@@ -3074,12 +3078,12 @@ export type DeletePromptData = {
   body?: never;
   path: {
     /**
-     * Prompt Name
+     * Prompt Id
      */
-    prompt_name: string;
+    prompt_id: string;
   };
   query?: never;
-  url: '/system/api/v1/prompts/{prompt_name}';
+  url: '/system/api/v1/prompts/{prompt_id}';
 };
 
 export type DeletePromptErrors = {
@@ -3106,12 +3110,12 @@ export type GetPromptData = {
   body?: never;
   path: {
     /**
-     * Prompt Name
+     * Prompt Id
      */
-    prompt_name: string;
+    prompt_id: string;
   };
   query?: never;
-  url: '/system/api/v1/prompts/{prompt_name}';
+  url: '/system/api/v1/prompts/{prompt_id}';
 };
 
 export type GetPromptErrors = {
@@ -3140,12 +3144,12 @@ export type UpdatePromptData = {
   body: PromptUpdate;
   path: {
     /**
-     * Prompt Name
+     * Prompt Id
      */
-    prompt_name: string;
+    prompt_id: string;
   };
   query?: never;
-  url: '/system/api/v1/prompts/{prompt_name}';
+  url: '/system/api/v1/prompts/{prompt_id}';
 };
 
 export type UpdatePromptErrors = {

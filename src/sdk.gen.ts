@@ -1277,7 +1277,7 @@ export const getModel = <ThrowOnError extends boolean = false>(
 
 /**
  * List Prompts
- * List all prompts for the environment.
+ * List all prompts for the environment, optionally filter by name.
  */
 export const listPrompts = <ThrowOnError extends boolean = false>(
   options?: Options<ListPromptsData, ThrowOnError>
@@ -1350,7 +1350,7 @@ export const getSystemDefaultPrompt = <ThrowOnError extends boolean = false>(
 
 /**
  * Delete Prompt
- * Delete a specific prompt.
+ * Delete a specific prompt by ID.
  */
 export const deletePrompt = <ThrowOnError extends boolean = false>(
   options: Options<DeletePromptData, ThrowOnError>
@@ -1366,14 +1366,14 @@ export const deletePrompt = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/prompts/{prompt_name}',
+    url: '/system/api/v1/prompts/{prompt_id}',
     ...options,
   });
 };
 
 /**
  * Get Prompt
- * Get a specific prompt.
+ * Get a specific prompt by ID.
  */
 export const getPrompt = <ThrowOnError extends boolean = false>(
   options: Options<GetPromptData, ThrowOnError>
@@ -1385,14 +1385,14 @@ export const getPrompt = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/prompts/{prompt_name}',
+    url: '/system/api/v1/prompts/{prompt_id}',
     ...options,
   });
 };
 
 /**
  * Update Prompt
- * Update a specific prompt.
+ * Update a specific prompt by ID.
  */
 export const updatePrompt = <ThrowOnError extends boolean = false>(
   options: Options<UpdatePromptData, ThrowOnError>
@@ -1408,7 +1408,7 @@ export const updatePrompt = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/prompts/{prompt_name}',
+    url: '/system/api/v1/prompts/{prompt_id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
