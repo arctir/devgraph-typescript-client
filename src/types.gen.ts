@@ -53,6 +53,28 @@ export type ApiTokenResponse = {
 };
 
 /**
+ * ApiTokenUpdate
+ */
+export type ApiTokenUpdate = {
+  /**
+   * Name
+   */
+  name?: string | null;
+  /**
+   * Expires At
+   */
+  expires_at?: string | null;
+  /**
+   * Scopes
+   */
+  scopes?: Array<string> | null;
+  /**
+   * Active
+   */
+  active?: boolean | null;
+};
+
+/**
  * ChatMessageCreate
  */
 export type ChatMessageCreate = {
@@ -2276,6 +2298,74 @@ export type CreateTokenResponses = {
 };
 
 export type CreateTokenResponse = CreateTokenResponses[keyof CreateTokenResponses];
+
+export type DeleteTokenData = {
+  body?: never;
+  path: {
+    /**
+     * Token Id
+     */
+    token_id: string;
+  };
+  query?: never;
+  url: '/system/api/v1/tokens/{token_id}';
+};
+
+export type DeleteTokenErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type DeleteTokenError = DeleteTokenErrors[keyof DeleteTokenErrors];
+
+export type DeleteTokenResponses = {
+  /**
+   * Successful Response
+   */
+  204: void;
+};
+
+export type DeleteTokenResponse = DeleteTokenResponses[keyof DeleteTokenResponses];
+
+export type UpdateTokenData = {
+  body: ApiTokenUpdate;
+  path: {
+    /**
+     * Token Id
+     */
+    token_id: string;
+  };
+  query?: never;
+  url: '/system/api/v1/tokens/{token_id}';
+};
+
+export type UpdateTokenErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type UpdateTokenError = UpdateTokenErrors[keyof UpdateTokenErrors];
+
+export type UpdateTokenResponses = {
+  /**
+   * Successful Response
+   */
+  200: ApiTokenResponse;
+};
+
+export type UpdateTokenResponse = UpdateTokenResponses[keyof UpdateTokenResponses];
 
 export type ListEnvironmentUsersData = {
   body?: never;

@@ -77,6 +77,12 @@ import type {
   CreateTokenData,
   CreateTokenResponses,
   CreateTokenErrors,
+  DeleteTokenData,
+  DeleteTokenResponses,
+  DeleteTokenErrors,
+  UpdateTokenData,
+  UpdateTokenResponses,
+  UpdateTokenErrors,
   ListEnvironmentUsersData,
   ListEnvironmentUsersResponses,
   ListEnvironmentUsersErrors,
@@ -760,6 +766,56 @@ export const createToken = <ThrowOnError extends boolean = false>(
       },
     ],
     url: '/system/api/v1/tokens',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Delete Token
+ * Delete a specific API token by ID.
+ */
+export const deleteToken = <ThrowOnError extends boolean = false>(
+  options: Options<DeleteTokenData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).delete<
+    DeleteTokenResponses,
+    DeleteTokenErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/tokens/{token_id}',
+    ...options,
+  });
+};
+
+/**
+ * Update Token
+ * Update a specific API token by ID.
+ */
+export const updateToken = <ThrowOnError extends boolean = false>(
+  options: Options<UpdateTokenData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).put<
+    UpdateTokenResponses,
+    UpdateTokenErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/tokens/{token_id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
