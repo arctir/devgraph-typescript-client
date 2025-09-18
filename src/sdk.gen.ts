@@ -11,6 +11,12 @@ import type {
   DeleteEntityDefinitionData,
   DeleteEntityDefinitionResponses,
   DeleteEntityDefinitionErrors,
+  CleanupOrphanedEntitiesData,
+  CleanupOrphanedEntitiesResponses,
+  CleanupOrphanedEntitiesErrors,
+  ListOrphanedEntitiesData,
+  ListOrphanedEntitiesResponses,
+  ListOrphanedEntitiesErrors,
   CreateEntityData,
   CreateEntityResponses,
   CreateEntityErrors,
@@ -29,6 +35,9 @@ import type {
   CreateEntityRelationData,
   CreateEntityRelationResponses,
   CreateEntityRelationErrors,
+  CreateEntityRelationsBulkData,
+  CreateEntityRelationsBulkResponses,
+  CreateEntityRelationsBulkErrors,
   CreateChatTitleData,
   CreateChatTitleResponses,
   CreateChatTitleErrors,
@@ -284,6 +293,52 @@ export const deleteEntityDefinition = <ThrowOnError extends boolean = false>(
 };
 
 /**
+ * Clean up orphaned entities
+ * Delete all entities marked as orphans. Requires 'delete:entities' permission.
+ */
+export const cleanupOrphanedEntities = <ThrowOnError extends boolean = false>(
+  options?: Options<CleanupOrphanedEntitiesData, ThrowOnError>
+) => {
+  return (options?.client ?? _heyApiClient).delete<
+    CleanupOrphanedEntitiesResponses,
+    CleanupOrphanedEntitiesErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/entities/orphans',
+    ...options,
+  });
+};
+
+/**
+ * List orphaned entities
+ * Lists all entities marked as orphans across all namespaces. Requires 'read:entities' permission.
+ */
+export const listOrphanedEntities = <ThrowOnError extends boolean = false>(
+  options?: Options<ListOrphanedEntitiesData, ThrowOnError>
+) => {
+  return (options?.client ?? _heyApiClient).get<
+    ListOrphanedEntitiesResponses,
+    ListOrphanedEntitiesErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/entities/orphans',
+    ...options,
+  });
+};
+
+/**
  * Create a resource based on an entity definition
  * Creates a new entity based on the specified group, version, namespace, and kind. Requires 'create:entities' permission.
  */
@@ -414,6 +469,33 @@ export const createEntityRelation = <ThrowOnError extends boolean = false>(
       },
     ],
     url: '/api/v1/entities/relations',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Create multiple entity relations in bulk
+ * Creates multiple entity relations in a single request. Provides detailed success/failure information for each relation. Requires 'create:entityrelations' permission.
+ */
+export const createEntityRelationsBulk = <ThrowOnError extends boolean = false>(
+  options: Options<CreateEntityRelationsBulkData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    CreateEntityRelationsBulkResponses,
+    CreateEntityRelationsBulkErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/entities/relations/bulk',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1333,7 +1415,7 @@ export const getModel = <ThrowOnError extends boolean = false>(
 
 /**
  * List Prompts
- * List all prompts for the environment, optionally filter by name.
+ * List all prompts for the environment.
  */
 export const listPrompts = <ThrowOnError extends boolean = false>(
   options?: Options<ListPromptsData, ThrowOnError>
