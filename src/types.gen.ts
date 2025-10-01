@@ -262,7 +262,11 @@ export type ChatSessionCreate = {
  * ChatSessionUpdate
  */
 export type ChatSessionUpdate = {
-  visibility?: ChatVisibility;
+  /**
+   * Title
+   */
+  title?: string | null;
+  visibility?: ChatVisibility | null;
 };
 
 /**
@@ -1484,7 +1488,11 @@ export type TypedChatMessageContent = {
   /**
    * Text
    */
-  text: string;
+  text?: string | null;
+  /**
+   * Reasoning
+   */
+  reasoning?: string | null;
 };
 
 /**
