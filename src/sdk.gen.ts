@@ -20,6 +20,12 @@ import type {
   CreateEntityData,
   CreateEntityResponses,
   CreateEntityErrors,
+  CreateEntitiesBulkData,
+  CreateEntitiesBulkResponses,
+  CreateEntitiesBulkErrors,
+  GetEntityByUidData,
+  GetEntityByUidResponses,
+  GetEntityByUidErrors,
   DeleteEntityData,
   DeleteEntityResponses,
   DeleteEntityErrors,
@@ -41,6 +47,9 @@ import type {
   CreateChatTitleData,
   CreateChatTitleResponses,
   CreateChatTitleErrors,
+  DeleteChatsBulkData,
+  DeleteChatsBulkResponses,
+  DeleteChatsBulkErrors,
   GetChatsData,
   GetChatsResponses,
   GetChatsErrors,
@@ -128,6 +137,9 @@ import type {
   GetModelproviderData,
   GetModelproviderResponses,
   GetModelproviderErrors,
+  UpdateModelproviderData,
+  UpdateModelproviderResponses,
+  UpdateModelproviderErrors,
   GetMcpendpointsData,
   GetMcpendpointsResponses,
   GetMcpendpointsErrors,
@@ -143,6 +155,21 @@ import type {
   UpdateMcpendpointData,
   UpdateMcpendpointResponses,
   UpdateMcpendpointErrors,
+  ListMcpendpointToolsData,
+  ListMcpendpointToolsResponses,
+  ListMcpendpointToolsErrors,
+  CreateMcpToolAssociationData,
+  CreateMcpToolAssociationResponses,
+  CreateMcpToolAssociationErrors,
+  GetEntityToolsData,
+  GetEntityToolsResponses,
+  GetEntityToolsErrors,
+  GetMcpEndpointEntityTypesData,
+  GetMcpEndpointEntityTypesResponses,
+  GetMcpEndpointEntityTypesErrors,
+  DeleteMcpToolAssociationData,
+  DeleteMcpToolAssociationResponses,
+  DeleteMcpToolAssociationErrors,
   GetModelsData,
   GetModelsResponses,
   GetModelsErrors,
@@ -155,6 +182,9 @@ import type {
   GetModelData,
   GetModelResponses,
   GetModelErrors,
+  UpdateModelData,
+  UpdateModelResponses,
+  UpdateModelErrors,
   ListPromptsData,
   ListPromptsResponses,
   ListPromptsErrors,
@@ -366,8 +396,58 @@ export const createEntity = <ThrowOnError extends boolean = false>(
 };
 
 /**
+ * Create multiple entities in bulk
+ * Creates multiple entities in a single request with concurrent processing. Provides detailed success/failure information for each entity. Requires 'create:entities' permission.
+ */
+export const createEntitiesBulk = <ThrowOnError extends boolean = false>(
+  options: Options<CreateEntitiesBulkData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    CreateEntitiesBulkResponses,
+    CreateEntitiesBulkErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/entities/bulk',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Retrieve a specific entity by UID with its relations
+ * Fetches a specific entity by its unique identifier (UID), including related entities and relations. Requires 'read:entities' permission.
+ */
+export const getEntityByUid = <ThrowOnError extends boolean = false>(
+  options: Options<GetEntityByUidData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).get<
+    GetEntityByUidResponses,
+    GetEntityByUidErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/entities/uid/{uid}',
+    ...options,
+  });
+};
+
+/**
  * Delete a specific entity
- * Deletes a specific entity from the knowledge graph. Requires 'delete:entities' permission.
+ * Deletes a specific entity from the ontology. Requires 'delete:entities' permission.
  */
 export const deleteEntity = <ThrowOnError extends boolean = false>(
   options: Options<DeleteEntityData, ThrowOnError>
@@ -389,8 +469,8 @@ export const deleteEntity = <ThrowOnError extends boolean = false>(
 };
 
 /**
- * Retrieve a specific entity by name
- * Fetches a specific entity based on group, version, namespace, plural, and name. Requires 'read:entities' permission.
+ * Retrieve a specific entity by name with its relations
+ * Fetches a specific entity based on group, version, namespace, plural, and name, including related entities and relations. Requires 'read:entities' permission.
  */
 export const getEntity = <ThrowOnError extends boolean = false>(
   options: Options<GetEntityData, ThrowOnError>
@@ -403,7 +483,7 @@ export const getEntity = <ThrowOnError extends boolean = false>(
 
 /**
  * Query entities with optional field selectors
- * Retrieves entities from the knowledge graph, optionally filtered by field selectors. Field selectors use dot notation for nested properties (e.g., 'spec.metadata.owner=team-a'). Requires 'read:entities' permission.
+ * Retrieves entities from the ontology, optionally filtered by field selectors. Field selectors use dot notation for nested properties (e.g., 'spec.metadata.owner=team-a'). Requires 'read:entities' permission.
  */
 export const getEntities = <ThrowOnError extends boolean = false>(
   options?: Options<GetEntitiesData, ThrowOnError>
@@ -528,6 +608,29 @@ export const createChatTitle = <ThrowOnError extends boolean = false>(
       'Content-Type': 'application/json',
       ...options.headers,
     },
+  });
+};
+
+/**
+ * Delete Chats Bulk
+ * Bulk delete multiple chat sessions.
+ */
+export const deleteChatsBulk = <ThrowOnError extends boolean = false>(
+  options: Options<DeleteChatsBulkData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).delete<
+    DeleteChatsBulkResponses,
+    DeleteChatsBulkErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/chat/',
+    ...options,
   });
 };
 
@@ -1203,6 +1306,33 @@ export const getModelprovider = <ThrowOnError extends boolean = false>(
 };
 
 /**
+ * Update Modelprovider
+ * Update a specific Model Provider configuration by ID.
+ */
+export const updateModelprovider = <ThrowOnError extends boolean = false>(
+  options: Options<UpdateModelproviderData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).put<
+    UpdateModelproviderResponses,
+    UpdateModelproviderErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/modelproviders/{provider_id}',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
  * Get Mcpendpoints
  * List all MCP Endpoint configurations for the authenticated user and environment.
  */
@@ -1326,6 +1456,126 @@ export const updateMcpendpoint = <ThrowOnError extends boolean = false>(
 };
 
 /**
+ * List Mcpendpoint Tools
+ * List all available tools from a specific MCP Endpoint.
+ * This interrogates the MCP server to discover its available tools.
+ */
+export const listMcpendpointTools = <ThrowOnError extends boolean = false>(
+  options: Options<ListMcpendpointToolsData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).get<
+    ListMcpendpointToolsResponses,
+    ListMcpendpointToolsErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/mcpendpoints/{mcpendpoint_id}/tools',
+    ...options,
+  });
+};
+
+/**
+ * Create Mcp Tool Association
+ * Create an association between an MCP tool and an entity definition.
+ */
+export const createMcpToolAssociation = <ThrowOnError extends boolean = false>(
+  options: Options<CreateMcpToolAssociationData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    CreateMcpToolAssociationResponses,
+    CreateMcpToolAssociationErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/mcp-tool-associations',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Get Entity Tools
+ * Get all MCP tools associated with an entity definition.
+ */
+export const getEntityTools = <ThrowOnError extends boolean = false>(
+  options: Options<GetEntityToolsData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).get<
+    GetEntityToolsResponses,
+    GetEntityToolsErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/entity-definitions/{entity_definition_id}/tools',
+    ...options,
+  });
+};
+
+/**
+ * Get Mcp Endpoint Entity Types
+ * Get all entity types associated with an MCP endpoint's tools.
+ */
+export const getMcpEndpointEntityTypes = <ThrowOnError extends boolean = false>(
+  options: Options<GetMcpEndpointEntityTypesData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).get<
+    GetMcpEndpointEntityTypesResponses,
+    GetMcpEndpointEntityTypesErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/mcpendpoints/{mcpendpoint_name}/entity-types',
+    ...options,
+  });
+};
+
+/**
+ * Delete Mcp Tool Association
+ * Delete an MCP tool-entity association.
+ */
+export const deleteMcpToolAssociation = <ThrowOnError extends boolean = false>(
+  options: Options<DeleteMcpToolAssociationData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).delete<
+    DeleteMcpToolAssociationResponses,
+    DeleteMcpToolAssociationErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/mcp-tool-associations/{association_id}',
+    ...options,
+  });
+};
+
+/**
  * Get Models
  * List all model configurations for the authenticated user and environment.
  */
@@ -1410,6 +1660,33 @@ export const getModel = <ThrowOnError extends boolean = false>(
     ],
     url: '/system/api/v1/models/{model_name}',
     ...options,
+  });
+};
+
+/**
+ * Update Model
+ * Update a model configuration by name.
+ */
+export const updateModel = <ThrowOnError extends boolean = false>(
+  options: Options<UpdateModelData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).put<
+    UpdateModelResponses,
+    UpdateModelErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/system/api/v1/models/{model_name}',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
   });
 };
 

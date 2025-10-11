@@ -56,10 +56,7 @@ export type ApiTokenCreate = {
    * Name
    */
   name: string;
-  /**
-   * Expires At
-   */
-  expires_at?: string | null;
+  expires_at?: string;
   /**
    * Scopes
    */
@@ -82,18 +79,12 @@ export type ApiTokenResponse = {
    * User Id
    */
   user_id: string;
-  /**
-   * Expires At
-   */
-  expires_at?: string | null;
+  expires_at?: string;
   /**
    * Token
    */
   token: string;
-  /**
-   * Scopes
-   */
-  scopes?: Array<string> | null;
+  scopes?: Array<string>;
   /**
    * Active
    */
@@ -104,22 +95,10 @@ export type ApiTokenResponse = {
  * ApiTokenUpdate
  */
 export type ApiTokenUpdate = {
-  /**
-   * Name
-   */
-  name?: string | null;
-  /**
-   * Expires At
-   */
-  expires_at?: string | null;
-  /**
-   * Scopes
-   */
-  scopes?: Array<string> | null;
-  /**
-   * Active
-   */
-  active?: boolean | null;
+  name?: string;
+  expires_at?: string;
+  scopes?: Array<string>;
+  active?: boolean;
 };
 
 /**
@@ -243,10 +222,7 @@ export type ChatSession = {
  * ChatSessionCreate
  */
 export type ChatSessionCreate = {
-  /**
-   * Id
-   */
-  id?: string | null;
+  id?: string;
   /**
    * Userid
    */
@@ -262,11 +238,8 @@ export type ChatSessionCreate = {
  * ChatSessionUpdate
  */
 export type ChatSessionUpdate = {
-  /**
-   * Title
-   */
-  title?: string | null;
-  visibility?: ChatVisibility | null;
+  title?: string;
+  visibility?: ChatVisibility;
 };
 
 /**
@@ -332,10 +305,7 @@ export type EntityDefinitionResponse = {
    * List Kind
    */
   list_kind: string;
-  /**
-   * Plural
-   */
-  plural?: string | null;
+  plural?: string;
   /**
    * Singular
    */
@@ -344,10 +314,7 @@ export type EntityDefinitionResponse = {
    * Name
    */
   name?: string;
-  /**
-   * Description
-   */
-  description?: string | null;
+  description?: string;
   /**
    * Spec
    */
@@ -384,10 +351,7 @@ export type EntityDefinitionSpec = {
    * List Kind
    */
   list_kind: string;
-  /**
-   * Plural
-   */
-  plural?: string | null;
+  plural?: string;
   /**
    * Singular
    */
@@ -396,10 +360,7 @@ export type EntityDefinitionSpec = {
    * Name
    */
   name?: string;
-  /**
-   * Description
-   */
-  description?: string | null;
+  description?: string;
   /**
    * Spec
    */
@@ -428,6 +389,10 @@ export type EntityMetadata = {
    * Namespace
    */
   namespace: string;
+  /**
+   * Uid
+   */
+  uid?: string;
   /**
    * Labels
    */
@@ -577,6 +542,7 @@ export type EntityResponse = {
 
 /**
  * EntityResultSetResponse
+ * Response for a set of entities with their relations (used for queries returning multiple entities).
  */
 export type EntityResultSetResponse = {
   /**
@@ -608,21 +574,29 @@ export type EntityStatus = {
    * Whether this entity is orphaned (definition no longer exists)
    */
   is_orphan?: boolean;
-  /**
-   * Last Seen
-   * Timestamp when the entity was last seen during discovery
-   */
-  last_seen?: string | null;
-  /**
-   * Discovery Source
-   * Name of the provider that last discovered/updated this entity
-   */
-  discovery_source?: string | null;
+  last_seen?: string;
+  discovery_source?: string;
   /**
    * Generation
    * Generation number, incremented on each update
    */
   generation?: number;
+};
+
+/**
+ * EntityWithRelationsResponse
+ * Response for a single entity with its related entities and relations.
+ */
+export type EntityWithRelationsResponse = {
+  entity: EntityResponse;
+  /**
+   * Related Entities
+   */
+  related_entities?: Array<EntityResponse>;
+  /**
+   * Relations
+   */
+  relations?: Array<EntityRelationResponse>;
 };
 
 /**
@@ -777,10 +751,7 @@ export type McpEndpointCreate = {
    * Url
    */
   url: string;
-  /**
-   * Description
-   */
-  description?: string | null;
+  description?: string;
   /**
    * Headers
    */
@@ -795,10 +766,7 @@ export type McpEndpointCreate = {
    * Supports Resources
    */
   supports_resources?: boolean;
-  /**
-   * Oauth Service Id
-   */
-  oauth_service_id?: string | null;
+  oauth_service_id?: string;
   /**
    * Immutable
    */
@@ -807,6 +775,8 @@ export type McpEndpointCreate = {
    * Active
    */
   active?: boolean;
+  allowed_tools?: Array<string>;
+  denied_tools?: Array<string>;
 };
 
 /**
@@ -825,10 +795,7 @@ export type McpEndpointResponse = {
    * Url
    */
   url: string;
-  /**
-   * Description
-   */
-  description?: string | null;
+  description?: string;
   /**
    * Headers
    */
@@ -843,10 +810,7 @@ export type McpEndpointResponse = {
    * Supports Resources
    */
   supports_resources?: boolean;
-  /**
-   * Oauth Service Id
-   */
-  oauth_service_id?: string | null;
+  oauth_service_id?: string;
   /**
    * Immutable
    */
@@ -855,50 +819,87 @@ export type McpEndpointResponse = {
    * Active
    */
   active?: boolean;
+  allowed_tools?: Array<string>;
+  denied_tools?: Array<string>;
 };
 
 /**
  * MCPEndpointUpdate
  */
 export type McpEndpointUpdate = {
-  /**
-   * Name
-   */
-  name?: string | null;
-  /**
-   * Url
-   */
-  url?: string | null;
-  /**
-   * Description
-   */
-  description?: string | null;
-  /**
-   * Headers
-   */
+  name?: string;
+  url?: string;
+  description?: string;
   headers?: {
     [key: string]: string;
-  } | null;
+  };
+  devgraph_auth?: boolean;
+  supports_resources?: boolean;
+  oauth_service_id?: string;
+  immutable?: boolean;
+  active?: boolean;
+  allowed_tools?: Array<string>;
+  denied_tools?: Array<string>;
+};
+
+/**
+ * MCPToolEntityAssociationCreate
+ */
+export type McpToolEntityAssociationCreate = {
   /**
-   * Devgraph Auth
+   * Mcp Endpoint Name
    */
-  devgraph_auth?: boolean | null;
+  mcp_endpoint_name: string;
   /**
-   * Supports Resources
+   * Tool Name
    */
-  supports_resources?: boolean | null;
+  tool_name: string;
   /**
-   * Oauth Service Id
+   * Entity Definition Id
    */
-  oauth_service_id?: string | null;
+  entity_definition_id: string;
+  entity_version_id?: string;
+  tool_config?: {
+    [key: string]: unknown;
+  };
+};
+
+/**
+ * MCPToolEntityAssociationResponse
+ */
+export type McpToolEntityAssociationResponse = {
   /**
-   * Immutable
+   * Id
    */
-  immutable?: boolean | null;
+  id: string;
   /**
-   * Active
+   * Mcp Endpoint Name
    */
-  active?: boolean | null;
+  mcp_endpoint_name: string;
+  /**
+   * Tool Name
+   */
+  tool_name: string;
+  /**
+   * Entity Definition Id
+   */
+  entity_definition_id: string;
+  entity_version_id?: string;
+  tool_config?: {
+    [key: string]: unknown;
+  };
+  /**
+   * Environment Id
+   */
+  environment_id: string;
+  /**
+   * Created At
+   */
+  created_at: string;
+  /**
+   * Updated At
+   */
+  updated_at: string;
 };
 
 /**
@@ -909,10 +910,7 @@ export type ModelCreate = {
    * Name
    */
   name: string;
-  /**
-   * Description
-   */
-  description?: string | null;
+  description?: string;
   /**
    * Provider Id
    */
@@ -957,6 +955,15 @@ export type ModelProviderResponse =
     } & AnthropicModelProviderResponse);
 
 /**
+ * ModelProviderUpdate
+ */
+export type ModelProviderUpdate = {
+  name?: string;
+  api_key?: string;
+  default?: boolean;
+};
+
+/**
  * ModelResponse
  */
 export type ModelResponse = {
@@ -968,10 +975,7 @@ export type ModelResponse = {
    * Name
    */
   name: string;
-  /**
-   * Description
-   */
-  description?: string | null;
+  description?: string;
   /**
    * Provider Id
    */
@@ -979,6 +983,15 @@ export type ModelResponse = {
   /**
    * Default
    */
+  default?: boolean;
+};
+
+/**
+ * ModelUpdate
+ */
+export type ModelUpdate = {
+  description?: string;
+  provider_id?: string;
   default?: boolean;
 };
 
@@ -995,18 +1008,9 @@ export type OAuthAuthorizationRequest = {
    * Service Id
    */
   service_id: string;
-  /**
-   * Scopes
-   */
-  scopes?: Array<string> | null;
-  /**
-   * Redirect Uri
-   */
-  redirect_uri?: string | null;
-  /**
-   * State
-   */
-  state?: string | null;
+  scopes?: Array<string>;
+  redirect_uri?: string;
+  state?: string;
 };
 
 /**
@@ -1035,10 +1039,7 @@ export type OAuthServiceCreate = {
    * Display Name
    */
   display_name: string;
-  /**
-   * Description
-   */
-  description?: string | null;
+  description?: string;
   /**
    * Client Id
    */
@@ -1055,14 +1056,8 @@ export type OAuthServiceCreate = {
    * Token Url
    */
   token_url: string;
-  /**
-   * Userinfo Url
-   */
-  userinfo_url?: string | null;
-  /**
-   * Default Scopes
-   */
-  default_scopes?: Array<string> | null;
+  userinfo_url?: string;
+  default_scopes?: Array<string>;
   /**
    * Supported Grant Types
    */
@@ -1071,20 +1066,11 @@ export type OAuthServiceCreate = {
    * Is Active
    */
   is_active?: boolean;
-  /**
-   * Icon Url
-   */
-  icon_url?: string | null;
-  /**
-   * Homepage Url
-   */
-  homepage_url?: string | null;
-  /**
-   * Additional Params
-   */
+  icon_url?: string;
+  homepage_url?: string;
   additional_params?: {
     [key: string]: unknown;
-  } | null;
+  };
 };
 
 /**
@@ -1117,10 +1103,7 @@ export type OAuthServiceResponse = {
    * Display Name
    */
   display_name: string;
-  /**
-   * Description
-   */
-  description: string | null;
+  description: string;
   /**
    * Authorization Url
    */
@@ -1129,10 +1112,7 @@ export type OAuthServiceResponse = {
    * Token Url
    */
   token_url: string;
-  /**
-   * Userinfo Url
-   */
-  userinfo_url: string | null;
+  userinfo_url: string;
   /**
    * Default Scopes
    */
@@ -1145,14 +1125,8 @@ export type OAuthServiceResponse = {
    * Is Active
    */
   is_active: boolean;
-  /**
-   * Icon Url
-   */
-  icon_url: string | null;
-  /**
-   * Homepage Url
-   */
-  homepage_url: string | null;
+  icon_url: string;
+  homepage_url: string;
   /**
    * Created At
    */
@@ -1167,60 +1141,21 @@ export type OAuthServiceResponse = {
  * OAuthServiceUpdate
  */
 export type OAuthServiceUpdate = {
-  /**
-   * Display Name
-   */
-  display_name?: string | null;
-  /**
-   * Description
-   */
-  description?: string | null;
-  /**
-   * Client Id
-   */
-  client_id?: string | null;
-  /**
-   * Client Secret
-   */
-  client_secret?: string | null;
-  /**
-   * Authorization Url
-   */
-  authorization_url?: string | null;
-  /**
-   * Token Url
-   */
-  token_url?: string | null;
-  /**
-   * Userinfo Url
-   */
-  userinfo_url?: string | null;
-  /**
-   * Default Scopes
-   */
-  default_scopes?: Array<string> | null;
-  /**
-   * Supported Grant Types
-   */
-  supported_grant_types?: Array<string> | null;
-  /**
-   * Is Active
-   */
-  is_active?: boolean | null;
-  /**
-   * Icon Url
-   */
-  icon_url?: string | null;
-  /**
-   * Homepage Url
-   */
-  homepage_url?: string | null;
-  /**
-   * Additional Params
-   */
+  display_name?: string;
+  description?: string;
+  client_id?: string;
+  client_secret?: string;
+  authorization_url?: string;
+  token_url?: string;
+  userinfo_url?: string;
+  default_scopes?: Array<string>;
+  supported_grant_types?: Array<string>;
+  is_active?: boolean;
+  icon_url?: string;
+  homepage_url?: string;
   additional_params?: {
     [key: string]: unknown;
-  } | null;
+  };
 };
 
 /**
@@ -1235,14 +1170,8 @@ export type OAuthTokenExchange = {
    * Code
    */
   code: string;
-  /**
-   * State
-   */
-  state?: string | null;
-  /**
-   * Redirect Uri
-   */
-  redirect_uri?: string | null;
+  state?: string;
+  redirect_uri?: string;
 };
 
 /**
@@ -1257,14 +1186,8 @@ export type OAuthTokenResponse = {
    * Token Type
    */
   token_type: string;
-  /**
-   * Expires In
-   */
-  expires_in?: number | null;
-  /**
-   * Refresh Token
-   */
-  refresh_token?: string | null;
+  expires_in?: number;
+  refresh_token?: string;
   /**
    * Scopes
    */
@@ -1347,10 +1270,7 @@ export type PendingInvitationResponse = {
    * Updated At
    */
   updated_at: number;
-  /**
-   * Expires At
-   */
-  expires_at?: number | null;
+  expires_at?: number;
 };
 
 /**
@@ -1365,10 +1285,7 @@ export type PromptCreate = {
    * Content
    */
   content: string;
-  /**
-   * Description
-   */
-  description?: string | null;
+  description?: string;
   /**
    * Active
    */
@@ -1395,10 +1312,7 @@ export type PromptResponse = {
    * Content
    */
   content: string;
-  /**
-   * Description
-   */
-  description?: string | null;
+  description?: string;
   /**
    * Active
    */
@@ -1425,22 +1339,10 @@ export type PromptResponse = {
  * PromptUpdate
  */
 export type PromptUpdate = {
-  /**
-   * Content
-   */
-  content?: string | null;
-  /**
-   * Description
-   */
-  description?: string | null;
-  /**
-   * Active
-   */
-  active?: boolean | null;
-  /**
-   * Is Default
-   */
-  is_default?: boolean | null;
+  content?: string;
+  description?: string;
+  active?: boolean;
+  is_default?: boolean;
 };
 
 /**
@@ -1485,14 +1387,8 @@ export type TypedChatMessageContent = {
    * Type
    */
   type: string;
-  /**
-   * Text
-   */
-  text?: string | null;
-  /**
-   * Reasoning
-   */
-  reasoning?: string | null;
+  text?: string;
+  reasoning?: string;
 };
 
 /**
@@ -1792,6 +1688,98 @@ export type CreateEntityResponses = {
 
 export type CreateEntityResponse = CreateEntityResponses[keyof CreateEntityResponses];
 
+export type CreateEntitiesBulkData = {
+  /**
+   * Entities
+   */
+  body: Array<Entity>;
+  path?: never;
+  query: {
+    /**
+     * Group
+     */
+    group: string;
+    /**
+     * Version
+     */
+    version: string;
+    /**
+     * Namespace
+     */
+    namespace: string;
+    /**
+     * Plural
+     */
+    plural: string;
+  };
+  url: '/api/v1/entities/bulk';
+};
+
+export type CreateEntitiesBulkErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type CreateEntitiesBulkError = CreateEntitiesBulkErrors[keyof CreateEntitiesBulkErrors];
+
+export type CreateEntitiesBulkResponses = {
+  /**
+   * Response Create Entities Bulk
+   * Successful Response
+   */
+  201: {
+    [key: string]: unknown;
+  };
+};
+
+export type CreateEntitiesBulkResponse =
+  CreateEntitiesBulkResponses[keyof CreateEntitiesBulkResponses];
+
+export type GetEntityByUidData = {
+  body?: never;
+  path: {
+    /**
+     * Uid
+     */
+    uid: string;
+  };
+  query?: {
+    /**
+     * Namespace
+     */
+    namespace?: string;
+  };
+  url: '/api/v1/entities/uid/{uid}';
+};
+
+export type GetEntityByUidErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type GetEntityByUidError = GetEntityByUidErrors[keyof GetEntityByUidErrors];
+
+export type GetEntityByUidResponses = {
+  /**
+   * Successful Response
+   */
+  200: EntityWithRelationsResponse;
+};
+
+export type GetEntityByUidResponse = GetEntityByUidResponses[keyof GetEntityByUidResponses];
+
 export type DeleteEntityData = {
   body?: never;
   path: {
@@ -1887,7 +1875,7 @@ export type GetEntityResponses = {
   /**
    * Successful Response
    */
-  200: EntityResponse;
+  200: EntityWithRelationsResponse;
 };
 
 export type GetEntityResponse = GetEntityResponses[keyof GetEntityResponses];
@@ -1912,6 +1900,11 @@ export type GetEntitiesData = {
      * Offset
      */
     offset?: number;
+    /**
+     * Include Relations
+     * Include relations in the response. Set to false for faster queries when relations are not needed.
+     */
+    include_relations?: boolean;
     /**
      * Fieldselector
      * Comma-separated field selectors in format 'key=value', supports dot notation for nested properties
@@ -2074,6 +2067,39 @@ export type CreateChatTitleResponses = {
 };
 
 export type CreateChatTitleResponse = CreateChatTitleResponses[keyof CreateChatTitleResponses];
+
+export type DeleteChatsBulkData = {
+  body?: never;
+  path?: never;
+  query: {
+    /**
+     * Chat Ids
+     * List of chat IDs to delete
+     */
+    chat_ids: Array<string>;
+  };
+  url: '/api/v1/chat/';
+};
+
+export type DeleteChatsBulkErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type DeleteChatsBulkError = DeleteChatsBulkErrors[keyof DeleteChatsBulkErrors];
+
+export type DeleteChatsBulkResponses = {
+  /**
+   * Successful Response
+   */
+  200: unknown;
+};
 
 export type GetChatsData = {
   body?: never;
@@ -3070,6 +3096,41 @@ export type GetModelproviderResponses = {
 
 export type GetModelproviderResponse = GetModelproviderResponses[keyof GetModelproviderResponses];
 
+export type UpdateModelproviderData = {
+  body: ModelProviderUpdate;
+  path: {
+    /**
+     * Provider Id
+     */
+    provider_id: string;
+  };
+  query?: never;
+  url: '/system/api/v1/modelproviders/{provider_id}';
+};
+
+export type UpdateModelproviderErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type UpdateModelproviderError = UpdateModelproviderErrors[keyof UpdateModelproviderErrors];
+
+export type UpdateModelproviderResponses = {
+  /**
+   * Successful Response
+   */
+  200: ModelProviderResponse;
+};
+
+export type UpdateModelproviderResponse =
+  UpdateModelproviderResponses[keyof UpdateModelproviderResponses];
+
 export type GetMcpendpointsData = {
   body?: never;
   path?: never;
@@ -3228,6 +3289,188 @@ export type UpdateMcpendpointResponses = {
 export type UpdateMcpendpointResponse =
   UpdateMcpendpointResponses[keyof UpdateMcpendpointResponses];
 
+export type ListMcpendpointToolsData = {
+  body?: never;
+  path: {
+    /**
+     * Mcpendpoint Id
+     */
+    mcpendpoint_id: string;
+  };
+  query?: never;
+  url: '/system/api/v1/mcpendpoints/{mcpendpoint_id}/tools';
+};
+
+export type ListMcpendpointToolsErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type ListMcpendpointToolsError =
+  ListMcpendpointToolsErrors[keyof ListMcpendpointToolsErrors];
+
+export type ListMcpendpointToolsResponses = {
+  /**
+   * Response List Mcpendpoint Tools
+   * Successful Response
+   */
+  200: Array<{
+    [key: string]: unknown;
+  }>;
+};
+
+export type ListMcpendpointToolsResponse =
+  ListMcpendpointToolsResponses[keyof ListMcpendpointToolsResponses];
+
+export type CreateMcpToolAssociationData = {
+  body: McpToolEntityAssociationCreate;
+  path?: never;
+  query?: never;
+  url: '/system/api/v1/mcp-tool-associations';
+};
+
+export type CreateMcpToolAssociationErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type CreateMcpToolAssociationError =
+  CreateMcpToolAssociationErrors[keyof CreateMcpToolAssociationErrors];
+
+export type CreateMcpToolAssociationResponses = {
+  /**
+   * Successful Response
+   */
+  201: McpToolEntityAssociationResponse;
+};
+
+export type CreateMcpToolAssociationResponse =
+  CreateMcpToolAssociationResponses[keyof CreateMcpToolAssociationResponses];
+
+export type GetEntityToolsData = {
+  body?: never;
+  path: {
+    /**
+     * Entity Definition Id
+     */
+    entity_definition_id: string;
+  };
+  query?: {
+    entity_version_id?: string;
+  };
+  url: '/system/api/v1/entity-definitions/{entity_definition_id}/tools';
+};
+
+export type GetEntityToolsErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type GetEntityToolsError = GetEntityToolsErrors[keyof GetEntityToolsErrors];
+
+export type GetEntityToolsResponses = {
+  /**
+   * Response Get Entity Tools
+   * Successful Response
+   */
+  200: Array<McpToolEntityAssociationResponse>;
+};
+
+export type GetEntityToolsResponse = GetEntityToolsResponses[keyof GetEntityToolsResponses];
+
+export type GetMcpEndpointEntityTypesData = {
+  body?: never;
+  path: {
+    /**
+     * Mcpendpoint Name
+     */
+    mcpendpoint_name: string;
+  };
+  query?: {
+    tool_name?: string;
+  };
+  url: '/system/api/v1/mcpendpoints/{mcpendpoint_name}/entity-types';
+};
+
+export type GetMcpEndpointEntityTypesErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type GetMcpEndpointEntityTypesError =
+  GetMcpEndpointEntityTypesErrors[keyof GetMcpEndpointEntityTypesErrors];
+
+export type GetMcpEndpointEntityTypesResponses = {
+  /**
+   * Response Get Mcp Endpoint Entity Types
+   * Successful Response
+   */
+  200: Array<McpToolEntityAssociationResponse>;
+};
+
+export type GetMcpEndpointEntityTypesResponse =
+  GetMcpEndpointEntityTypesResponses[keyof GetMcpEndpointEntityTypesResponses];
+
+export type DeleteMcpToolAssociationData = {
+  body?: never;
+  path: {
+    /**
+     * Association Id
+     */
+    association_id: string;
+  };
+  query?: never;
+  url: '/system/api/v1/mcp-tool-associations/{association_id}';
+};
+
+export type DeleteMcpToolAssociationErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type DeleteMcpToolAssociationError =
+  DeleteMcpToolAssociationErrors[keyof DeleteMcpToolAssociationErrors];
+
+export type DeleteMcpToolAssociationResponses = {
+  /**
+   * Successful Response
+   */
+  204: void;
+};
+
+export type DeleteMcpToolAssociationResponse =
+  DeleteMcpToolAssociationResponses[keyof DeleteMcpToolAssociationResponses];
+
 export type GetModelsData = {
   body?: never;
   path?: never;
@@ -3348,6 +3591,40 @@ export type GetModelResponses = {
 };
 
 export type GetModelResponse = GetModelResponses[keyof GetModelResponses];
+
+export type UpdateModelData = {
+  body: ModelUpdate;
+  path: {
+    /**
+     * Model Name
+     */
+    model_name: string;
+  };
+  query?: never;
+  url: '/system/api/v1/models/{model_name}';
+};
+
+export type UpdateModelErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type UpdateModelError = UpdateModelErrors[keyof UpdateModelErrors];
+
+export type UpdateModelResponses = {
+  /**
+   * Successful Response
+   */
+  200: ModelResponse;
+};
+
+export type UpdateModelResponse = UpdateModelResponses[keyof UpdateModelResponses];
 
 export type ListPromptsData = {
   body?: never;
