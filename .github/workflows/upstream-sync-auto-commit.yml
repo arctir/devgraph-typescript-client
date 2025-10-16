@@ -3,7 +3,7 @@ name: Sync from Upstream Spec (Auto-commit)
 on:
   repository_dispatch:
     types: [upstream_spec_update]
-  workflow_dispatch:  # Allow manual triggers
+  workflow_dispatch:
 
 jobs:
   regenerate-client:
