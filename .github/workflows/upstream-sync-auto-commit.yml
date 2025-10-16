@@ -34,7 +34,7 @@ jobs:
         curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
           -H "Accept: application/vnd.github.raw" \
           -o ../devgraph/specs/devgraph/v1/spec.yaml \
-          https://api.github.com/repos/arctir/devgraph/contents/specs/devgraph/v1/spec.yaml?ref=main
+          https://api.github.com/repos/arctir/devgraph-ai/contents/specs/devgraph/v1/spec.yaml?ref=main
 
         echo "✅ Spec downloaded successfully"
         ls -lh ../devgraph/specs/devgraph/v1/spec.yaml
