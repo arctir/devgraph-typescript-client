@@ -90,11 +90,11 @@ jobs:
           git add .
           git commit -m "chore: regenerate TypeScript client from upstream spec update
 
-Automated commit triggered by upstream spec update from devgraph repository.
+          Automated commit triggered by upstream spec update from devgraph repository.
 
-Version: $NEW_VERSION
-Source commit: ${{ github.event.client_payload.ref }}
-Triggered by: GitHub Actions upstream-sync workflow"
+          Version: $NEW_VERSION
+          Source commit: ${{ github.event.client_payload.ref }}
+          Triggered by: GitHub Actions upstream-sync workflow"
 
           # Create and push tag
           git tag -a "v$NEW_VERSION" -m "Release v$NEW_VERSION - Auto-generated from upstream spec"
