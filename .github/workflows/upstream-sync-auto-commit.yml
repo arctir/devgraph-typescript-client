@@ -28,13 +28,15 @@ jobs:
         git config user.email "github-actions[bot]@users.noreply.github.com"
 
     - name: Fetch latest API spec from devgraph repo
+      env:
+        GH_TOKEN: ${{ secrets.DEVGRAPH_SPEC_TOKEN }}
       run: |
         echo "📥 Fetching spec from devgraph repository..."
         mkdir -p ../devgraph/specs/devgraph/v1
-        curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-          -H "Accept: application/vnd.github.raw" \
-          -o ../devgraph/specs/devgraph/v1/spec.yaml \
-          https://api.github.com/repos/arctir/devgraph-ai/contents/specs/devgraph/v1/spec.yaml?ref=main
+
+        # Use gh cli to fetch the file
+        gh api repos/arctir/devgraph-ai/contents/specs/devgraph/v1/spec.yaml \
+          --jq '.content' | base64 -d > ../devgraph/specs/devgraph/v1/spec.yaml
 
         echo "✅ Spec downloaded successfully"
         ls -lh ../devgraph/specs/devgraph/v1/spec.yaml
