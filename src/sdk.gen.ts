@@ -631,6 +631,10 @@ export const deleteChatsBulk = <ThrowOnError extends boolean = false>(
     ],
     url: '/api/v1/chat/',
     ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
   });
 };
 

@@ -102,6 +102,17 @@ export type ApiTokenUpdate = {
 };
 
 /**
+ * BulkDeleteRequest
+ * Request model for bulk chat deletion.
+ */
+export type BulkDeleteRequest = {
+  /**
+   * Chat Ids
+   */
+  chat_ids: Array<string>;
+};
+
+/**
  * BulkEntityRelationCreateRequest
  * Request model for creating multiple entity relations in bulk.
  */
@@ -2069,15 +2080,9 @@ export type CreateChatTitleResponses = {
 export type CreateChatTitleResponse = CreateChatTitleResponses[keyof CreateChatTitleResponses];
 
 export type DeleteChatsBulkData = {
-  body?: never;
+  body: BulkDeleteRequest;
   path?: never;
-  query: {
-    /**
-     * Chat Ids
-     * List of chat IDs to delete
-     */
-    chat_ids: Array<string>;
-  };
+  query?: never;
   url: '/api/v1/chat/';
 };
 
