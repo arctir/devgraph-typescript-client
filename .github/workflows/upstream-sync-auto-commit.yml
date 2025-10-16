@@ -102,7 +102,9 @@ jobs:
           git tag -a "v$NEW_VERSION" -m "Release v$NEW_VERSION - Auto-generated from upstream spec"
 
           git push origin main
-          git push origin "v$NEW_VERSION"
+
+          # Push tag, allowing it to fail if tag already exists
+          git push origin "v$NEW_VERSION" || echo "⚠️  Tag v$NEW_VERSION already exists, skipping tag push"
 
           echo "### ✅ Client Updated Successfully" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
