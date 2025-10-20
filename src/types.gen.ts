@@ -2376,7 +2376,7 @@ export type PostClerkWebhookData = {
   };
   path?: never;
   query?: never;
-  url: '/system/api/v1/webhooks/clerk';
+  url: '/api/v1/webhooks/clerk';
 };
 
 export type PostClerkWebhookErrors = {
@@ -2411,7 +2411,7 @@ export type PostStripeWebhookData = {
   };
   path?: never;
   query?: never;
-  url: '/system/api/v1/webhooks/stripe';
+  url: '/api/v1/webhooks/stripe';
 };
 
 export type PostStripeWebhookErrors = {
@@ -2441,7 +2441,7 @@ export type GetEnvironmentsData = {
   body?: never;
   path?: never;
   query?: never;
-  url: '/system/api/v1/environments';
+  url: '/api/v1/system/environments';
 };
 
 export type GetEnvironmentsErrors = {
@@ -2465,7 +2465,7 @@ export type CreateEnvironmentData = {
   body: EnvironmentCreate;
   path?: never;
   query?: never;
-  url: '/system/api/v1/environments';
+  url: '/api/v1/system/environments';
 };
 
 export type CreateEnvironmentErrors = {
@@ -2500,7 +2500,7 @@ export type GetEnvironmentStatusData = {
     env_id: string;
   };
   query?: never;
-  url: '/system/api/v1/environments/{env_id}/status';
+  url: '/api/v1/system/environments/{env_id}/status';
 };
 
 export type GetEnvironmentStatusErrors = {
@@ -2534,7 +2534,7 @@ export type GetSubscriptionsData = {
   body?: never;
   path?: never;
   query?: never;
-  url: '/system/api/v1/subscriptions';
+  url: '/api/v1/system/subscriptions';
 };
 
 export type GetSubscriptionsErrors = {
@@ -2558,7 +2558,7 @@ export type GetTokensData = {
   body?: never;
   path?: never;
   query?: never;
-  url: '/system/api/v1/tokens';
+  url: '/api/v1/system/tokens';
 };
 
 export type GetTokensErrors = {
@@ -2582,7 +2582,7 @@ export type CreateTokenData = {
   body: ApiTokenCreate;
   path?: never;
   query?: never;
-  url: '/system/api/v1/tokens';
+  url: '/api/v1/system/tokens';
 };
 
 export type CreateTokenErrors = {
@@ -2616,7 +2616,7 @@ export type DeleteTokenData = {
     token_id: string;
   };
   query?: never;
-  url: '/system/api/v1/tokens/{token_id}';
+  url: '/api/v1/system/tokens/{token_id}';
 };
 
 export type DeleteTokenErrors = {
@@ -2650,7 +2650,7 @@ export type UpdateTokenData = {
     token_id: string;
   };
   query?: never;
-  url: '/system/api/v1/tokens/{token_id}';
+  url: '/api/v1/system/tokens/{token_id}';
 };
 
 export type UpdateTokenErrors = {
@@ -2684,7 +2684,7 @@ export type ListEnvironmentUsersData = {
     environment_id: string;
   };
   query?: never;
-  url: '/system/api/v1/environments/{environment_id}/users';
+  url: '/api/v1/system/environments/{environment_id}/users';
 };
 
 export type ListEnvironmentUsersErrors = {
@@ -2721,7 +2721,7 @@ export type CreateEnvironmentUserData = {
     environment_id: string;
   };
   query?: never;
-  url: '/system/api/v1/environments/{environment_id}/users';
+  url: '/api/v1/system/environments/{environment_id}/users';
 };
 
 export type CreateEnvironmentUserErrors = {
@@ -2757,7 +2757,7 @@ export type GetPendingInvitationsData = {
     environment_id: string;
   };
   query?: never;
-  url: '/system/api/v1/environments/{environment_id}/users/pending';
+  url: '/api/v1/system/environments/{environment_id}/users/pending';
 };
 
 export type GetPendingInvitationsErrors = {
@@ -2798,7 +2798,7 @@ export type DeleteEnvironmentUserData = {
     user_id: string;
   };
   query?: never;
-  url: '/system/api/v1/environments/{environment_id}/users/{user_id}';
+  url: '/api/v1/system/environments/{environment_id}/users/{user_id}';
 };
 
 export type DeleteEnvironmentUserErrors = {
@@ -2838,7 +2838,7 @@ export type GetEnvironmentUserData = {
     user_id: string;
   };
   query?: never;
-  url: '/system/api/v1/environments/{environment_id}/users/{user_id}';
+  url: '/api/v1/system/environments/{environment_id}/users/{user_id}';
 };
 
 export type GetEnvironmentUserErrors = {
@@ -2877,7 +2877,7 @@ export type UpdateEnvironmentUserData = {
     user_id: string;
   };
   query?: never;
-  url: '/system/api/v1/environments/{environment_id}/users/{user_id}';
+  url: '/api/v1/system/environments/{environment_id}/users/{user_id}';
 };
 
 export type UpdateEnvironmentUserErrors = {
@@ -2913,7 +2913,7 @@ export type InviteEnvironmentUserData = {
     environment_id: string;
   };
   query?: never;
-  url: '/system/api/v1/environments/{environment_id}/users/invite';
+  url: '/api/v1/system/environments/{environment_id}/users/invite';
 };
 
 export type InviteEnvironmentUserErrors = {
@@ -2949,7 +2949,7 @@ export type BulkInviteEnvironmentUsersData = {
     environment_id: string;
   };
   query?: never;
-  url: '/system/api/v1/environments/{environment_id}/users/bulk-invite';
+  url: '/api/v1/system/environments/{environment_id}/users/bulk-invite';
 };
 
 export type BulkInviteEnvironmentUsersErrors = {
@@ -2981,7 +2981,7 @@ export type GetModelprovidersData = {
   body?: never;
   path?: never;
   query?: never;
-  url: '/system/api/v1/modelproviders';
+  url: '/api/v1/system/modelproviders';
 };
 
 export type GetModelprovidersErrors = {
@@ -3006,7 +3006,7 @@ export type CreateModelproviderData = {
   body: ModelProviderCreate;
   path?: never;
   query?: never;
-  url: '/system/api/v1/modelproviders';
+  url: '/api/v1/system/modelproviders';
 };
 
 export type CreateModelproviderErrors = {
@@ -3041,7 +3041,7 @@ export type DeleteModelproviderData = {
     provider_id: string;
   };
   query?: never;
-  url: '/system/api/v1/modelproviders/{provider_id}';
+  url: '/api/v1/system/modelproviders/{provider_id}';
 };
 
 export type DeleteModelproviderErrors = {
@@ -3076,7 +3076,7 @@ export type GetModelproviderData = {
     provider_id: string;
   };
   query?: never;
-  url: '/system/api/v1/modelproviders/{provider_id}';
+  url: '/api/v1/system/modelproviders/{provider_id}';
 };
 
 export type GetModelproviderErrors = {
@@ -3110,7 +3110,7 @@ export type UpdateModelproviderData = {
     provider_id: string;
   };
   query?: never;
-  url: '/system/api/v1/modelproviders/{provider_id}';
+  url: '/api/v1/system/modelproviders/{provider_id}';
 };
 
 export type UpdateModelproviderErrors = {
@@ -3140,7 +3140,7 @@ export type GetMcpendpointsData = {
   body?: never;
   path?: never;
   query?: never;
-  url: '/system/api/v1/mcpendpoints';
+  url: '/api/v1/system/mcpendpoints';
 };
 
 export type GetMcpendpointsErrors = {
@@ -3164,7 +3164,7 @@ export type CreateMcpendpointData = {
   body: McpEndpointCreate;
   path?: never;
   query?: never;
-  url: '/system/api/v1/mcpendpoints';
+  url: '/api/v1/system/mcpendpoints';
 };
 
 export type CreateMcpendpointErrors = {
@@ -3199,7 +3199,7 @@ export type DeleteMcpendpointData = {
     mcpendpoint_id: string;
   };
   query?: never;
-  url: '/system/api/v1/mcpendpoints/{mcpendpoint_id}';
+  url: '/api/v1/system/mcpendpoints/{mcpendpoint_id}';
 };
 
 export type DeleteMcpendpointErrors = {
@@ -3234,7 +3234,7 @@ export type GetMcpendpointData = {
     mcpendpoint_id: string;
   };
   query?: never;
-  url: '/system/api/v1/mcpendpoints/{mcpendpoint_id}';
+  url: '/api/v1/system/mcpendpoints/{mcpendpoint_id}';
 };
 
 export type GetMcpendpointErrors = {
@@ -3268,7 +3268,7 @@ export type UpdateMcpendpointData = {
     mcpendpoint_id: string;
   };
   query?: never;
-  url: '/system/api/v1/mcpendpoints/{mcpendpoint_id}';
+  url: '/api/v1/system/mcpendpoints/{mcpendpoint_id}';
 };
 
 export type UpdateMcpendpointErrors = {
@@ -3303,7 +3303,7 @@ export type ListMcpendpointToolsData = {
     mcpendpoint_id: string;
   };
   query?: never;
-  url: '/system/api/v1/mcpendpoints/{mcpendpoint_id}/tools';
+  url: '/api/v1/system/mcpendpoints/{mcpendpoint_id}/tools';
 };
 
 export type ListMcpendpointToolsErrors = {
@@ -3337,7 +3337,7 @@ export type CreateMcpToolAssociationData = {
   body: McpToolEntityAssociationCreate;
   path?: never;
   query?: never;
-  url: '/system/api/v1/mcp-tool-associations';
+  url: '/api/v1/system/mcp-tool-associations';
 };
 
 export type CreateMcpToolAssociationErrors = {
@@ -3375,7 +3375,7 @@ export type GetEntityToolsData = {
   query?: {
     entity_version_id?: string;
   };
-  url: '/system/api/v1/entity-definitions/{entity_definition_id}/tools';
+  url: '/api/v1/system/entity-definitions/{entity_definition_id}/tools';
 };
 
 export type GetEntityToolsErrors = {
@@ -3412,7 +3412,7 @@ export type GetMcpEndpointEntityTypesData = {
   query?: {
     tool_name?: string;
   };
-  url: '/system/api/v1/mcpendpoints/{mcpendpoint_name}/entity-types';
+  url: '/api/v1/system/mcpendpoints/{mcpendpoint_name}/entity-types';
 };
 
 export type GetMcpEndpointEntityTypesErrors = {
@@ -3449,7 +3449,7 @@ export type DeleteMcpToolAssociationData = {
     association_id: string;
   };
   query?: never;
-  url: '/system/api/v1/mcp-tool-associations/{association_id}';
+  url: '/api/v1/system/mcp-tool-associations/{association_id}';
 };
 
 export type DeleteMcpToolAssociationErrors = {
@@ -3480,7 +3480,7 @@ export type GetModelsData = {
   body?: never;
   path?: never;
   query?: never;
-  url: '/system/api/v1/models';
+  url: '/api/v1/system/models';
 };
 
 export type GetModelsErrors = {
@@ -3504,7 +3504,7 @@ export type CreateModelData = {
   body: ModelCreate;
   path?: never;
   query?: never;
-  url: '/system/api/v1/models';
+  url: '/api/v1/system/models';
 };
 
 export type CreateModelErrors = {
@@ -3538,7 +3538,7 @@ export type DeleteModelData = {
     model_name: string;
   };
   query?: never;
-  url: '/system/api/v1/models/{model_name}';
+  url: '/api/v1/system/models/{model_name}';
 };
 
 export type DeleteModelErrors = {
@@ -3572,7 +3572,7 @@ export type GetModelData = {
     model_name: string;
   };
   query?: never;
-  url: '/system/api/v1/models/{model_name}';
+  url: '/api/v1/system/models/{model_name}';
 };
 
 export type GetModelErrors = {
@@ -3606,7 +3606,7 @@ export type UpdateModelData = {
     model_name: string;
   };
   query?: never;
-  url: '/system/api/v1/models/{model_name}';
+  url: '/api/v1/system/models/{model_name}';
 };
 
 export type UpdateModelErrors = {
@@ -3637,7 +3637,7 @@ export type ListPromptsData = {
   query?: {
     active?: NullBooleanEnum;
   };
-  url: '/system/api/v1/prompts';
+  url: '/api/v1/system/prompts';
 };
 
 export type ListPromptsErrors = {
@@ -3667,7 +3667,7 @@ export type CreatePromptData = {
   body: PromptCreate;
   path?: never;
   query?: never;
-  url: '/system/api/v1/prompts';
+  url: '/api/v1/system/prompts';
 };
 
 export type CreatePromptErrors = {
@@ -3696,7 +3696,7 @@ export type GetSystemDefaultPromptData = {
   body?: never;
   path?: never;
   query?: never;
-  url: '/system/api/v1/prompts/system-default';
+  url: '/api/v1/system/prompts/system-default';
 };
 
 export type GetSystemDefaultPromptErrors = {
@@ -3725,7 +3725,7 @@ export type DeletePromptData = {
     prompt_id: string;
   };
   query?: never;
-  url: '/system/api/v1/prompts/{prompt_id}';
+  url: '/api/v1/system/prompts/{prompt_id}';
 };
 
 export type DeletePromptErrors = {
@@ -3757,7 +3757,7 @@ export type GetPromptData = {
     prompt_id: string;
   };
   query?: never;
-  url: '/system/api/v1/prompts/{prompt_id}';
+  url: '/api/v1/system/prompts/{prompt_id}';
 };
 
 export type GetPromptErrors = {
@@ -3791,7 +3791,7 @@ export type UpdatePromptData = {
     prompt_id: string;
   };
   query?: never;
-  url: '/system/api/v1/prompts/{prompt_id}';
+  url: '/api/v1/system/prompts/{prompt_id}';
 };
 
 export type UpdatePromptErrors = {

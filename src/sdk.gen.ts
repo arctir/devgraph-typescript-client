@@ -805,7 +805,7 @@ export const postClerkWebhook = <ThrowOnError extends boolean = false>(
     PostClerkWebhookErrors,
     ThrowOnError
   >({
-    url: '/system/api/v1/webhooks/clerk',
+    url: '/api/v1/webhooks/clerk',
     ...options,
   });
 };
@@ -821,7 +821,7 @@ export const postStripeWebhook = <ThrowOnError extends boolean = false>(
     PostStripeWebhookErrors,
     ThrowOnError
   >({
-    url: '/system/api/v1/webhooks/stripe',
+    url: '/api/v1/webhooks/stripe',
     ...options,
   });
 };
@@ -843,7 +843,7 @@ export const getEnvironments = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/environments',
+    url: '/api/v1/system/environments',
     ...options,
   });
 };
@@ -865,7 +865,7 @@ export const createEnvironment = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/environments',
+    url: '/api/v1/system/environments',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -891,7 +891,7 @@ export const getEnvironmentStatus = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/environments/{env_id}/status',
+    url: '/api/v1/system/environments/{env_id}/status',
     ...options,
   });
 };
@@ -913,7 +913,7 @@ export const getSubscriptions = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/subscriptions',
+    url: '/api/v1/system/subscriptions',
     ...options,
   });
 };
@@ -932,7 +932,7 @@ export const getTokens = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/tokens',
+    url: '/api/v1/system/tokens',
     ...options,
   });
 };
@@ -954,7 +954,7 @@ export const createToken = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/tokens',
+    url: '/api/v1/system/tokens',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -981,7 +981,7 @@ export const deleteToken = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/tokens/{token_id}',
+    url: '/api/v1/system/tokens/{token_id}',
     ...options,
   });
 };
@@ -1004,7 +1004,7 @@ export const updateToken = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/tokens/{token_id}',
+    url: '/api/v1/system/tokens/{token_id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1031,7 +1031,7 @@ export const listEnvironmentUsers = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/environments/{environment_id}/users',
+    url: '/api/v1/system/environments/{environment_id}/users',
     ...options,
   });
 };
@@ -1054,7 +1054,7 @@ export const createEnvironmentUser = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/environments/{environment_id}/users',
+    url: '/api/v1/system/environments/{environment_id}/users',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1081,7 +1081,7 @@ export const getPendingInvitations = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/environments/{environment_id}/users/pending',
+    url: '/api/v1/system/environments/{environment_id}/users/pending',
     ...options,
   });
 };
@@ -1104,7 +1104,7 @@ export const deleteEnvironmentUser = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/environments/{environment_id}/users/{user_id}',
+    url: '/api/v1/system/environments/{environment_id}/users/{user_id}',
     ...options,
   });
 };
@@ -1127,7 +1127,7 @@ export const getEnvironmentUser = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/environments/{environment_id}/users/{user_id}',
+    url: '/api/v1/system/environments/{environment_id}/users/{user_id}',
     ...options,
   });
 };
@@ -1150,7 +1150,7 @@ export const updateEnvironmentUser = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/environments/{environment_id}/users/{user_id}',
+    url: '/api/v1/system/environments/{environment_id}/users/{user_id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1177,7 +1177,7 @@ export const inviteEnvironmentUser = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/environments/{environment_id}/users/invite',
+    url: '/api/v1/system/environments/{environment_id}/users/invite',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1204,7 +1204,7 @@ export const bulkInviteEnvironmentUsers = <ThrowOnError extends boolean = false>
         type: 'http',
       },
     ],
-    url: '/system/api/v1/environments/{environment_id}/users/bulk-invite',
+    url: '/api/v1/system/environments/{environment_id}/users/bulk-invite',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1231,7 +1231,7 @@ export const getModelproviders = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/modelproviders',
+    url: '/api/v1/system/modelproviders',
     ...options,
   });
 };
@@ -1254,7 +1254,7 @@ export const createModelprovider = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/modelproviders',
+    url: '/api/v1/system/modelproviders',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1281,7 +1281,7 @@ export const deleteModelprovider = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/modelproviders/{provider_id}',
+    url: '/api/v1/system/modelproviders/{provider_id}',
     ...options,
   });
 };
@@ -1304,7 +1304,7 @@ export const getModelprovider = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/modelproviders/{provider_id}',
+    url: '/api/v1/system/modelproviders/{provider_id}',
     ...options,
   });
 };
@@ -1327,7 +1327,7 @@ export const updateModelprovider = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/modelproviders/{provider_id}',
+    url: '/api/v1/system/modelproviders/{provider_id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1354,7 +1354,7 @@ export const getMcpendpoints = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/mcpendpoints',
+    url: '/api/v1/system/mcpendpoints',
     ...options,
   });
 };
@@ -1377,7 +1377,7 @@ export const createMcpendpoint = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/mcpendpoints',
+    url: '/api/v1/system/mcpendpoints',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1404,7 +1404,7 @@ export const deleteMcpendpoint = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/mcpendpoints/{mcpendpoint_id}',
+    url: '/api/v1/system/mcpendpoints/{mcpendpoint_id}',
     ...options,
   });
 };
@@ -1427,7 +1427,7 @@ export const getMcpendpoint = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/mcpendpoints/{mcpendpoint_id}',
+    url: '/api/v1/system/mcpendpoints/{mcpendpoint_id}',
     ...options,
   });
 };
@@ -1450,7 +1450,7 @@ export const updateMcpendpoint = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/mcpendpoints/{mcpendpoint_id}',
+    url: '/api/v1/system/mcpendpoints/{mcpendpoint_id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1478,7 +1478,7 @@ export const listMcpendpointTools = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/mcpendpoints/{mcpendpoint_id}/tools',
+    url: '/api/v1/system/mcpendpoints/{mcpendpoint_id}/tools',
     ...options,
   });
 };
@@ -1501,7 +1501,7 @@ export const createMcpToolAssociation = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/mcp-tool-associations',
+    url: '/api/v1/system/mcp-tool-associations',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1528,7 +1528,7 @@ export const getEntityTools = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/entity-definitions/{entity_definition_id}/tools',
+    url: '/api/v1/system/entity-definitions/{entity_definition_id}/tools',
     ...options,
   });
 };
@@ -1551,7 +1551,7 @@ export const getMcpEndpointEntityTypes = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/mcpendpoints/{mcpendpoint_name}/entity-types',
+    url: '/api/v1/system/mcpendpoints/{mcpendpoint_name}/entity-types',
     ...options,
   });
 };
@@ -1574,7 +1574,7 @@ export const deleteMcpToolAssociation = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/mcp-tool-associations/{association_id}',
+    url: '/api/v1/system/mcp-tool-associations/{association_id}',
     ...options,
   });
 };
@@ -1593,7 +1593,7 @@ export const getModels = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/models',
+    url: '/api/v1/system/models',
     ...options,
   });
 };
@@ -1616,7 +1616,7 @@ export const createModel = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/models',
+    url: '/api/v1/system/models',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1643,7 +1643,7 @@ export const deleteModel = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/models/{model_name}',
+    url: '/api/v1/system/models/{model_name}',
     ...options,
   });
 };
@@ -1662,7 +1662,7 @@ export const getModel = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/models/{model_name}',
+    url: '/api/v1/system/models/{model_name}',
     ...options,
   });
 };
@@ -1685,7 +1685,7 @@ export const updateModel = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/models/{model_name}',
+    url: '/api/v1/system/models/{model_name}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1712,7 +1712,7 @@ export const listPrompts = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/prompts',
+    url: '/api/v1/system/prompts',
     ...options,
   });
 };
@@ -1735,7 +1735,7 @@ export const createPrompt = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/prompts',
+    url: '/api/v1/system/prompts',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1762,7 +1762,7 @@ export const getSystemDefaultPrompt = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/prompts/system-default',
+    url: '/api/v1/system/prompts/system-default',
     ...options,
   });
 };
@@ -1785,7 +1785,7 @@ export const deletePrompt = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/prompts/{prompt_id}',
+    url: '/api/v1/system/prompts/{prompt_id}',
     ...options,
   });
 };
@@ -1804,7 +1804,7 @@ export const getPrompt = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/prompts/{prompt_id}',
+    url: '/api/v1/system/prompts/{prompt_id}',
     ...options,
   });
 };
@@ -1827,7 +1827,7 @@ export const updatePrompt = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/system/api/v1/prompts/{prompt_id}',
+    url: '/api/v1/system/prompts/{prompt_id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
