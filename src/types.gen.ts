@@ -663,6 +663,16 @@ export type EnvironmentResponse = {
 };
 
 /**
+ * EnvironmentStatusResponse
+ */
+export type EnvironmentStatusResponse = {
+  /**
+   * Status
+   */
+  status: string;
+};
+
+/**
  * EnvironmentUserBulkInvite
  */
 export type EnvironmentUserBulkInvite = {
@@ -2519,12 +2529,9 @@ export type GetEnvironmentStatusError =
 
 export type GetEnvironmentStatusResponses = {
   /**
-   * Response Get Environment Status
    * Successful Response
    */
-  200: {
-    [key: string]: unknown;
-  };
+  200: EnvironmentStatusResponse;
 };
 
 export type GetEnvironmentStatusResponse =
