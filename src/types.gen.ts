@@ -1378,10 +1378,7 @@ export type SubscriptionResponse = {
    * Stripe Subscription Id
    */
   stripe_subscription_id: string;
-  /**
-   * Environment Id
-   */
-  environment_id: string;
+  environment_id?: string;
   /**
    * Status
    */
