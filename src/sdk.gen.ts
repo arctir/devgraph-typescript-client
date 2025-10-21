@@ -203,6 +203,15 @@ import type {
   UpdatePromptData,
   UpdatePromptResponses,
   UpdatePromptErrors,
+  ListChatSuggestionsData,
+  ListChatSuggestionsResponses,
+  ListChatSuggestionsErrors,
+  CreateChatSuggestionData,
+  CreateChatSuggestionResponses,
+  CreateChatSuggestionErrors,
+  DeleteChatSuggestionData,
+  DeleteChatSuggestionResponses,
+  DeleteChatSuggestionErrors,
   ListOauthServicesData,
   ListOauthServicesResponses,
   ListOauthServicesErrors,
@@ -1833,6 +1842,79 @@ export const updatePrompt = <ThrowOnError extends boolean = false>(
       'Content-Type': 'application/json',
       ...options.headers,
     },
+  });
+};
+
+/**
+ * List Chat Suggestions
+ * List chat suggestions. Returns system-wide suggestions + environment/user-specific ones.
+ */
+export const listChatSuggestions = <ThrowOnError extends boolean = false>(
+  options?: Options<ListChatSuggestionsData, ThrowOnError>
+) => {
+  return (options?.client ?? _heyApiClient).get<
+    ListChatSuggestionsResponses,
+    ListChatSuggestionsErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/system/chat-suggestions',
+    ...options,
+  });
+};
+
+/**
+ * Create Chat Suggestion
+ * Create a new chat suggestion for the environment.
+ */
+export const createChatSuggestion = <ThrowOnError extends boolean = false>(
+  options: Options<CreateChatSuggestionData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    CreateChatSuggestionResponses,
+    CreateChatSuggestionErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/system/chat-suggestions',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Delete Chat Suggestion
+ * Delete a chat suggestion. Can only delete user's own suggestions (not system ones).
+ */
+export const deleteChatSuggestion = <ThrowOnError extends boolean = false>(
+  options: Options<DeleteChatSuggestionData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).delete<
+    DeleteChatSuggestionResponses,
+    DeleteChatSuggestionErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/system/chat-suggestions/{suggestion_id}',
+    ...options,
   });
 };
 

@@ -254,6 +254,67 @@ export type ChatSessionUpdate = {
 };
 
 /**
+ * ChatSuggestionCreate
+ */
+export type ChatSuggestionCreate = {
+  /**
+   * Title
+   */
+  title: string;
+  /**
+   * Label
+   */
+  label: string;
+  /**
+   * Action
+   */
+  action: string;
+  /**
+   * Active
+   */
+  active?: boolean;
+};
+
+/**
+ * ChatSuggestionResponse
+ */
+export type ChatSuggestionResponse = {
+  /**
+   * Id
+   */
+  id: string;
+  /**
+   * Title
+   */
+  title: string;
+  /**
+   * Label
+   */
+  label: string;
+  /**
+   * Action
+   */
+  action: string;
+  /**
+   * Active
+   */
+  active?: boolean;
+  /**
+   * Is System
+   */
+  is_system?: boolean;
+  environment_id?: string;
+  /**
+   * Created At
+   */
+  created_at: string;
+  /**
+   * Updated At
+   */
+  updated_at: string;
+};
+
+/**
  * ChatTitleRequest
  */
 export type ChatTitleRequest = {
@@ -3819,6 +3880,109 @@ export type UpdatePromptResponses = {
 };
 
 export type UpdatePromptResponse = UpdatePromptResponses[keyof UpdatePromptResponses];
+
+export type ListChatSuggestionsData = {
+  body?: never;
+  path?: never;
+  query?: {
+    /**
+     * Active Only
+     */
+    active_only?: boolean;
+  };
+  url: '/api/v1/system/chat-suggestions';
+};
+
+export type ListChatSuggestionsErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type ListChatSuggestionsError = ListChatSuggestionsErrors[keyof ListChatSuggestionsErrors];
+
+export type ListChatSuggestionsResponses = {
+  /**
+   * Response List Chat Suggestions
+   * Successful Response
+   */
+  200: Array<ChatSuggestionResponse>;
+};
+
+export type ListChatSuggestionsResponse =
+  ListChatSuggestionsResponses[keyof ListChatSuggestionsResponses];
+
+export type CreateChatSuggestionData = {
+  body: ChatSuggestionCreate;
+  path?: never;
+  query?: never;
+  url: '/api/v1/system/chat-suggestions';
+};
+
+export type CreateChatSuggestionErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type CreateChatSuggestionError =
+  CreateChatSuggestionErrors[keyof CreateChatSuggestionErrors];
+
+export type CreateChatSuggestionResponses = {
+  /**
+   * Successful Response
+   */
+  201: ChatSuggestionResponse;
+};
+
+export type CreateChatSuggestionResponse =
+  CreateChatSuggestionResponses[keyof CreateChatSuggestionResponses];
+
+export type DeleteChatSuggestionData = {
+  body?: never;
+  path: {
+    /**
+     * Suggestion Id
+     */
+    suggestion_id: string;
+  };
+  query?: never;
+  url: '/api/v1/system/chat-suggestions/{suggestion_id}';
+};
+
+export type DeleteChatSuggestionErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type DeleteChatSuggestionError =
+  DeleteChatSuggestionErrors[keyof DeleteChatSuggestionErrors];
+
+export type DeleteChatSuggestionResponses = {
+  /**
+   * Successful Response
+   */
+  204: void;
+};
+
+export type DeleteChatSuggestionResponse =
+  DeleteChatSuggestionResponses[keyof DeleteChatSuggestionResponses];
 
 export type ListOauthServicesData = {
   body?: never;
