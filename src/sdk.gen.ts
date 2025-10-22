@@ -86,6 +86,9 @@ import type {
   GetEnvironmentStatusData,
   GetEnvironmentStatusResponses,
   GetEnvironmentStatusErrors,
+  DeleteEnvironmentData,
+  DeleteEnvironmentResponses,
+  DeleteEnvironmentErrors,
   GetSubscriptionsData,
   GetSubscriptionsResponses,
   GetSubscriptionsErrors,
@@ -901,6 +904,35 @@ export const getEnvironmentStatus = <ThrowOnError extends boolean = false>(
       },
     ],
     url: '/api/v1/system/environments/{env_id}/status',
+    ...options,
+  });
+};
+
+/**
+ * Delete Environment
+ * Soft delete an environment.
+ *
+ * This marks the environment as deleted (sets deleted_at timestamp) which triggers
+ * the Kubernetes controller to clean up all associated resources (namespace, database, etc.).
+ * The environment record is retained for the configured retention period for potential recovery.
+ *
+ * For permanent GDPR-compliant deletion, use the Admin API endpoint.
+ */
+export const deleteEnvironment = <ThrowOnError extends boolean = false>(
+  options: Options<DeleteEnvironmentData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).delete<
+    DeleteEnvironmentResponses,
+    DeleteEnvironmentErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/system/environments/{env_id}',
     ...options,
   });
 };

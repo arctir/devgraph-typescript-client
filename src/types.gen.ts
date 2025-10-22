@@ -2595,6 +2595,41 @@ export type GetEnvironmentStatusResponses = {
 export type GetEnvironmentStatusResponse =
   GetEnvironmentStatusResponses[keyof GetEnvironmentStatusResponses];
 
+export type DeleteEnvironmentData = {
+  body?: never;
+  path: {
+    /**
+     * Env Id
+     */
+    env_id: string;
+  };
+  query?: never;
+  url: '/api/v1/system/environments/{env_id}';
+};
+
+export type DeleteEnvironmentErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type DeleteEnvironmentError = DeleteEnvironmentErrors[keyof DeleteEnvironmentErrors];
+
+export type DeleteEnvironmentResponses = {
+  /**
+   * Successful Response
+   */
+  204: void;
+};
+
+export type DeleteEnvironmentResponse =
+  DeleteEnvironmentResponses[keyof DeleteEnvironmentResponses];
+
 export type GetSubscriptionsData = {
   body?: never;
   path?: never;
