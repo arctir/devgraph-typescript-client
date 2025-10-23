@@ -340,6 +340,44 @@ export type ChatTitleResponse = {
 export type ChatVisibility = 'public' | 'private';
 
 /**
+ * EntitlementCheckResponse
+ */
+export type EntitlementCheckResponse = {
+  /**
+   * Allowed
+   */
+  allowed: boolean;
+  limit?: number;
+  current_usage?: number;
+  remaining?: number;
+  reason?: string;
+};
+
+/**
+ * EntitlementDetail
+ */
+export type EntitlementDetail = {
+  limit_value?: number;
+  enabled?: boolean;
+  config_value?: string;
+  current_usage?: number;
+  remaining?: number;
+};
+
+/**
+ * EntitlementResponse
+ */
+export type EntitlementResponse = {
+  /**
+   * Entitlement Type
+   */
+  entitlement_type: string;
+  limit_value?: number;
+  enabled?: boolean;
+  config_value?: string;
+};
+
+/**
  * Entity
  */
 export type Entity = {
@@ -1456,6 +1494,10 @@ export type SubscriptionResponse = {
    * Current Period End
    */
   current_period_end: number;
+  /**
+   * Entitlements
+   */
+  entitlements?: Array<EntitlementResponse>;
 };
 
 /**
@@ -1468,6 +1510,18 @@ export type TypedChatMessageContent = {
   type: string;
   text?: string;
   reasoning?: string;
+};
+
+/**
+ * UserEntitlementsResponse
+ */
+export type UserEntitlementsResponse = {
+  /**
+   * Entitlements
+   */
+  entitlements: {
+    [key: string]: EntitlementDetail;
+  };
 };
 
 /**
@@ -2653,6 +2707,63 @@ export type GetSubscriptionsResponses = {
 };
 
 export type GetSubscriptionsResponse = GetSubscriptionsResponses[keyof GetSubscriptionsResponses];
+
+export type GetEntitlementsData = {
+  body?: never;
+  path?: never;
+  query?: never;
+  url: '/api/v1/system/entitlements';
+};
+
+export type GetEntitlementsErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+};
+
+export type GetEntitlementsResponses = {
+  /**
+   * Successful Response
+   */
+  200: UserEntitlementsResponse;
+};
+
+export type GetEntitlementsResponse = GetEntitlementsResponses[keyof GetEntitlementsResponses];
+
+export type CheckEntitlementData = {
+  body?: never;
+  path: {
+    /**
+     * Entitlement Type
+     */
+    entitlement_type: string;
+  };
+  query?: never;
+  url: '/api/v1/system/entitlements/check/{entitlement_type}';
+};
+
+export type CheckEntitlementErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type CheckEntitlementError = CheckEntitlementErrors[keyof CheckEntitlementErrors];
+
+export type CheckEntitlementResponses = {
+  /**
+   * Successful Response
+   */
+  200: EntitlementCheckResponse;
+};
+
+export type CheckEntitlementResponse = CheckEntitlementResponses[keyof CheckEntitlementResponses];
 
 export type GetTokensData = {
   body?: never;

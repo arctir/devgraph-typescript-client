@@ -92,6 +92,12 @@ import type {
   GetSubscriptionsData,
   GetSubscriptionsResponses,
   GetSubscriptionsErrors,
+  GetEntitlementsData,
+  GetEntitlementsResponses,
+  GetEntitlementsErrors,
+  CheckEntitlementData,
+  CheckEntitlementResponses,
+  CheckEntitlementErrors,
   GetTokensData,
   GetTokensResponses,
   GetTokensErrors,
@@ -955,6 +961,55 @@ export const getSubscriptions = <ThrowOnError extends boolean = false>(
       },
     ],
     url: '/api/v1/system/subscriptions',
+    ...options,
+  });
+};
+
+/**
+ * Get Entitlements
+ * Get all entitlements and current usage for the authenticated user.
+ */
+export const getEntitlements = <ThrowOnError extends boolean = false>(
+  options?: Options<GetEntitlementsData, ThrowOnError>
+) => {
+  return (options?.client ?? _heyApiClient).get<
+    GetEntitlementsResponses,
+    GetEntitlementsErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/system/entitlements',
+    ...options,
+  });
+};
+
+/**
+ * Check Entitlement
+ * Check a specific entitlement for the authenticated user.
+ *
+ * For numeric limits (e.g., max_environments), returns current usage and remaining quota.
+ * For boolean features (e.g., enable_sso), returns whether the feature is enabled.
+ */
+export const checkEntitlement = <ThrowOnError extends boolean = false>(
+  options: Options<CheckEntitlementData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).get<
+    CheckEntitlementResponses,
+    CheckEntitlementErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/system/entitlements/check/{entitlement_type}',
     ...options,
   });
 };
