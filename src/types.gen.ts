@@ -1477,23 +1477,17 @@ export type SubscriptionResponse = {
    * Stripe Subscription Id
    */
   stripe_subscription_id: string;
-  environment_id?: string;
+  /**
+   * Environment Ids
+   */
+  environment_ids?: Array<string>;
   /**
    * Status
    */
   status: string;
-  /**
-   * Price Id
-   */
-  price_id: string;
-  /**
-   * Current Period Start
-   */
-  current_period_start: number;
-  /**
-   * Current Period End
-   */
-  current_period_end: number;
+  plan_name?: string;
+  current_period_start?: number;
+  current_period_end?: number;
   /**
    * Entitlements
    */
