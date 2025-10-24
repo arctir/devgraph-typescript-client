@@ -759,6 +759,10 @@ export type EnvironmentResponse = {
    * Subscription Id
    */
   subscription_id: string;
+  /**
+   * Active
+   */
+  active?: boolean;
 };
 
 /**
