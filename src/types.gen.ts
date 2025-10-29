@@ -340,6 +340,141 @@ export type ChatTitleResponse = {
 export type ChatVisibility = 'public' | 'private';
 
 /**
+ * ConfiguredProviderCreate
+ * Request to create a configured discovery provider.
+ */
+export type ConfiguredProviderCreate = {
+  /**
+   * Name
+   * Human-readable name for this provider instance
+   */
+  name: string;
+  /**
+   * Provider Type
+   * Type of provider (github, gitlab, etc.)
+   */
+  provider_type: string;
+  /**
+   * Enabled
+   * Whether this provider is active
+   */
+  enabled?: boolean;
+  /**
+   * Interval
+   * Discovery interval in seconds (minimum 60)
+   */
+  interval?: number;
+  /**
+   * Config
+   * Provider configuration (will be encrypted)
+   */
+  config: {
+    [key: string]: unknown;
+  };
+};
+
+/**
+ * ConfiguredProviderResponse
+ * Response for a configured discovery provider (secrets masked).
+ */
+export type ConfiguredProviderResponse = {
+  /**
+   * Id
+   */
+  id: string;
+  /**
+   * Environment Id
+   */
+  environment_id: string;
+  /**
+   * Name
+   */
+  name: string;
+  /**
+   * Provider Type
+   */
+  provider_type: string;
+  /**
+   * Enabled
+   */
+  enabled: boolean;
+  /**
+   * Interval
+   */
+  interval: number;
+  /**
+   * Config
+   */
+  config: {
+    [key: string]: unknown;
+  };
+  last_run_at?: string;
+  last_run_status?: string;
+  last_error_message?: string;
+};
+
+/**
+ * ConfiguredProviderUpdate
+ * Request to update a configured discovery provider.
+ */
+export type ConfiguredProviderUpdate = {
+  name?: string;
+  enabled?: boolean;
+  interval?: number;
+  config?: {
+    [key: string]: unknown;
+  };
+};
+
+/**
+ * ConfiguredProvidersListResponse
+ * Response containing list of configured providers.
+ */
+export type ConfiguredProvidersListResponse = {
+  /**
+   * Providers
+   */
+  providers: Array<ConfiguredProviderResponse>;
+};
+
+/**
+ * DiscoveryProviderMetadata
+ * Metadata about a discovery provider.
+ */
+export type DiscoveryProviderMetadata = {
+  /**
+   * Type
+   */
+  type: string;
+  /**
+   * Display Name
+   */
+  display_name: string;
+  /**
+   * Description
+   */
+  description: string;
+  /**
+   * Config Schema
+   */
+  config_schema: {
+    [key: string]: unknown;
+  };
+  logo?: string;
+};
+
+/**
+ * DiscoveryProvidersListResponse
+ * Response containing list of available discovery providers.
+ */
+export type DiscoveryProvidersListResponse = {
+  /**
+   * Providers
+   */
+  providers: Array<DiscoveryProviderMetadata>;
+};
+
+/**
  * EntitlementCheckResponse
  */
 export type EntitlementCheckResponse = {
@@ -4413,6 +4548,250 @@ export type RevokeOauthTokenResponses = {
 };
 
 export type RevokeOauthTokenResponse = RevokeOauthTokenResponses[keyof RevokeOauthTokenResponses];
+
+export type ListDiscoveryProvidersData = {
+  body?: never;
+  path?: never;
+  query?: never;
+  url: '/api/v1/discovery/providers';
+};
+
+export type ListDiscoveryProvidersErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+};
+
+export type ListDiscoveryProvidersResponses = {
+  /**
+   * Successful Response
+   */
+  200: DiscoveryProvidersListResponse;
+};
+
+export type ListDiscoveryProvidersResponse =
+  ListDiscoveryProvidersResponses[keyof ListDiscoveryProvidersResponses];
+
+export type GetDiscoveryProviderConfigSchemaData = {
+  body?: never;
+  path: {
+    /**
+     * Provider Type
+     */
+    provider_type: string;
+  };
+  query?: never;
+  url: '/api/v1/discovery/providers/{provider_type}/config-schema';
+};
+
+export type GetDiscoveryProviderConfigSchemaErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type GetDiscoveryProviderConfigSchemaError =
+  GetDiscoveryProviderConfigSchemaErrors[keyof GetDiscoveryProviderConfigSchemaErrors];
+
+export type GetDiscoveryProviderConfigSchemaResponses = {
+  /**
+   * Successful Response
+   */
+  200: unknown;
+};
+
+export type ListConfiguredProvidersData = {
+  body?: never;
+  path?: never;
+  query?: never;
+  url: '/api/v1/discovery/configured-providers';
+};
+
+export type ListConfiguredProvidersErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+};
+
+export type ListConfiguredProvidersResponses = {
+  /**
+   * Successful Response
+   */
+  200: ConfiguredProvidersListResponse;
+};
+
+export type ListConfiguredProvidersResponse =
+  ListConfiguredProvidersResponses[keyof ListConfiguredProvidersResponses];
+
+export type CreateConfiguredProviderData = {
+  body: ConfiguredProviderCreate;
+  path?: never;
+  query?: never;
+  url: '/api/v1/discovery/configured-providers';
+};
+
+export type CreateConfiguredProviderErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type CreateConfiguredProviderError =
+  CreateConfiguredProviderErrors[keyof CreateConfiguredProviderErrors];
+
+export type CreateConfiguredProviderResponses = {
+  /**
+   * Successful Response
+   */
+  201: ConfiguredProviderResponse;
+};
+
+export type CreateConfiguredProviderResponse =
+  CreateConfiguredProviderResponses[keyof CreateConfiguredProviderResponses];
+
+export type DeleteConfiguredProviderData = {
+  body?: never;
+  path: {
+    /**
+     * Provider Id
+     */
+    provider_id: string;
+  };
+  query?: never;
+  url: '/api/v1/discovery/configured-providers/{provider_id}';
+};
+
+export type DeleteConfiguredProviderErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type DeleteConfiguredProviderError =
+  DeleteConfiguredProviderErrors[keyof DeleteConfiguredProviderErrors];
+
+export type DeleteConfiguredProviderResponses = {
+  /**
+   * Successful Response
+   */
+  204: void;
+};
+
+export type DeleteConfiguredProviderResponse =
+  DeleteConfiguredProviderResponses[keyof DeleteConfiguredProviderResponses];
+
+export type GetConfiguredProviderData = {
+  body?: never;
+  path: {
+    /**
+     * Provider Id
+     */
+    provider_id: string;
+  };
+  query?: never;
+  url: '/api/v1/discovery/configured-providers/{provider_id}';
+};
+
+export type GetConfiguredProviderErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type GetConfiguredProviderError =
+  GetConfiguredProviderErrors[keyof GetConfiguredProviderErrors];
+
+export type GetConfiguredProviderResponses = {
+  /**
+   * Successful Response
+   */
+  200: ConfiguredProviderResponse;
+};
+
+export type GetConfiguredProviderResponse =
+  GetConfiguredProviderResponses[keyof GetConfiguredProviderResponses];
+
+export type UpdateConfiguredProviderData = {
+  body: ConfiguredProviderUpdate;
+  path: {
+    /**
+     * Provider Id
+     */
+    provider_id: string;
+  };
+  query?: never;
+  url: '/api/v1/discovery/configured-providers/{provider_id}';
+};
+
+export type UpdateConfiguredProviderErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type UpdateConfiguredProviderError =
+  UpdateConfiguredProviderErrors[keyof UpdateConfiguredProviderErrors];
+
+export type UpdateConfiguredProviderResponses = {
+  /**
+   * Successful Response
+   */
+  200: ConfiguredProviderResponse;
+};
+
+export type UpdateConfiguredProviderResponse =
+  UpdateConfiguredProviderResponses[keyof UpdateConfiguredProviderResponses];
+
+export type AdminListConfiguredProvidersData = {
+  body?: never;
+  path?: never;
+  query?: never;
+  url: '/api/v1/discovery/admin/configured-providers';
+};
+
+export type AdminListConfiguredProvidersErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+};
+
+export type AdminListConfiguredProvidersResponses = {
+  /**
+   * Successful Response
+   */
+  200: ConfiguredProvidersListResponse;
+};
+
+export type AdminListConfiguredProvidersResponse =
+  AdminListConfiguredProvidersResponses[keyof AdminListConfiguredProvidersResponses];
 
 export type ClientOptions = {
   baseUrl: `${string}://${string}` | (string & {});

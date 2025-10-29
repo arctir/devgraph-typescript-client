@@ -248,6 +248,30 @@ import type {
   RevokeOauthTokenData,
   RevokeOauthTokenResponses,
   RevokeOauthTokenErrors,
+  ListDiscoveryProvidersData,
+  ListDiscoveryProvidersResponses,
+  ListDiscoveryProvidersErrors,
+  GetDiscoveryProviderConfigSchemaData,
+  GetDiscoveryProviderConfigSchemaResponses,
+  GetDiscoveryProviderConfigSchemaErrors,
+  ListConfiguredProvidersData,
+  ListConfiguredProvidersResponses,
+  ListConfiguredProvidersErrors,
+  CreateConfiguredProviderData,
+  CreateConfiguredProviderResponses,
+  CreateConfiguredProviderErrors,
+  DeleteConfiguredProviderData,
+  DeleteConfiguredProviderResponses,
+  DeleteConfiguredProviderErrors,
+  GetConfiguredProviderData,
+  GetConfiguredProviderResponses,
+  GetConfiguredProviderErrors,
+  UpdateConfiguredProviderData,
+  UpdateConfiguredProviderResponses,
+  UpdateConfiguredProviderErrors,
+  AdminListConfiguredProvidersData,
+  AdminListConfiguredProvidersResponses,
+  AdminListConfiguredProvidersErrors,
 } from './types.gen';
 import { client as _heyApiClient } from './client.gen';
 
@@ -2215,6 +2239,221 @@ export const revokeOauthToken = <ThrowOnError extends boolean = false>(
       },
     ],
     url: '/api/v1/oauth/tokens/{service_name}',
+    ...options,
+  });
+};
+
+/**
+ * List Discovery Providers
+ * List all available discovery provider types with their configuration schemas.
+ *
+ * This endpoint discovers all registered discovery providers using the plugin system
+ * and returns their metadata including JSON schemas for configuration.
+ */
+export const listDiscoveryProviders = <ThrowOnError extends boolean = false>(
+  options?: Options<ListDiscoveryProvidersData, ThrowOnError>
+) => {
+  return (options?.client ?? _heyApiClient).get<
+    ListDiscoveryProvidersResponses,
+    ListDiscoveryProvidersErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/discovery/providers',
+    ...options,
+  });
+};
+
+/**
+ * Get Discovery Provider Config Schema
+ * Get the configuration schema for a specific discovery provider type.
+ *
+ * Args:
+ * provider_type: The type identifier of the provider (e.g., 'github', 'gitlab')
+ *
+ * Returns:
+ * JSON schema for the provider's configuration
+ */
+export const getDiscoveryProviderConfigSchema = <ThrowOnError extends boolean = false>(
+  options: Options<GetDiscoveryProviderConfigSchemaData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).get<
+    GetDiscoveryProviderConfigSchemaResponses,
+    GetDiscoveryProviderConfigSchemaErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/discovery/providers/{provider_type}/config-schema',
+    ...options,
+  });
+};
+
+/**
+ * List Configured Providers
+ * List all configured discovery providers for the current environment.
+ *
+ * Secrets in provider configurations are masked.
+ */
+export const listConfiguredProviders = <ThrowOnError extends boolean = false>(
+  options?: Options<ListConfiguredProvidersData, ThrowOnError>
+) => {
+  return (options?.client ?? _heyApiClient).get<
+    ListConfiguredProvidersResponses,
+    ListConfiguredProvidersErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/discovery/configured-providers',
+    ...options,
+  });
+};
+
+/**
+ * Create Configured Provider
+ * Create a new configured discovery provider.
+ *
+ * The provider configuration (including secrets) will be encrypted and stored.
+ */
+export const createConfiguredProvider = <ThrowOnError extends boolean = false>(
+  options: Options<CreateConfiguredProviderData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    CreateConfiguredProviderResponses,
+    CreateConfiguredProviderErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/discovery/configured-providers',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Delete Configured Provider
+ * Delete a configured discovery provider.
+ */
+export const deleteConfiguredProvider = <ThrowOnError extends boolean = false>(
+  options: Options<DeleteConfiguredProviderData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).delete<
+    DeleteConfiguredProviderResponses,
+    DeleteConfiguredProviderErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/discovery/configured-providers/{provider_id}',
+    ...options,
+  });
+};
+
+/**
+ * Get Configured Provider
+ * Get a specific configured discovery provider.
+ *
+ * Secrets in the provider configuration are masked.
+ */
+export const getConfiguredProvider = <ThrowOnError extends boolean = false>(
+  options: Options<GetConfiguredProviderData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).get<
+    GetConfiguredProviderResponses,
+    GetConfiguredProviderErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/discovery/configured-providers/{provider_id}',
+    ...options,
+  });
+};
+
+/**
+ * Update Configured Provider
+ * Update a configured discovery provider.
+ *
+ * Only provided fields will be updated. To update secrets, provide the full
+ * config object with new secret values.
+ */
+export const updateConfiguredProvider = <ThrowOnError extends boolean = false>(
+  options: Options<UpdateConfiguredProviderData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).put<
+    UpdateConfiguredProviderResponses,
+    UpdateConfiguredProviderErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/discovery/configured-providers/{provider_id}',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Admin List Configured Providers
+ * List configured providers with UNMASKED secrets for discovery service.
+ *
+ * This endpoint is intended for the discovery service only. It returns
+ * provider configurations with decrypted secrets.
+ *
+ * Requires: Opaque token with 'read:discoverysecrets' scope
+ */
+export const adminListConfiguredProviders = <ThrowOnError extends boolean = false>(
+  options?: Options<AdminListConfiguredProvidersData, ThrowOnError>
+) => {
+  return (options?.client ?? _heyApiClient).get<
+    AdminListConfiguredProvidersResponses,
+    AdminListConfiguredProvidersErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/discovery/admin/configured-providers',
     ...options,
   });
 };
