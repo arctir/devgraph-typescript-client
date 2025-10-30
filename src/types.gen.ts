@@ -3456,6 +3456,46 @@ export type BulkInviteEnvironmentUsersResponses = {
 export type BulkInviteEnvironmentUsersResponse =
   BulkInviteEnvironmentUsersResponses[keyof BulkInviteEnvironmentUsersResponses];
 
+export type DeleteEnvironmentInvitationData = {
+  body?: never;
+  path: {
+    /**
+     * Environment Id
+     */
+    environment_id: string;
+    /**
+     * Invitation Id
+     */
+    invitation_id: string;
+  };
+  query?: never;
+  url: '/api/v1/system/environments/{environment_id}/users/invitations/{invitation_id}';
+};
+
+export type DeleteEnvironmentInvitationErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type DeleteEnvironmentInvitationError =
+  DeleteEnvironmentInvitationErrors[keyof DeleteEnvironmentInvitationErrors];
+
+export type DeleteEnvironmentInvitationResponses = {
+  /**
+   * Successful Response
+   */
+  204: void;
+};
+
+export type DeleteEnvironmentInvitationResponse =
+  DeleteEnvironmentInvitationResponses[keyof DeleteEnvironmentInvitationResponses];
+
 export type GetModelprovidersData = {
   body?: never;
   path?: never;

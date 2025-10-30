@@ -134,6 +134,9 @@ import type {
   BulkInviteEnvironmentUsersData,
   BulkInviteEnvironmentUsersResponses,
   BulkInviteEnvironmentUsersErrors,
+  DeleteEnvironmentInvitationData,
+  DeleteEnvironmentInvitationResponses,
+  DeleteEnvironmentInvitationErrors,
   GetModelprovidersData,
   GetModelprovidersResponses,
   GetModelprovidersErrors,
@@ -1342,6 +1345,29 @@ export const bulkInviteEnvironmentUsers = <ThrowOnError extends boolean = false>
       'Content-Type': 'application/json',
       ...options.headers,
     },
+  });
+};
+
+/**
+ * Delete Environment Invitation
+ * Revoke a pending invitation to an environment (organization).
+ */
+export const deleteEnvironmentInvitation = <ThrowOnError extends boolean = false>(
+  options: Options<DeleteEnvironmentInvitationData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).delete<
+    DeleteEnvironmentInvitationResponses,
+    DeleteEnvironmentInvitationErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/system/environments/{environment_id}/users/invitations/{invitation_id}',
+    ...options,
   });
 };
 
