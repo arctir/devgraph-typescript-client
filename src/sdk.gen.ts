@@ -272,6 +272,18 @@ import type {
   AdminListConfiguredProvidersData,
   AdminListConfiguredProvidersResponses,
   AdminListConfiguredProvidersErrors,
+  GetAllProviderVersionsData,
+  GetAllProviderVersionsResponses,
+  GetAllProviderVersionsErrors,
+  GetDeprecatedProviderConfigsData,
+  GetDeprecatedProviderConfigsResponses,
+  GetDeprecatedProviderConfigsErrors,
+  MigrateProviderConfigData,
+  MigrateProviderConfigResponses,
+  MigrateProviderConfigErrors,
+  MigrateAllDeprecatedConfigsData,
+  MigrateAllDeprecatedConfigsResponses,
+  MigrateAllDeprecatedConfigsErrors,
 } from './types.gen';
 import { client as _heyApiClient } from './client.gen';
 
@@ -2454,6 +2466,98 @@ export const adminListConfiguredProviders = <ThrowOnError extends boolean = fals
       },
     ],
     url: '/api/v1/discovery/admin/configured-providers',
+    ...options,
+  });
+};
+
+/**
+ * Get All Provider Versions
+ * Get version support info for all available provider types.
+ */
+export const getAllProviderVersions = <ThrowOnError extends boolean = false>(
+  options?: Options<GetAllProviderVersionsData, ThrowOnError>
+) => {
+  return (options?.client ?? _heyApiClient).get<
+    GetAllProviderVersionsResponses,
+    GetAllProviderVersionsErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/discovery/admin/discovery/versions',
+    ...options,
+  });
+};
+
+/**
+ * Get Deprecated Provider Configs
+ * Get all provider instances using deprecated config versions.
+ */
+export const getDeprecatedProviderConfigs = <ThrowOnError extends boolean = false>(
+  options?: Options<GetDeprecatedProviderConfigsData, ThrowOnError>
+) => {
+  return (options?.client ?? _heyApiClient).get<
+    GetDeprecatedProviderConfigsResponses,
+    GetDeprecatedProviderConfigsErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/discovery/admin/discovery/versions/deprecated',
+    ...options,
+  });
+};
+
+/**
+ * Migrate Provider Config
+ * Migrate a specific provider config to the latest version.
+ */
+export const migrateProviderConfig = <ThrowOnError extends boolean = false>(
+  options: Options<MigrateProviderConfigData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    MigrateProviderConfigResponses,
+    MigrateProviderConfigErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/discovery/admin/discovery/versions/{provider_id}/migrate',
+    ...options,
+  });
+};
+
+/**
+ * Migrate All Deprecated Configs
+ * Batch migrate all configs using deprecated versions.
+ */
+export const migrateAllDeprecatedConfigs = <ThrowOnError extends boolean = false>(
+  options?: Options<MigrateAllDeprecatedConfigsData, ThrowOnError>
+) => {
+  return (options?.client ?? _heyApiClient).post<
+    MigrateAllDeprecatedConfigsResponses,
+    MigrateAllDeprecatedConfigsErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/discovery/admin/discovery/versions/migrate-all',
     ...options,
   });
 };
