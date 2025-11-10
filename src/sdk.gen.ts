@@ -71,12 +71,18 @@ import type {
   PostChatMessagesData,
   PostChatMessagesResponses,
   PostChatMessagesErrors,
-  PostClerkWebhookData,
-  PostClerkWebhookResponses,
-  PostClerkWebhookErrors,
-  PostStripeWebhookData,
-  PostStripeWebhookResponses,
-  PostStripeWebhookErrors,
+  ListChatSuggestionsData,
+  ListChatSuggestionsResponses,
+  ListChatSuggestionsErrors,
+  CreateChatSuggestionData,
+  CreateChatSuggestionResponses,
+  CreateChatSuggestionErrors,
+  DeleteChatSuggestionData,
+  DeleteChatSuggestionResponses,
+  DeleteChatSuggestionErrors,
+  CreateChatCompletionsData,
+  CreateChatCompletionsResponses,
+  CreateChatCompletionsErrors,
   GetEnvironmentsData,
   GetEnvironmentsResponses,
   GetEnvironmentsErrors,
@@ -89,27 +95,6 @@ import type {
   DeleteEnvironmentData,
   DeleteEnvironmentResponses,
   DeleteEnvironmentErrors,
-  GetSubscriptionsData,
-  GetSubscriptionsResponses,
-  GetSubscriptionsErrors,
-  GetEntitlementsData,
-  GetEntitlementsResponses,
-  GetEntitlementsErrors,
-  CheckEntitlementData,
-  CheckEntitlementResponses,
-  CheckEntitlementErrors,
-  GetTokensData,
-  GetTokensResponses,
-  GetTokensErrors,
-  CreateTokenData,
-  CreateTokenResponses,
-  CreateTokenErrors,
-  DeleteTokenData,
-  DeleteTokenResponses,
-  DeleteTokenErrors,
-  UpdateTokenData,
-  UpdateTokenResponses,
-  UpdateTokenErrors,
   ListEnvironmentUsersData,
   ListEnvironmentUsersResponses,
   ListEnvironmentUsersErrors,
@@ -137,21 +122,6 @@ import type {
   DeleteEnvironmentInvitationData,
   DeleteEnvironmentInvitationResponses,
   DeleteEnvironmentInvitationErrors,
-  GetModelprovidersData,
-  GetModelprovidersResponses,
-  GetModelprovidersErrors,
-  CreateModelproviderData,
-  CreateModelproviderResponses,
-  CreateModelproviderErrors,
-  DeleteModelproviderData,
-  DeleteModelproviderResponses,
-  DeleteModelproviderErrors,
-  GetModelproviderData,
-  GetModelproviderResponses,
-  GetModelproviderErrors,
-  UpdateModelproviderData,
-  UpdateModelproviderResponses,
-  UpdateModelproviderErrors,
   GetMcpendpointsData,
   GetMcpendpointsResponses,
   GetMcpendpointsErrors,
@@ -182,6 +152,21 @@ import type {
   DeleteMcpToolAssociationData,
   DeleteMcpToolAssociationResponses,
   DeleteMcpToolAssociationErrors,
+  GetModelprovidersData,
+  GetModelprovidersResponses,
+  GetModelprovidersErrors,
+  CreateModelproviderData,
+  CreateModelproviderResponses,
+  CreateModelproviderErrors,
+  DeleteModelproviderData,
+  DeleteModelproviderResponses,
+  DeleteModelproviderErrors,
+  GetModelproviderData,
+  GetModelproviderResponses,
+  GetModelproviderErrors,
+  UpdateModelproviderData,
+  UpdateModelproviderResponses,
+  UpdateModelproviderErrors,
   GetModelsData,
   GetModelsResponses,
   GetModelsErrors,
@@ -215,15 +200,27 @@ import type {
   UpdatePromptData,
   UpdatePromptResponses,
   UpdatePromptErrors,
-  ListChatSuggestionsData,
-  ListChatSuggestionsResponses,
-  ListChatSuggestionsErrors,
-  CreateChatSuggestionData,
-  CreateChatSuggestionResponses,
-  CreateChatSuggestionErrors,
-  DeleteChatSuggestionData,
-  DeleteChatSuggestionResponses,
-  DeleteChatSuggestionErrors,
+  GetSubscriptionsData,
+  GetSubscriptionsResponses,
+  GetSubscriptionsErrors,
+  GetEntitlementsData,
+  GetEntitlementsResponses,
+  GetEntitlementsErrors,
+  CheckEntitlementData,
+  CheckEntitlementResponses,
+  CheckEntitlementErrors,
+  GetTokensData,
+  GetTokensResponses,
+  GetTokensErrors,
+  CreateTokenData,
+  CreateTokenResponses,
+  CreateTokenErrors,
+  DeleteTokenData,
+  DeleteTokenResponses,
+  DeleteTokenErrors,
+  UpdateTokenData,
+  UpdateTokenResponses,
+  UpdateTokenErrors,
   ListOauthServicesData,
   ListOauthServicesResponses,
   ListOauthServicesErrors,
@@ -272,9 +269,6 @@ import type {
   UpdateConfiguredProviderData,
   UpdateConfiguredProviderResponses,
   UpdateConfiguredProviderErrors,
-  AdminListConfiguredProvidersData,
-  AdminListConfiguredProvidersResponses,
-  AdminListConfiguredProvidersErrors,
   GetAllProviderVersionsData,
   GetAllProviderVersionsResponses,
   GetAllProviderVersionsErrors,
@@ -659,7 +653,7 @@ export const createChatTitle = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/chat/title',
+    url: '/api/v1/chats/title',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -686,7 +680,7 @@ export const deleteChatsBulk = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/chat/',
+    url: '/api/v1/chats/',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -708,7 +702,7 @@ export const getChats = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/chat/',
+    url: '/api/v1/chats/',
     ...options,
   });
 };
@@ -730,7 +724,7 @@ export const createChat = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/chat/',
+    url: '/api/v1/chats/',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -756,7 +750,7 @@ export const deleteChat = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/chat/{chat_id}',
+    url: '/api/v1/chats/{chat_id}',
     ...options,
   });
 };
@@ -774,7 +768,7 @@ export const getChat = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/chat/{chat_id}',
+    url: '/api/v1/chats/{chat_id}',
     ...options,
   });
 };
@@ -793,7 +787,7 @@ export const updateChat = <ThrowOnError extends boolean = false>(
           type: 'http',
         },
       ],
-      url: '/api/v1/chat/{chat_id}',
+      url: '/api/v1/chats/{chat_id}',
       ...options,
       headers: {
         'Content-Type': 'application/json',
@@ -820,7 +814,7 @@ export const getChatMessages = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/chat/{chat_id}/messages',
+    url: '/api/v1/chats/{chat_id}/messages',
     ...options,
   });
 };
@@ -842,7 +836,7 @@ export const postChatMessages = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/chat/{chat_id}/messages',
+    url: '/api/v1/chats/{chat_id}/messages',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -852,34 +846,102 @@ export const postChatMessages = <ThrowOnError extends boolean = false>(
 };
 
 /**
- * Post Clerk Webhook
+ * List Chat Suggestions
+ * List chat suggestions. Returns system-wide suggestions + environment/user-specific ones.
  */
-export const postClerkWebhook = <ThrowOnError extends boolean = false>(
-  options: Options<PostClerkWebhookData, ThrowOnError>
+export const listChatSuggestions = <ThrowOnError extends boolean = false>(
+  options?: Options<ListChatSuggestionsData, ThrowOnError>
 ) => {
-  return (options.client ?? _heyApiClient).post<
-    PostClerkWebhookResponses,
-    PostClerkWebhookErrors,
+  return (options?.client ?? _heyApiClient).get<
+    ListChatSuggestionsResponses,
+    ListChatSuggestionsErrors,
     ThrowOnError
   >({
-    url: '/api/v1/webhooks/clerk',
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/chats/suggestions',
     ...options,
   });
 };
 
 /**
- * Post Stripe Webhook
+ * Create Chat Suggestion
+ * Create a new chat suggestion for the environment.
  */
-export const postStripeWebhook = <ThrowOnError extends boolean = false>(
-  options: Options<PostStripeWebhookData, ThrowOnError>
+export const createChatSuggestion = <ThrowOnError extends boolean = false>(
+  options: Options<CreateChatSuggestionData, ThrowOnError>
 ) => {
   return (options.client ?? _heyApiClient).post<
-    PostStripeWebhookResponses,
-    PostStripeWebhookErrors,
+    CreateChatSuggestionResponses,
+    CreateChatSuggestionErrors,
     ThrowOnError
   >({
-    url: '/api/v1/webhooks/stripe',
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/chats/suggestions',
     ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Delete Chat Suggestion
+ * Delete a chat suggestion. Can only delete user's own suggestions (not system ones).
+ */
+export const deleteChatSuggestion = <ThrowOnError extends boolean = false>(
+  options: Options<DeleteChatSuggestionData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).delete<
+    DeleteChatSuggestionResponses,
+    DeleteChatSuggestionErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/chats/suggestions/{suggestion_id}',
+    ...options,
+  });
+};
+
+/**
+ * Post Chat Completions
+ * Handle chat completions requests.
+ */
+export const createChatCompletions = <ThrowOnError extends boolean = false>(
+  options: Options<CreateChatCompletionsData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    CreateChatCompletionsResponses,
+    CreateChatCompletionsErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/chat/completions',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
   });
 };
 
@@ -900,7 +962,7 @@ export const getEnvironments = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/environments',
+    url: '/api/v1/environments',
     ...options,
   });
 };
@@ -922,7 +984,7 @@ export const createEnvironment = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/environments',
+    url: '/api/v1/environments',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -948,7 +1010,7 @@ export const getEnvironmentStatus = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/environments/{env_id}/status',
+    url: '/api/v1/environments/{env_id}/status',
     ...options,
   });
 };
@@ -977,174 +1039,8 @@ export const deleteEnvironment = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/environments/{env_id}',
+    url: '/api/v1/environments/{env_id}',
     ...options,
-  });
-};
-
-/**
- * Get Subscriptions
- */
-export const getSubscriptions = <ThrowOnError extends boolean = false>(
-  options?: Options<GetSubscriptionsData, ThrowOnError>
-) => {
-  return (options?.client ?? _heyApiClient).get<
-    GetSubscriptionsResponses,
-    GetSubscriptionsErrors,
-    ThrowOnError
-  >({
-    security: [
-      {
-        scheme: 'bearer',
-        type: 'http',
-      },
-    ],
-    url: '/api/v1/system/subscriptions',
-    ...options,
-  });
-};
-
-/**
- * Get Entitlements
- * Get all entitlements and current usage for the authenticated user.
- */
-export const getEntitlements = <ThrowOnError extends boolean = false>(
-  options?: Options<GetEntitlementsData, ThrowOnError>
-) => {
-  return (options?.client ?? _heyApiClient).get<
-    GetEntitlementsResponses,
-    GetEntitlementsErrors,
-    ThrowOnError
-  >({
-    security: [
-      {
-        scheme: 'bearer',
-        type: 'http',
-      },
-    ],
-    url: '/api/v1/system/entitlements',
-    ...options,
-  });
-};
-
-/**
- * Check Entitlement
- * Check a specific entitlement for the authenticated user.
- *
- * For numeric limits (e.g., max_environments), returns current usage and remaining quota.
- * For boolean features (e.g., enable_sso), returns whether the feature is enabled.
- */
-export const checkEntitlement = <ThrowOnError extends boolean = false>(
-  options: Options<CheckEntitlementData, ThrowOnError>
-) => {
-  return (options.client ?? _heyApiClient).get<
-    CheckEntitlementResponses,
-    CheckEntitlementErrors,
-    ThrowOnError
-  >({
-    security: [
-      {
-        scheme: 'bearer',
-        type: 'http',
-      },
-    ],
-    url: '/api/v1/system/entitlements/check/{entitlement_type}',
-    ...options,
-  });
-};
-
-/**
- * Get Tokens
- * Get all API tokens for the authenticated user.
- */
-export const getTokens = <ThrowOnError extends boolean = false>(
-  options?: Options<GetTokensData, ThrowOnError>
-) => {
-  return (options?.client ?? _heyApiClient).get<GetTokensResponses, GetTokensErrors, ThrowOnError>({
-    security: [
-      {
-        scheme: 'bearer',
-        type: 'http',
-      },
-    ],
-    url: '/api/v1/system/tokens',
-    ...options,
-  });
-};
-
-/**
- * Create Token
- */
-export const createToken = <ThrowOnError extends boolean = false>(
-  options: Options<CreateTokenData, ThrowOnError>
-) => {
-  return (options.client ?? _heyApiClient).post<
-    CreateTokenResponses,
-    CreateTokenErrors,
-    ThrowOnError
-  >({
-    security: [
-      {
-        scheme: 'bearer',
-        type: 'http',
-      },
-    ],
-    url: '/api/v1/system/tokens',
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
-  });
-};
-
-/**
- * Delete Token
- * Delete a specific API token by ID.
- */
-export const deleteToken = <ThrowOnError extends boolean = false>(
-  options: Options<DeleteTokenData, ThrowOnError>
-) => {
-  return (options.client ?? _heyApiClient).delete<
-    DeleteTokenResponses,
-    DeleteTokenErrors,
-    ThrowOnError
-  >({
-    security: [
-      {
-        scheme: 'bearer',
-        type: 'http',
-      },
-    ],
-    url: '/api/v1/system/tokens/{token_id}',
-    ...options,
-  });
-};
-
-/**
- * Update Token
- * Update a specific API token by ID.
- */
-export const updateToken = <ThrowOnError extends boolean = false>(
-  options: Options<UpdateTokenData, ThrowOnError>
-) => {
-  return (options.client ?? _heyApiClient).put<
-    UpdateTokenResponses,
-    UpdateTokenErrors,
-    ThrowOnError
-  >({
-    security: [
-      {
-        scheme: 'bearer',
-        type: 'http',
-      },
-    ],
-    url: '/api/v1/system/tokens/{token_id}',
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
   });
 };
 
@@ -1166,7 +1062,7 @@ export const listEnvironmentUsers = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/environments/{environment_id}/users',
+    url: '/api/v1/environments/{environment_id}/users',
     ...options,
   });
 };
@@ -1189,7 +1085,7 @@ export const createEnvironmentUser = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/environments/{environment_id}/users',
+    url: '/api/v1/environments/{environment_id}/users',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1216,7 +1112,7 @@ export const getPendingInvitations = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/environments/{environment_id}/users/pending',
+    url: '/api/v1/environments/{environment_id}/users/pending',
     ...options,
   });
 };
@@ -1239,7 +1135,7 @@ export const deleteEnvironmentUser = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/environments/{environment_id}/users/{user_id}',
+    url: '/api/v1/environments/{environment_id}/users/{user_id}',
     ...options,
   });
 };
@@ -1262,7 +1158,7 @@ export const getEnvironmentUser = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/environments/{environment_id}/users/{user_id}',
+    url: '/api/v1/environments/{environment_id}/users/{user_id}',
     ...options,
   });
 };
@@ -1285,7 +1181,7 @@ export const updateEnvironmentUser = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/environments/{environment_id}/users/{user_id}',
+    url: '/api/v1/environments/{environment_id}/users/{user_id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1312,7 +1208,7 @@ export const inviteEnvironmentUser = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/environments/{environment_id}/users/invite',
+    url: '/api/v1/environments/{environment_id}/users/invite',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1339,7 +1235,7 @@ export const bulkInviteEnvironmentUsers = <ThrowOnError extends boolean = false>
         type: 'http',
       },
     ],
-    url: '/api/v1/system/environments/{environment_id}/users/bulk-invite',
+    url: '/api/v1/environments/{environment_id}/users/bulk-invite',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1366,131 +1262,8 @@ export const deleteEnvironmentInvitation = <ThrowOnError extends boolean = false
         type: 'http',
       },
     ],
-    url: '/api/v1/system/environments/{environment_id}/users/invitations/{invitation_id}',
+    url: '/api/v1/environments/{environment_id}/users/invitations/{invitation_id}',
     ...options,
-  });
-};
-
-/**
- * Get Modelproviders
- * List all Model Provider configurations for the authenticated user and environment.
- */
-export const getModelproviders = <ThrowOnError extends boolean = false>(
-  options?: Options<GetModelprovidersData, ThrowOnError>
-) => {
-  return (options?.client ?? _heyApiClient).get<
-    GetModelprovidersResponses,
-    GetModelprovidersErrors,
-    ThrowOnError
-  >({
-    security: [
-      {
-        scheme: 'bearer',
-        type: 'http',
-      },
-    ],
-    url: '/api/v1/system/modelproviders',
-    ...options,
-  });
-};
-
-/**
- * Create Modelprovider
- * Create a new Model Provider configuration.
- */
-export const createModelprovider = <ThrowOnError extends boolean = false>(
-  options: Options<CreateModelproviderData, ThrowOnError>
-) => {
-  return (options.client ?? _heyApiClient).post<
-    CreateModelproviderResponses,
-    CreateModelproviderErrors,
-    ThrowOnError
-  >({
-    security: [
-      {
-        scheme: 'bearer',
-        type: 'http',
-      },
-    ],
-    url: '/api/v1/system/modelproviders',
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
-  });
-};
-
-/**
- * Delete Modelprovider
- * Delete a specific Model Provider configuration by ID.
- */
-export const deleteModelprovider = <ThrowOnError extends boolean = false>(
-  options: Options<DeleteModelproviderData, ThrowOnError>
-) => {
-  return (options.client ?? _heyApiClient).delete<
-    DeleteModelproviderResponses,
-    DeleteModelproviderErrors,
-    ThrowOnError
-  >({
-    security: [
-      {
-        scheme: 'bearer',
-        type: 'http',
-      },
-    ],
-    url: '/api/v1/system/modelproviders/{provider_id}',
-    ...options,
-  });
-};
-
-/**
- * Get Modelprovider
- * Get a specific Model Provider configuration by ID.
- */
-export const getModelprovider = <ThrowOnError extends boolean = false>(
-  options: Options<GetModelproviderData, ThrowOnError>
-) => {
-  return (options.client ?? _heyApiClient).get<
-    GetModelproviderResponses,
-    GetModelproviderErrors,
-    ThrowOnError
-  >({
-    security: [
-      {
-        scheme: 'bearer',
-        type: 'http',
-      },
-    ],
-    url: '/api/v1/system/modelproviders/{provider_id}',
-    ...options,
-  });
-};
-
-/**
- * Update Modelprovider
- * Update a specific Model Provider configuration by ID.
- */
-export const updateModelprovider = <ThrowOnError extends boolean = false>(
-  options: Options<UpdateModelproviderData, ThrowOnError>
-) => {
-  return (options.client ?? _heyApiClient).put<
-    UpdateModelproviderResponses,
-    UpdateModelproviderErrors,
-    ThrowOnError
-  >({
-    security: [
-      {
-        scheme: 'bearer',
-        type: 'http',
-      },
-    ],
-    url: '/api/v1/system/modelproviders/{provider_id}',
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
   });
 };
 
@@ -1512,7 +1285,7 @@ export const getMcpendpoints = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/mcpendpoints',
+    url: '/api/v1/mcp/endpoints',
     ...options,
   });
 };
@@ -1535,7 +1308,7 @@ export const createMcpendpoint = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/mcpendpoints',
+    url: '/api/v1/mcp/endpoints',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1562,7 +1335,7 @@ export const deleteMcpendpoint = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/mcpendpoints/{mcpendpoint_id}',
+    url: '/api/v1/mcp/endpoints/{mcpendpoint_id}',
     ...options,
   });
 };
@@ -1585,7 +1358,7 @@ export const getMcpendpoint = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/mcpendpoints/{mcpendpoint_id}',
+    url: '/api/v1/mcp/endpoints/{mcpendpoint_id}',
     ...options,
   });
 };
@@ -1608,7 +1381,7 @@ export const updateMcpendpoint = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/mcpendpoints/{mcpendpoint_id}',
+    url: '/api/v1/mcp/endpoints/{mcpendpoint_id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1636,7 +1409,7 @@ export const listMcpendpointTools = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/mcpendpoints/{mcpendpoint_id}/tools',
+    url: '/api/v1/mcp/endpoints/{mcpendpoint_id}/tools',
     ...options,
   });
 };
@@ -1659,7 +1432,7 @@ export const createMcpToolAssociation = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/mcp-tool-associations',
+    url: '/api/v1/mcp/tool-associations',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1686,7 +1459,7 @@ export const getEntityTools = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/entity-definitions/{entity_definition_id}/tools',
+    url: '/api/v1/mcp/entity-definitions/{entity_definition_id}/tools',
     ...options,
   });
 };
@@ -1709,7 +1482,7 @@ export const getMcpEndpointEntityTypes = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/mcpendpoints/{mcpendpoint_name}/entity-types',
+    url: '/api/v1/mcp/endpoints/{mcpendpoint_name}/entity-types',
     ...options,
   });
 };
@@ -1732,8 +1505,131 @@ export const deleteMcpToolAssociation = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/mcp-tool-associations/{association_id}',
+    url: '/api/v1/mcp/tool-associations/{association_id}',
     ...options,
+  });
+};
+
+/**
+ * Get Modelproviders
+ * List all Model Provider configurations for the authenticated user and environment.
+ */
+export const getModelproviders = <ThrowOnError extends boolean = false>(
+  options?: Options<GetModelprovidersData, ThrowOnError>
+) => {
+  return (options?.client ?? _heyApiClient).get<
+    GetModelprovidersResponses,
+    GetModelprovidersErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/models/providers',
+    ...options,
+  });
+};
+
+/**
+ * Create Modelprovider
+ * Create a new Model Provider configuration.
+ */
+export const createModelprovider = <ThrowOnError extends boolean = false>(
+  options: Options<CreateModelproviderData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    CreateModelproviderResponses,
+    CreateModelproviderErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/models/providers',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Delete Modelprovider
+ * Delete a specific Model Provider configuration by ID.
+ */
+export const deleteModelprovider = <ThrowOnError extends boolean = false>(
+  options: Options<DeleteModelproviderData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).delete<
+    DeleteModelproviderResponses,
+    DeleteModelproviderErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/models/providers/{provider_id}',
+    ...options,
+  });
+};
+
+/**
+ * Get Modelprovider
+ * Get a specific Model Provider configuration by ID.
+ */
+export const getModelprovider = <ThrowOnError extends boolean = false>(
+  options: Options<GetModelproviderData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).get<
+    GetModelproviderResponses,
+    GetModelproviderErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/models/providers/{provider_id}',
+    ...options,
+  });
+};
+
+/**
+ * Update Modelprovider
+ * Update a specific Model Provider configuration by ID.
+ */
+export const updateModelprovider = <ThrowOnError extends boolean = false>(
+  options: Options<UpdateModelproviderData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).put<
+    UpdateModelproviderResponses,
+    UpdateModelproviderErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/models/providers/{provider_id}',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
   });
 };
 
@@ -1751,7 +1647,7 @@ export const getModels = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/models',
+    url: '/api/v1/models',
     ...options,
   });
 };
@@ -1774,7 +1670,7 @@ export const createModel = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/models',
+    url: '/api/v1/models',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1801,7 +1697,7 @@ export const deleteModel = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/models/{model_name}',
+    url: '/api/v1/models/{model_name}',
     ...options,
   });
 };
@@ -1820,7 +1716,7 @@ export const getModel = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/models/{model_name}',
+    url: '/api/v1/models/{model_name}',
     ...options,
   });
 };
@@ -1843,7 +1739,7 @@ export const updateModel = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/models/{model_name}',
+    url: '/api/v1/models/{model_name}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1870,7 +1766,7 @@ export const listPrompts = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/prompts',
+    url: '/api/v1/prompts',
     ...options,
   });
 };
@@ -1893,7 +1789,7 @@ export const createPrompt = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/prompts',
+    url: '/api/v1/prompts',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1920,7 +1816,7 @@ export const getSystemDefaultPrompt = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/prompts/system-default',
+    url: '/api/v1/prompts/system-default',
     ...options,
   });
 };
@@ -1943,7 +1839,7 @@ export const deletePrompt = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/prompts/{prompt_id}',
+    url: '/api/v1/prompts/{prompt_id}',
     ...options,
   });
 };
@@ -1962,7 +1858,7 @@ export const getPrompt = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/prompts/{prompt_id}',
+    url: '/api/v1/prompts/{prompt_id}',
     ...options,
   });
 };
@@ -1985,7 +1881,7 @@ export const updatePrompt = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/prompts/{prompt_id}',
+    url: '/api/v1/prompts/{prompt_id}',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -1995,15 +1891,14 @@ export const updatePrompt = <ThrowOnError extends boolean = false>(
 };
 
 /**
- * List Chat Suggestions
- * List chat suggestions. Returns system-wide suggestions + environment/user-specific ones.
+ * Get Subscriptions
  */
-export const listChatSuggestions = <ThrowOnError extends boolean = false>(
-  options?: Options<ListChatSuggestionsData, ThrowOnError>
+export const getSubscriptions = <ThrowOnError extends boolean = false>(
+  options?: Options<GetSubscriptionsData, ThrowOnError>
 ) => {
   return (options?.client ?? _heyApiClient).get<
-    ListChatSuggestionsResponses,
-    ListChatSuggestionsErrors,
+    GetSubscriptionsResponses,
+    GetSubscriptionsErrors,
     ThrowOnError
   >({
     security: [
@@ -2012,21 +1907,21 @@ export const listChatSuggestions = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/chat-suggestions',
+    url: '/api/v1/subscriptions',
     ...options,
   });
 };
 
 /**
- * Create Chat Suggestion
- * Create a new chat suggestion for the environment.
+ * Get Entitlements
+ * Get all entitlements and current usage for the authenticated user.
  */
-export const createChatSuggestion = <ThrowOnError extends boolean = false>(
-  options: Options<CreateChatSuggestionData, ThrowOnError>
+export const getEntitlements = <ThrowOnError extends boolean = false>(
+  options?: Options<GetEntitlementsData, ThrowOnError>
 ) => {
-  return (options.client ?? _heyApiClient).post<
-    CreateChatSuggestionResponses,
-    CreateChatSuggestionErrors,
+  return (options?.client ?? _heyApiClient).get<
+    GetEntitlementsResponses,
+    GetEntitlementsErrors,
     ThrowOnError
   >({
     security: [
@@ -2035,7 +1930,74 @@ export const createChatSuggestion = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/chat-suggestions',
+    url: '/api/v1/entitlements',
+    ...options,
+  });
+};
+
+/**
+ * Check Entitlement
+ * Check a specific entitlement for the authenticated user.
+ *
+ * For numeric limits (e.g., max_environments), returns current usage and remaining quota.
+ * For boolean features (e.g., enable_sso), returns whether the feature is enabled.
+ */
+export const checkEntitlement = <ThrowOnError extends boolean = false>(
+  options: Options<CheckEntitlementData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).get<
+    CheckEntitlementResponses,
+    CheckEntitlementErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/entitlements/check/{entitlement_type}',
+    ...options,
+  });
+};
+
+/**
+ * Get Tokens
+ * Get all API tokens for the authenticated user.
+ */
+export const getTokens = <ThrowOnError extends boolean = false>(
+  options?: Options<GetTokensData, ThrowOnError>
+) => {
+  return (options?.client ?? _heyApiClient).get<GetTokensResponses, GetTokensErrors, ThrowOnError>({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/tokens',
+    ...options,
+  });
+};
+
+/**
+ * Create Token
+ */
+export const createToken = <ThrowOnError extends boolean = false>(
+  options: Options<CreateTokenData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).post<
+    CreateTokenResponses,
+    CreateTokenErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/tokens',
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -2045,15 +2007,15 @@ export const createChatSuggestion = <ThrowOnError extends boolean = false>(
 };
 
 /**
- * Delete Chat Suggestion
- * Delete a chat suggestion. Can only delete user's own suggestions (not system ones).
+ * Delete Token
+ * Delete a specific API token by ID.
  */
-export const deleteChatSuggestion = <ThrowOnError extends boolean = false>(
-  options: Options<DeleteChatSuggestionData, ThrowOnError>
+export const deleteToken = <ThrowOnError extends boolean = false>(
+  options: Options<DeleteTokenData, ThrowOnError>
 ) => {
   return (options.client ?? _heyApiClient).delete<
-    DeleteChatSuggestionResponses,
-    DeleteChatSuggestionErrors,
+    DeleteTokenResponses,
+    DeleteTokenErrors,
     ThrowOnError
   >({
     security: [
@@ -2062,8 +2024,35 @@ export const deleteChatSuggestion = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/system/chat-suggestions/{suggestion_id}',
+    url: '/api/v1/tokens/{token_id}',
     ...options,
+  });
+};
+
+/**
+ * Update Token
+ * Update a specific API token by ID.
+ */
+export const updateToken = <ThrowOnError extends boolean = false>(
+  options: Options<UpdateTokenData, ThrowOnError>
+) => {
+  return (options.client ?? _heyApiClient).put<
+    UpdateTokenResponses,
+    UpdateTokenErrors,
+    ThrowOnError
+  >({
+    security: [
+      {
+        scheme: 'bearer',
+        type: 'http',
+      },
+    ],
+    url: '/api/v1/tokens/{token_id}',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
   });
 };
 
@@ -2469,34 +2458,6 @@ export const updateConfiguredProvider = <ThrowOnError extends boolean = false>(
 };
 
 /**
- * Admin List Configured Providers
- * List configured providers with UNMASKED secrets for discovery service.
- *
- * This endpoint is intended for the discovery service only. It returns
- * provider configurations with decrypted secrets.
- *
- * Requires: Opaque token with 'read:discoverysecrets' scope
- */
-export const adminListConfiguredProviders = <ThrowOnError extends boolean = false>(
-  options?: Options<AdminListConfiguredProvidersData, ThrowOnError>
-) => {
-  return (options?.client ?? _heyApiClient).get<
-    AdminListConfiguredProvidersResponses,
-    AdminListConfiguredProvidersErrors,
-    ThrowOnError
-  >({
-    security: [
-      {
-        scheme: 'bearer',
-        type: 'http',
-      },
-    ],
-    url: '/api/v1/discovery/admin/configured-providers',
-    ...options,
-  });
-};
-
-/**
  * Get All Provider Versions
  * Get version support info for all available provider types.
  */
@@ -2514,7 +2475,7 @@ export const getAllProviderVersions = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/discovery/admin/discovery/versions',
+    url: '/api/v1/discovery/versions',
     ...options,
   });
 };
@@ -2537,7 +2498,7 @@ export const getDeprecatedProviderConfigs = <ThrowOnError extends boolean = fals
         type: 'http',
       },
     ],
-    url: '/api/v1/discovery/admin/discovery/versions/deprecated',
+    url: '/api/v1/discovery/versions/deprecated',
     ...options,
   });
 };
@@ -2560,7 +2521,7 @@ export const migrateProviderConfig = <ThrowOnError extends boolean = false>(
         type: 'http',
       },
     ],
-    url: '/api/v1/discovery/admin/discovery/versions/{provider_id}/migrate',
+    url: '/api/v1/discovery/versions/{provider_id}/migrate',
     ...options,
   });
 };
@@ -2583,7 +2544,7 @@ export const migrateAllDeprecatedConfigs = <ThrowOnError extends boolean = false
         type: 'http',
       },
     ],
-    url: '/api/v1/discovery/admin/discovery/versions/migrate-all',
+    url: '/api/v1/discovery/versions/migrate-all',
     ...options,
   });
 };

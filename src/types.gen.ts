@@ -113,6 +113,24 @@ export type ApiTokenUpdate = {
 };
 
 /**
+ * AudioBlock
+ * A representation of audio data to directly pass to/from the LLM.
+ */
+export type AudioBlock = {
+  /**
+   * Block Type
+   */
+  block_type?: 'audio';
+  audio?: Blob | File;
+  path?: string;
+  /**
+   * Url
+   */
+  url?: string | null;
+  format?: string;
+};
+
+/**
  * BulkDeleteRequest
  * Request model for bulk chat deletion.
  */
@@ -175,6 +193,156 @@ export type BulkEntityRelationResponse = {
    * Number of failed relation creations.
    */
   readonly failure_count: number;
+};
+
+/**
+ * CacheControl
+ */
+export type CacheControl = {
+  /**
+   * Type
+   */
+  type: string;
+  /**
+   * Ttl
+   */
+  ttl?: string;
+};
+
+/**
+ * CachePoint
+ * Used to set the point to cache up to, if the LLM supports caching.
+ */
+export type CachePoint = {
+  /**
+   * Block Type
+   */
+  block_type?: 'cache';
+  cache_control: CacheControl;
+};
+
+/**
+ * ChatCompletionChunk
+ */
+export type ChatCompletionChunk = {
+  /**
+   * Id
+   * Unique identifier for the chat completion
+   */
+  id: string;
+  /**
+   * Object
+   * Type of the response object
+   */
+  object?: string;
+  /**
+   * Created
+   * Unix timestamp of creation
+   */
+  created: number;
+  /**
+   * Model
+   * Model used, e.g., gpt-3.5-turbo
+   */
+  model: string;
+  /**
+   * Choices
+   * List of response choices (usually one)
+   */
+  choices: Array<Choice>;
+  usage?: Usage;
+  system_fingerprint?: string;
+  [key: string]: unknown | string | number | Array<Choice> | Usage | undefined;
+};
+
+/**
+ * ChatCompletionRequest
+ */
+export type ChatCompletionRequest = {
+  /**
+   * Model
+   * The model to use, e.g., 'gpt-3.5-turbo' or 'gpt-4'
+   */
+  model: string;
+  /**
+   * Messages
+   * List of messages comprising the conversation
+   */
+  messages: Array<ChatMessageInput>;
+  temperature?: number;
+  max_tokens?: number;
+  stream?: boolean;
+  n?: number;
+  response_format?: ResponseFormat;
+  [key: string]:
+    | unknown
+    | string
+    | Array<ChatMessageInput>
+    | number
+    | number
+    | boolean
+    | ResponseFormat
+    | undefined;
+};
+
+/**
+ * ChatMessage
+ * Chat message.
+ */
+export type ChatMessageInput = {
+  role?: MessageRole;
+  /**
+   * Additional Kwargs
+   */
+  additional_kwargs?: {
+    [key: string]: unknown;
+  };
+  /**
+   * Blocks
+   */
+  blocks?: Array<
+    | ({
+        block_type: 'text';
+      } & TextBlock)
+    | ({
+        block_type: 'image';
+      } & ImageBlock)
+    | ({
+        block_type: 'audio';
+      } & AudioBlock)
+    | ({
+        block_type: 'video';
+      } & VideoBlock)
+    | ({
+        block_type: 'document';
+      } & DocumentBlock)
+    | ({
+        block_type: 'cache';
+      } & CachePoint)
+    | ({
+        block_type: 'citable';
+      } & CitableBlock)
+    | ({
+        block_type: 'citation';
+      } & CitationBlock)
+    | ({
+        block_type: 'thinking';
+      } & ThinkingBlock)
+    | ({
+        block_type: 'tool_call';
+      } & ToolCallBlock)
+  >;
+};
+
+/**
+ * ChatMessage
+ */
+export type ChatMessageOutput = {
+  /**
+   * Role
+   */
+  role: string;
+  content?: string;
 };
 
 /**
@@ -351,6 +519,88 @@ export type ChatTitleResponse = {
 export type ChatVisibility = 'public' | 'private';
 
 /**
+ * Choice
+ */
+export type Choice = {
+  /**
+   * Index
+   * Index of this choice (usually 0)
+   */
+  index: number;
+  message?: ChatMessageOutput;
+  delta?: Delta;
+  finish_reason?: string;
+};
+
+/**
+ * CitableBlock
+ * Supports providing citable content to LLMs that have built-in citation support.
+ */
+export type CitableBlock = {
+  /**
+   * Block Type
+   */
+  block_type?: 'citable';
+  /**
+   * Title
+   */
+  title: string;
+  /**
+   * Source
+   */
+  source: string;
+  /**
+   * Content
+   */
+  content: Array<
+    | ({
+        block_type: 'text';
+      } & TextBlock)
+    | ({
+        block_type: 'image';
+      } & ImageBlock)
+    | ({
+        block_type: 'document';
+      } & DocumentBlock)
+  >;
+};
+
+/**
+ * CitationBlock
+ * A representation of cited content from past messages.
+ */
+export type CitationBlock = {
+  /**
+   * Block Type
+   */
+  block_type?: 'citation';
+  /**
+   * Cited Content
+   */
+  cited_content:
+    | ({
+        block_type: 'text';
+      } & TextBlock)
+    | ({
+        block_type: 'image';
+      } & ImageBlock);
+  /**
+   * Source
+   */
+  source: string;
+  /**
+   * Title
+   */
+  title: string;
+  /**
+   * Additional Location Info
+   */
+  additional_location_info: {
+    [key: string]: number;
+  };
+};
+
+/**
  * ConfiguredProviderCreate
  * Request to create a configured discovery provider.
  */
@@ -449,6 +699,14 @@ export type ConfiguredProvidersListResponse = {
 };
 
 /**
+ * Delta
+ */
+export type Delta = {
+  role?: string;
+  content?: string;
+};
+
+/**
  * DeprecatedProviderConfig
  * Information about a provider instance with deprecated config.
  */
@@ -533,6 +791,25 @@ export type DiscoveryProvidersListResponse = {
    * Providers
    */
   providers: Array<DiscoveryProviderMetadata>;
+};
+
+/**
+ * DocumentBlock
+ * A representation of a document to directly pass to the LLM.
+ */
+export type DocumentBlock = {
+  /**
+   * Block Type
+   */
+  block_type?: 'document';
+  data?: Blob | File;
+  /**
+   * Path
+   */
+  path?: string | null;
+  url?: string;
+  title?: string;
+  document_mimetype?: string;
 };
 
 /**
@@ -1060,6 +1337,25 @@ export type HttpValidationError = {
 };
 
 /**
+ * ImageBlock
+ * A representation of image data to directly pass to/from the LLM.
+ */
+export type ImageBlock = {
+  /**
+   * Block Type
+   */
+  block_type?: 'image';
+  image?: Blob | File;
+  path?: string;
+  /**
+   * Url
+   */
+  url?: string | null;
+  image_mimetype?: string;
+  detail?: string;
+};
+
+/**
  * MCPEndpointCreate
  */
 export type McpEndpointCreate = {
@@ -1221,6 +1517,20 @@ export type McpToolEntityAssociationResponse = {
    */
   updated_at: string;
 };
+
+/**
+ * MessageRole
+ * Message role.
+ */
+export type MessageRole =
+  | 'system'
+  | 'developer'
+  | 'user'
+  | 'assistant'
+  | 'function'
+  | 'tool'
+  | 'chatbot'
+  | 'model';
 
 /**
  * MigrationResult
@@ -1740,6 +2050,17 @@ export type ProviderVersionInfo = {
 };
 
 /**
+ * ResponseFormat
+ */
+export type ResponseFormat = {
+  /**
+   * Type
+   * The format of the response
+   */
+  type?: 'text' | 'json_object';
+};
+
+/**
  * SubscriptionResponse
  */
 export type SubscriptionResponse = {
@@ -1769,6 +2090,66 @@ export type SubscriptionResponse = {
 };
 
 /**
+ * TextBlock
+ * A representation of text data to directly pass to/from the LLM.
+ */
+export type TextBlock = {
+  /**
+   * Block Type
+   */
+  block_type?: 'text';
+  /**
+   * Text
+   */
+  text: string;
+};
+
+/**
+ * ThinkingBlock
+ * A representation of the content streamed from reasoning/thinking processes by LLMs
+ */
+export type ThinkingBlock = {
+  /**
+   * Block Type
+   */
+  block_type?: 'thinking';
+  content?: string;
+  num_tokens?: number;
+  /**
+   * Additional Information
+   * Additional information related to the thinking/reasoning process, if available
+   */
+  additional_information?: {
+    [key: string]: unknown;
+  };
+};
+
+/**
+ * ToolCallBlock
+ */
+export type ToolCallBlock = {
+  /**
+   * Block Type
+   */
+  block_type?: 'tool_call';
+  tool_call_id?: string;
+  /**
+   * Tool Name
+   * Name of the called tool
+   */
+  tool_name: string;
+  /**
+   * Tool Kwargs
+   * Arguments provided to the tool, if available
+   */
+  tool_kwargs?:
+    | {
+        [key: string]: unknown;
+      }
+    | string;
+};
+
+/**
  * TypedChatMessageContent
  */
 export type TypedChatMessageContent = {
@@ -1778,6 +2159,24 @@ export type TypedChatMessageContent = {
   type: string;
   text?: string;
   reasoning?: string;
+};
+
+/**
+ * Usage
+ */
+export type Usage = {
+  /**
+   * Prompt Tokens
+   */
+  prompt_tokens: number;
+  /**
+   * Completion Tokens
+   */
+  completion_tokens: number;
+  /**
+   * Total Tokens
+   */
+  total_tokens: number;
 };
 
 /**
@@ -1811,13 +2210,23 @@ export type ValidationError = {
 };
 
 /**
- * WebhookResponse
+ * VideoBlock
+ * A representation of video data to directly pass to/from the LLM.
  */
-export type WebhookResponse = {
+export type VideoBlock = {
   /**
-   * Status
+   * Block Type
    */
-  status: string;
+  block_type?: 'video';
+  video?: Blob | File;
+  path?: string;
+  /**
+   * Url
+   */
+  url?: string | null;
+  video_mimetype?: string;
+  detail?: string;
+  fps?: number;
 };
 
 /**
@@ -2444,7 +2853,7 @@ export type CreateChatTitleData = {
   body: ChatTitleRequest;
   path?: never;
   query?: never;
-  url: '/api/v1/chat/title';
+  url: '/api/v1/chats/title';
 };
 
 export type CreateChatTitleErrors = {
@@ -2473,7 +2882,7 @@ export type DeleteChatsBulkData = {
   body: BulkDeleteRequest;
   path?: never;
   query?: never;
-  url: '/api/v1/chat/';
+  url: '/api/v1/chats/';
 };
 
 export type DeleteChatsBulkErrors = {
@@ -2509,7 +2918,7 @@ export type GetChatsData = {
      */
     limit?: number;
   };
-  url: '/api/v1/chat/';
+  url: '/api/v1/chats/';
 };
 
 export type GetChatsErrors = {
@@ -2539,7 +2948,7 @@ export type CreateChatData = {
   body: ChatSessionCreate;
   path?: never;
   query?: never;
-  url: '/api/v1/chat/';
+  url: '/api/v1/chats/';
 };
 
 export type CreateChatErrors = {
@@ -2573,7 +2982,7 @@ export type DeleteChatData = {
     chat_id: string;
   };
   query?: never;
-  url: '/api/v1/chat/{chat_id}';
+  url: '/api/v1/chats/{chat_id}';
 };
 
 export type DeleteChatErrors = {
@@ -2607,7 +3016,7 @@ export type GetChatData = {
     chat_id: string;
   };
   query?: never;
-  url: '/api/v1/chat/{chat_id}';
+  url: '/api/v1/chats/{chat_id}';
 };
 
 export type GetChatErrors = {
@@ -2641,7 +3050,7 @@ export type UpdateChatData = {
     chat_id: string;
   };
   query?: never;
-  url: '/api/v1/chat/{chat_id}';
+  url: '/api/v1/chats/{chat_id}';
 };
 
 export type UpdateChatErrors = {
@@ -2684,7 +3093,7 @@ export type GetChatMessagesData = {
      */
     offset?: number;
   };
-  url: '/api/v1/chat/{chat_id}/messages';
+  url: '/api/v1/chats/{chat_id}/messages';
 };
 
 export type GetChatMessagesErrors = {
@@ -2722,7 +3131,7 @@ export type PostChatMessagesData = {
     chat_id: string;
   };
   query?: never;
-  url: '/api/v1/chat/{chat_id}/messages';
+  url: '/api/v1/chats/{chat_id}/messages';
 };
 
 export type PostChatMessagesErrors = {
@@ -2748,28 +3157,19 @@ export type PostChatMessagesResponses = {
 
 export type PostChatMessagesResponse = PostChatMessagesResponses[keyof PostChatMessagesResponses];
 
-export type PostClerkWebhookData = {
+export type ListChatSuggestionsData = {
   body?: never;
-  headers: {
-    /**
-     * Svix-Id
-     */
-    'Svix-Id': string;
-    /**
-     * Svix-Timestamp
-     */
-    'Svix-Timestamp': string;
-    /**
-     * Svix-Signature
-     */
-    'Svix-Signature': string;
-  };
   path?: never;
-  query?: never;
-  url: '/api/v1/webhooks/clerk';
+  query?: {
+    /**
+     * Active Only
+     */
+    active_only?: boolean;
+  };
+  url: '/api/v1/chats/suggestions';
 };
 
-export type PostClerkWebhookErrors = {
+export type ListChatSuggestionsErrors = {
   /**
    * Not found
    */
@@ -2780,31 +3180,27 @@ export type PostClerkWebhookErrors = {
   422: HttpValidationError;
 };
 
-export type PostClerkWebhookError = PostClerkWebhookErrors[keyof PostClerkWebhookErrors];
+export type ListChatSuggestionsError = ListChatSuggestionsErrors[keyof ListChatSuggestionsErrors];
 
-export type PostClerkWebhookResponses = {
+export type ListChatSuggestionsResponses = {
   /**
+   * Response List Chat Suggestions
    * Successful Response
    */
-  201: WebhookResponse;
+  200: Array<ChatSuggestionResponse>;
 };
 
-export type PostClerkWebhookResponse = PostClerkWebhookResponses[keyof PostClerkWebhookResponses];
+export type ListChatSuggestionsResponse =
+  ListChatSuggestionsResponses[keyof ListChatSuggestionsResponses];
 
-export type PostStripeWebhookData = {
-  body?: never;
-  headers: {
-    /**
-     * Stripe-Signature
-     */
-    'Stripe-Signature': string;
-  };
+export type CreateChatSuggestionData = {
+  body: ChatSuggestionCreate;
   path?: never;
   query?: never;
-  url: '/api/v1/webhooks/stripe';
+  url: '/api/v1/chats/suggestions';
 };
 
-export type PostStripeWebhookErrors = {
+export type CreateChatSuggestionErrors = {
   /**
    * Not found
    */
@@ -2815,23 +3211,91 @@ export type PostStripeWebhookErrors = {
   422: HttpValidationError;
 };
 
-export type PostStripeWebhookError = PostStripeWebhookErrors[keyof PostStripeWebhookErrors];
+export type CreateChatSuggestionError =
+  CreateChatSuggestionErrors[keyof CreateChatSuggestionErrors];
 
-export type PostStripeWebhookResponses = {
+export type CreateChatSuggestionResponses = {
   /**
    * Successful Response
    */
-  201: WebhookResponse;
+  201: ChatSuggestionResponse;
 };
 
-export type PostStripeWebhookResponse =
-  PostStripeWebhookResponses[keyof PostStripeWebhookResponses];
+export type CreateChatSuggestionResponse =
+  CreateChatSuggestionResponses[keyof CreateChatSuggestionResponses];
+
+export type DeleteChatSuggestionData = {
+  body?: never;
+  path: {
+    /**
+     * Suggestion Id
+     */
+    suggestion_id: string;
+  };
+  query?: never;
+  url: '/api/v1/chats/suggestions/{suggestion_id}';
+};
+
+export type DeleteChatSuggestionErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type DeleteChatSuggestionError =
+  DeleteChatSuggestionErrors[keyof DeleteChatSuggestionErrors];
+
+export type DeleteChatSuggestionResponses = {
+  /**
+   * Successful Response
+   */
+  204: void;
+};
+
+export type DeleteChatSuggestionResponse =
+  DeleteChatSuggestionResponses[keyof DeleteChatSuggestionResponses];
+
+export type CreateChatCompletionsData = {
+  body: ChatCompletionRequest;
+  path?: never;
+  query?: never;
+  url: '/api/v1/chat/completions';
+};
+
+export type CreateChatCompletionsErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type CreateChatCompletionsError =
+  CreateChatCompletionsErrors[keyof CreateChatCompletionsErrors];
+
+export type CreateChatCompletionsResponses = {
+  /**
+   * Successful Response
+   */
+  200: ChatCompletionChunk;
+};
+
+export type CreateChatCompletionsResponse =
+  CreateChatCompletionsResponses[keyof CreateChatCompletionsResponses];
 
 export type GetEnvironmentsData = {
   body?: never;
   path?: never;
   query?: never;
-  url: '/api/v1/system/environments';
+  url: '/api/v1/environments';
 };
 
 export type GetEnvironmentsErrors = {
@@ -2855,7 +3319,7 @@ export type CreateEnvironmentData = {
   body: EnvironmentCreate;
   path?: never;
   query?: never;
-  url: '/api/v1/system/environments';
+  url: '/api/v1/environments';
 };
 
 export type CreateEnvironmentErrors = {
@@ -2890,7 +3354,7 @@ export type GetEnvironmentStatusData = {
     env_id: string;
   };
   query?: never;
-  url: '/api/v1/system/environments/{env_id}/status';
+  url: '/api/v1/environments/{env_id}/status';
 };
 
 export type GetEnvironmentStatusErrors = {
@@ -2926,7 +3390,7 @@ export type DeleteEnvironmentData = {
     env_id: string;
   };
   query?: never;
-  url: '/api/v1/system/environments/{env_id}';
+  url: '/api/v1/environments/{env_id}';
 };
 
 export type DeleteEnvironmentErrors = {
@@ -2952,208 +3416,6 @@ export type DeleteEnvironmentResponses = {
 export type DeleteEnvironmentResponse =
   DeleteEnvironmentResponses[keyof DeleteEnvironmentResponses];
 
-export type GetSubscriptionsData = {
-  body?: never;
-  path?: never;
-  query?: never;
-  url: '/api/v1/system/subscriptions';
-};
-
-export type GetSubscriptionsErrors = {
-  /**
-   * Not found
-   */
-  404: unknown;
-};
-
-export type GetSubscriptionsResponses = {
-  /**
-   * Response Get Subscriptions
-   * Successful Response
-   */
-  200: Array<SubscriptionResponse>;
-};
-
-export type GetSubscriptionsResponse = GetSubscriptionsResponses[keyof GetSubscriptionsResponses];
-
-export type GetEntitlementsData = {
-  body?: never;
-  path?: never;
-  query?: never;
-  url: '/api/v1/system/entitlements';
-};
-
-export type GetEntitlementsErrors = {
-  /**
-   * Not found
-   */
-  404: unknown;
-};
-
-export type GetEntitlementsResponses = {
-  /**
-   * Successful Response
-   */
-  200: UserEntitlementsResponse;
-};
-
-export type GetEntitlementsResponse = GetEntitlementsResponses[keyof GetEntitlementsResponses];
-
-export type CheckEntitlementData = {
-  body?: never;
-  path: {
-    /**
-     * Entitlement Type
-     */
-    entitlement_type: string;
-  };
-  query?: never;
-  url: '/api/v1/system/entitlements/check/{entitlement_type}';
-};
-
-export type CheckEntitlementErrors = {
-  /**
-   * Not found
-   */
-  404: unknown;
-  /**
-   * Validation Error
-   */
-  422: HttpValidationError;
-};
-
-export type CheckEntitlementError = CheckEntitlementErrors[keyof CheckEntitlementErrors];
-
-export type CheckEntitlementResponses = {
-  /**
-   * Successful Response
-   */
-  200: EntitlementCheckResponse;
-};
-
-export type CheckEntitlementResponse = CheckEntitlementResponses[keyof CheckEntitlementResponses];
-
-export type GetTokensData = {
-  body?: never;
-  path?: never;
-  query?: never;
-  url: '/api/v1/system/tokens';
-};
-
-export type GetTokensErrors = {
-  /**
-   * Not found
-   */
-  404: unknown;
-};
-
-export type GetTokensResponses = {
-  /**
-   * Response Get Tokens
-   * Successful Response
-   */
-  200: Array<ApiTokenResponse>;
-};
-
-export type GetTokensResponse = GetTokensResponses[keyof GetTokensResponses];
-
-export type CreateTokenData = {
-  body: ApiTokenCreate;
-  path?: never;
-  query?: never;
-  url: '/api/v1/system/tokens';
-};
-
-export type CreateTokenErrors = {
-  /**
-   * Not found
-   */
-  404: unknown;
-  /**
-   * Validation Error
-   */
-  422: HttpValidationError;
-};
-
-export type CreateTokenError = CreateTokenErrors[keyof CreateTokenErrors];
-
-export type CreateTokenResponses = {
-  /**
-   * Successful Response
-   */
-  201: ApiTokenResponse;
-};
-
-export type CreateTokenResponse = CreateTokenResponses[keyof CreateTokenResponses];
-
-export type DeleteTokenData = {
-  body?: never;
-  path: {
-    /**
-     * Token Id
-     */
-    token_id: string;
-  };
-  query?: never;
-  url: '/api/v1/system/tokens/{token_id}';
-};
-
-export type DeleteTokenErrors = {
-  /**
-   * Not found
-   */
-  404: unknown;
-  /**
-   * Validation Error
-   */
-  422: HttpValidationError;
-};
-
-export type DeleteTokenError = DeleteTokenErrors[keyof DeleteTokenErrors];
-
-export type DeleteTokenResponses = {
-  /**
-   * Successful Response
-   */
-  204: void;
-};
-
-export type DeleteTokenResponse = DeleteTokenResponses[keyof DeleteTokenResponses];
-
-export type UpdateTokenData = {
-  body: ApiTokenUpdate;
-  path: {
-    /**
-     * Token Id
-     */
-    token_id: string;
-  };
-  query?: never;
-  url: '/api/v1/system/tokens/{token_id}';
-};
-
-export type UpdateTokenErrors = {
-  /**
-   * Not found
-   */
-  404: unknown;
-  /**
-   * Validation Error
-   */
-  422: HttpValidationError;
-};
-
-export type UpdateTokenError = UpdateTokenErrors[keyof UpdateTokenErrors];
-
-export type UpdateTokenResponses = {
-  /**
-   * Successful Response
-   */
-  200: ApiTokenResponse;
-};
-
-export type UpdateTokenResponse = UpdateTokenResponses[keyof UpdateTokenResponses];
-
 export type ListEnvironmentUsersData = {
   body?: never;
   path: {
@@ -3163,7 +3425,7 @@ export type ListEnvironmentUsersData = {
     environment_id: string;
   };
   query?: never;
-  url: '/api/v1/system/environments/{environment_id}/users';
+  url: '/api/v1/environments/{environment_id}/users';
 };
 
 export type ListEnvironmentUsersErrors = {
@@ -3200,7 +3462,7 @@ export type CreateEnvironmentUserData = {
     environment_id: string;
   };
   query?: never;
-  url: '/api/v1/system/environments/{environment_id}/users';
+  url: '/api/v1/environments/{environment_id}/users';
 };
 
 export type CreateEnvironmentUserErrors = {
@@ -3236,7 +3498,7 @@ export type GetPendingInvitationsData = {
     environment_id: string;
   };
   query?: never;
-  url: '/api/v1/system/environments/{environment_id}/users/pending';
+  url: '/api/v1/environments/{environment_id}/users/pending';
 };
 
 export type GetPendingInvitationsErrors = {
@@ -3277,7 +3539,7 @@ export type DeleteEnvironmentUserData = {
     user_id: string;
   };
   query?: never;
-  url: '/api/v1/system/environments/{environment_id}/users/{user_id}';
+  url: '/api/v1/environments/{environment_id}/users/{user_id}';
 };
 
 export type DeleteEnvironmentUserErrors = {
@@ -3317,7 +3579,7 @@ export type GetEnvironmentUserData = {
     user_id: string;
   };
   query?: never;
-  url: '/api/v1/system/environments/{environment_id}/users/{user_id}';
+  url: '/api/v1/environments/{environment_id}/users/{user_id}';
 };
 
 export type GetEnvironmentUserErrors = {
@@ -3356,7 +3618,7 @@ export type UpdateEnvironmentUserData = {
     user_id: string;
   };
   query?: never;
-  url: '/api/v1/system/environments/{environment_id}/users/{user_id}';
+  url: '/api/v1/environments/{environment_id}/users/{user_id}';
 };
 
 export type UpdateEnvironmentUserErrors = {
@@ -3392,7 +3654,7 @@ export type InviteEnvironmentUserData = {
     environment_id: string;
   };
   query?: never;
-  url: '/api/v1/system/environments/{environment_id}/users/invite';
+  url: '/api/v1/environments/{environment_id}/users/invite';
 };
 
 export type InviteEnvironmentUserErrors = {
@@ -3428,7 +3690,7 @@ export type BulkInviteEnvironmentUsersData = {
     environment_id: string;
   };
   query?: never;
-  url: '/api/v1/system/environments/{environment_id}/users/bulk-invite';
+  url: '/api/v1/environments/{environment_id}/users/bulk-invite';
 };
 
 export type BulkInviteEnvironmentUsersErrors = {
@@ -3469,7 +3731,7 @@ export type DeleteEnvironmentInvitationData = {
     invitation_id: string;
   };
   query?: never;
-  url: '/api/v1/system/environments/{environment_id}/users/invitations/{invitation_id}';
+  url: '/api/v1/environments/{environment_id}/users/invitations/{invitation_id}';
 };
 
 export type DeleteEnvironmentInvitationErrors = {
@@ -3496,170 +3758,11 @@ export type DeleteEnvironmentInvitationResponses = {
 export type DeleteEnvironmentInvitationResponse =
   DeleteEnvironmentInvitationResponses[keyof DeleteEnvironmentInvitationResponses];
 
-export type GetModelprovidersData = {
-  body?: never;
-  path?: never;
-  query?: never;
-  url: '/api/v1/system/modelproviders';
-};
-
-export type GetModelprovidersErrors = {
-  /**
-   * Not found
-   */
-  404: unknown;
-};
-
-export type GetModelprovidersResponses = {
-  /**
-   * Response Get Modelproviders
-   * Successful Response
-   */
-  200: Array<ModelProviderResponse>;
-};
-
-export type GetModelprovidersResponse =
-  GetModelprovidersResponses[keyof GetModelprovidersResponses];
-
-export type CreateModelproviderData = {
-  body: ModelProviderCreate;
-  path?: never;
-  query?: never;
-  url: '/api/v1/system/modelproviders';
-};
-
-export type CreateModelproviderErrors = {
-  /**
-   * Not found
-   */
-  404: unknown;
-  /**
-   * Validation Error
-   */
-  422: HttpValidationError;
-};
-
-export type CreateModelproviderError = CreateModelproviderErrors[keyof CreateModelproviderErrors];
-
-export type CreateModelproviderResponses = {
-  /**
-   * Successful Response
-   */
-  201: ModelProviderResponse;
-};
-
-export type CreateModelproviderResponse =
-  CreateModelproviderResponses[keyof CreateModelproviderResponses];
-
-export type DeleteModelproviderData = {
-  body?: never;
-  path: {
-    /**
-     * Provider Id
-     */
-    provider_id: string;
-  };
-  query?: never;
-  url: '/api/v1/system/modelproviders/{provider_id}';
-};
-
-export type DeleteModelproviderErrors = {
-  /**
-   * Not found
-   */
-  404: unknown;
-  /**
-   * Validation Error
-   */
-  422: HttpValidationError;
-};
-
-export type DeleteModelproviderError = DeleteModelproviderErrors[keyof DeleteModelproviderErrors];
-
-export type DeleteModelproviderResponses = {
-  /**
-   * Successful Response
-   */
-  204: void;
-};
-
-export type DeleteModelproviderResponse =
-  DeleteModelproviderResponses[keyof DeleteModelproviderResponses];
-
-export type GetModelproviderData = {
-  body?: never;
-  path: {
-    /**
-     * Provider Id
-     */
-    provider_id: string;
-  };
-  query?: never;
-  url: '/api/v1/system/modelproviders/{provider_id}';
-};
-
-export type GetModelproviderErrors = {
-  /**
-   * Not found
-   */
-  404: unknown;
-  /**
-   * Validation Error
-   */
-  422: HttpValidationError;
-};
-
-export type GetModelproviderError = GetModelproviderErrors[keyof GetModelproviderErrors];
-
-export type GetModelproviderResponses = {
-  /**
-   * Successful Response
-   */
-  200: ModelProviderResponse;
-};
-
-export type GetModelproviderResponse = GetModelproviderResponses[keyof GetModelproviderResponses];
-
-export type UpdateModelproviderData = {
-  body: ModelProviderUpdate;
-  path: {
-    /**
-     * Provider Id
-     */
-    provider_id: string;
-  };
-  query?: never;
-  url: '/api/v1/system/modelproviders/{provider_id}';
-};
-
-export type UpdateModelproviderErrors = {
-  /**
-   * Not found
-   */
-  404: unknown;
-  /**
-   * Validation Error
-   */
-  422: HttpValidationError;
-};
-
-export type UpdateModelproviderError = UpdateModelproviderErrors[keyof UpdateModelproviderErrors];
-
-export type UpdateModelproviderResponses = {
-  /**
-   * Successful Response
-   */
-  200: ModelProviderResponse;
-};
-
-export type UpdateModelproviderResponse =
-  UpdateModelproviderResponses[keyof UpdateModelproviderResponses];
-
 export type GetMcpendpointsData = {
   body?: never;
   path?: never;
   query?: never;
-  url: '/api/v1/system/mcpendpoints';
+  url: '/api/v1/mcp/endpoints';
 };
 
 export type GetMcpendpointsErrors = {
@@ -3683,7 +3786,7 @@ export type CreateMcpendpointData = {
   body: McpEndpointCreate;
   path?: never;
   query?: never;
-  url: '/api/v1/system/mcpendpoints';
+  url: '/api/v1/mcp/endpoints';
 };
 
 export type CreateMcpendpointErrors = {
@@ -3718,7 +3821,7 @@ export type DeleteMcpendpointData = {
     mcpendpoint_id: string;
   };
   query?: never;
-  url: '/api/v1/system/mcpendpoints/{mcpendpoint_id}';
+  url: '/api/v1/mcp/endpoints/{mcpendpoint_id}';
 };
 
 export type DeleteMcpendpointErrors = {
@@ -3753,7 +3856,7 @@ export type GetMcpendpointData = {
     mcpendpoint_id: string;
   };
   query?: never;
-  url: '/api/v1/system/mcpendpoints/{mcpendpoint_id}';
+  url: '/api/v1/mcp/endpoints/{mcpendpoint_id}';
 };
 
 export type GetMcpendpointErrors = {
@@ -3787,7 +3890,7 @@ export type UpdateMcpendpointData = {
     mcpendpoint_id: string;
   };
   query?: never;
-  url: '/api/v1/system/mcpendpoints/{mcpendpoint_id}';
+  url: '/api/v1/mcp/endpoints/{mcpendpoint_id}';
 };
 
 export type UpdateMcpendpointErrors = {
@@ -3822,7 +3925,7 @@ export type ListMcpendpointToolsData = {
     mcpendpoint_id: string;
   };
   query?: never;
-  url: '/api/v1/system/mcpendpoints/{mcpendpoint_id}/tools';
+  url: '/api/v1/mcp/endpoints/{mcpendpoint_id}/tools';
 };
 
 export type ListMcpendpointToolsErrors = {
@@ -3856,7 +3959,7 @@ export type CreateMcpToolAssociationData = {
   body: McpToolEntityAssociationCreate;
   path?: never;
   query?: never;
-  url: '/api/v1/system/mcp-tool-associations';
+  url: '/api/v1/mcp/tool-associations';
 };
 
 export type CreateMcpToolAssociationErrors = {
@@ -3894,7 +3997,7 @@ export type GetEntityToolsData = {
   query?: {
     entity_version_id?: string;
   };
-  url: '/api/v1/system/entity-definitions/{entity_definition_id}/tools';
+  url: '/api/v1/mcp/entity-definitions/{entity_definition_id}/tools';
 };
 
 export type GetEntityToolsErrors = {
@@ -3931,7 +4034,7 @@ export type GetMcpEndpointEntityTypesData = {
   query?: {
     tool_name?: string;
   };
-  url: '/api/v1/system/mcpendpoints/{mcpendpoint_name}/entity-types';
+  url: '/api/v1/mcp/endpoints/{mcpendpoint_name}/entity-types';
 };
 
 export type GetMcpEndpointEntityTypesErrors = {
@@ -3968,7 +4071,7 @@ export type DeleteMcpToolAssociationData = {
     association_id: string;
   };
   query?: never;
-  url: '/api/v1/system/mcp-tool-associations/{association_id}';
+  url: '/api/v1/mcp/tool-associations/{association_id}';
 };
 
 export type DeleteMcpToolAssociationErrors = {
@@ -3995,11 +4098,170 @@ export type DeleteMcpToolAssociationResponses = {
 export type DeleteMcpToolAssociationResponse =
   DeleteMcpToolAssociationResponses[keyof DeleteMcpToolAssociationResponses];
 
+export type GetModelprovidersData = {
+  body?: never;
+  path?: never;
+  query?: never;
+  url: '/api/v1/models/providers';
+};
+
+export type GetModelprovidersErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+};
+
+export type GetModelprovidersResponses = {
+  /**
+   * Response Get Modelproviders
+   * Successful Response
+   */
+  200: Array<ModelProviderResponse>;
+};
+
+export type GetModelprovidersResponse =
+  GetModelprovidersResponses[keyof GetModelprovidersResponses];
+
+export type CreateModelproviderData = {
+  body: ModelProviderCreate;
+  path?: never;
+  query?: never;
+  url: '/api/v1/models/providers';
+};
+
+export type CreateModelproviderErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type CreateModelproviderError = CreateModelproviderErrors[keyof CreateModelproviderErrors];
+
+export type CreateModelproviderResponses = {
+  /**
+   * Successful Response
+   */
+  201: ModelProviderResponse;
+};
+
+export type CreateModelproviderResponse =
+  CreateModelproviderResponses[keyof CreateModelproviderResponses];
+
+export type DeleteModelproviderData = {
+  body?: never;
+  path: {
+    /**
+     * Provider Id
+     */
+    provider_id: string;
+  };
+  query?: never;
+  url: '/api/v1/models/providers/{provider_id}';
+};
+
+export type DeleteModelproviderErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type DeleteModelproviderError = DeleteModelproviderErrors[keyof DeleteModelproviderErrors];
+
+export type DeleteModelproviderResponses = {
+  /**
+   * Successful Response
+   */
+  204: void;
+};
+
+export type DeleteModelproviderResponse =
+  DeleteModelproviderResponses[keyof DeleteModelproviderResponses];
+
+export type GetModelproviderData = {
+  body?: never;
+  path: {
+    /**
+     * Provider Id
+     */
+    provider_id: string;
+  };
+  query?: never;
+  url: '/api/v1/models/providers/{provider_id}';
+};
+
+export type GetModelproviderErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type GetModelproviderError = GetModelproviderErrors[keyof GetModelproviderErrors];
+
+export type GetModelproviderResponses = {
+  /**
+   * Successful Response
+   */
+  200: ModelProviderResponse;
+};
+
+export type GetModelproviderResponse = GetModelproviderResponses[keyof GetModelproviderResponses];
+
+export type UpdateModelproviderData = {
+  body: ModelProviderUpdate;
+  path: {
+    /**
+     * Provider Id
+     */
+    provider_id: string;
+  };
+  query?: never;
+  url: '/api/v1/models/providers/{provider_id}';
+};
+
+export type UpdateModelproviderErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type UpdateModelproviderError = UpdateModelproviderErrors[keyof UpdateModelproviderErrors];
+
+export type UpdateModelproviderResponses = {
+  /**
+   * Successful Response
+   */
+  200: ModelProviderResponse;
+};
+
+export type UpdateModelproviderResponse =
+  UpdateModelproviderResponses[keyof UpdateModelproviderResponses];
+
 export type GetModelsData = {
   body?: never;
   path?: never;
   query?: never;
-  url: '/api/v1/system/models';
+  url: '/api/v1/models';
 };
 
 export type GetModelsErrors = {
@@ -4023,7 +4285,7 @@ export type CreateModelData = {
   body: ModelCreate;
   path?: never;
   query?: never;
-  url: '/api/v1/system/models';
+  url: '/api/v1/models';
 };
 
 export type CreateModelErrors = {
@@ -4057,7 +4319,7 @@ export type DeleteModelData = {
     model_name: string;
   };
   query?: never;
-  url: '/api/v1/system/models/{model_name}';
+  url: '/api/v1/models/{model_name}';
 };
 
 export type DeleteModelErrors = {
@@ -4091,7 +4353,7 @@ export type GetModelData = {
     model_name: string;
   };
   query?: never;
-  url: '/api/v1/system/models/{model_name}';
+  url: '/api/v1/models/{model_name}';
 };
 
 export type GetModelErrors = {
@@ -4125,7 +4387,7 @@ export type UpdateModelData = {
     model_name: string;
   };
   query?: never;
-  url: '/api/v1/system/models/{model_name}';
+  url: '/api/v1/models/{model_name}';
 };
 
 export type UpdateModelErrors = {
@@ -4156,7 +4418,7 @@ export type ListPromptsData = {
   query?: {
     active?: NullBooleanEnum;
   };
-  url: '/api/v1/system/prompts';
+  url: '/api/v1/prompts';
 };
 
 export type ListPromptsErrors = {
@@ -4186,7 +4448,7 @@ export type CreatePromptData = {
   body: PromptCreate;
   path?: never;
   query?: never;
-  url: '/api/v1/system/prompts';
+  url: '/api/v1/prompts';
 };
 
 export type CreatePromptErrors = {
@@ -4215,7 +4477,7 @@ export type GetSystemDefaultPromptData = {
   body?: never;
   path?: never;
   query?: never;
-  url: '/api/v1/system/prompts/system-default';
+  url: '/api/v1/prompts/system-default';
 };
 
 export type GetSystemDefaultPromptErrors = {
@@ -4244,7 +4506,7 @@ export type DeletePromptData = {
     prompt_id: string;
   };
   query?: never;
-  url: '/api/v1/system/prompts/{prompt_id}';
+  url: '/api/v1/prompts/{prompt_id}';
 };
 
 export type DeletePromptErrors = {
@@ -4276,7 +4538,7 @@ export type GetPromptData = {
     prompt_id: string;
   };
   query?: never;
-  url: '/api/v1/system/prompts/{prompt_id}';
+  url: '/api/v1/prompts/{prompt_id}';
 };
 
 export type GetPromptErrors = {
@@ -4310,7 +4572,7 @@ export type UpdatePromptData = {
     prompt_id: string;
   };
   query?: never;
-  url: '/api/v1/system/prompts/{prompt_id}';
+  url: '/api/v1/prompts/{prompt_id}';
 };
 
 export type UpdatePromptErrors = {
@@ -4335,86 +4597,66 @@ export type UpdatePromptResponses = {
 
 export type UpdatePromptResponse = UpdatePromptResponses[keyof UpdatePromptResponses];
 
-export type ListChatSuggestionsData = {
+export type GetSubscriptionsData = {
   body?: never;
   path?: never;
-  query?: {
-    /**
-     * Active Only
-     */
-    active_only?: boolean;
-  };
-  url: '/api/v1/system/chat-suggestions';
+  query?: never;
+  url: '/api/v1/subscriptions';
 };
 
-export type ListChatSuggestionsErrors = {
+export type GetSubscriptionsErrors = {
   /**
    * Not found
    */
   404: unknown;
-  /**
-   * Validation Error
-   */
-  422: HttpValidationError;
 };
 
-export type ListChatSuggestionsError = ListChatSuggestionsErrors[keyof ListChatSuggestionsErrors];
-
-export type ListChatSuggestionsResponses = {
+export type GetSubscriptionsResponses = {
   /**
-   * Response List Chat Suggestions
+   * Response Get Subscriptions
    * Successful Response
    */
-  200: Array<ChatSuggestionResponse>;
+  200: Array<SubscriptionResponse>;
 };
 
-export type ListChatSuggestionsResponse =
-  ListChatSuggestionsResponses[keyof ListChatSuggestionsResponses];
+export type GetSubscriptionsResponse = GetSubscriptionsResponses[keyof GetSubscriptionsResponses];
 
-export type CreateChatSuggestionData = {
-  body: ChatSuggestionCreate;
+export type GetEntitlementsData = {
+  body?: never;
   path?: never;
   query?: never;
-  url: '/api/v1/system/chat-suggestions';
+  url: '/api/v1/entitlements';
 };
 
-export type CreateChatSuggestionErrors = {
+export type GetEntitlementsErrors = {
   /**
    * Not found
    */
   404: unknown;
-  /**
-   * Validation Error
-   */
-  422: HttpValidationError;
 };
 
-export type CreateChatSuggestionError =
-  CreateChatSuggestionErrors[keyof CreateChatSuggestionErrors];
-
-export type CreateChatSuggestionResponses = {
+export type GetEntitlementsResponses = {
   /**
    * Successful Response
    */
-  201: ChatSuggestionResponse;
+  200: UserEntitlementsResponse;
 };
 
-export type CreateChatSuggestionResponse =
-  CreateChatSuggestionResponses[keyof CreateChatSuggestionResponses];
+export type GetEntitlementsResponse = GetEntitlementsResponses[keyof GetEntitlementsResponses];
 
-export type DeleteChatSuggestionData = {
+export type CheckEntitlementData = {
   body?: never;
   path: {
     /**
-     * Suggestion Id
+     * Entitlement Type
      */
-    suggestion_id: string;
+    entitlement_type: string;
   };
   query?: never;
-  url: '/api/v1/system/chat-suggestions/{suggestion_id}';
+  url: '/api/v1/entitlements/check/{entitlement_type}';
 };
 
-export type DeleteChatSuggestionErrors = {
+export type CheckEntitlementErrors = {
   /**
    * Not found
    */
@@ -4425,18 +4667,137 @@ export type DeleteChatSuggestionErrors = {
   422: HttpValidationError;
 };
 
-export type DeleteChatSuggestionError =
-  DeleteChatSuggestionErrors[keyof DeleteChatSuggestionErrors];
+export type CheckEntitlementError = CheckEntitlementErrors[keyof CheckEntitlementErrors];
 
-export type DeleteChatSuggestionResponses = {
+export type CheckEntitlementResponses = {
+  /**
+   * Successful Response
+   */
+  200: EntitlementCheckResponse;
+};
+
+export type CheckEntitlementResponse = CheckEntitlementResponses[keyof CheckEntitlementResponses];
+
+export type GetTokensData = {
+  body?: never;
+  path?: never;
+  query?: never;
+  url: '/api/v1/tokens';
+};
+
+export type GetTokensErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+};
+
+export type GetTokensResponses = {
+  /**
+   * Response Get Tokens
+   * Successful Response
+   */
+  200: Array<ApiTokenResponse>;
+};
+
+export type GetTokensResponse = GetTokensResponses[keyof GetTokensResponses];
+
+export type CreateTokenData = {
+  body: ApiTokenCreate;
+  path?: never;
+  query?: never;
+  url: '/api/v1/tokens';
+};
+
+export type CreateTokenErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type CreateTokenError = CreateTokenErrors[keyof CreateTokenErrors];
+
+export type CreateTokenResponses = {
+  /**
+   * Successful Response
+   */
+  201: ApiTokenResponse;
+};
+
+export type CreateTokenResponse = CreateTokenResponses[keyof CreateTokenResponses];
+
+export type DeleteTokenData = {
+  body?: never;
+  path: {
+    /**
+     * Token Id
+     */
+    token_id: string;
+  };
+  query?: never;
+  url: '/api/v1/tokens/{token_id}';
+};
+
+export type DeleteTokenErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type DeleteTokenError = DeleteTokenErrors[keyof DeleteTokenErrors];
+
+export type DeleteTokenResponses = {
   /**
    * Successful Response
    */
   204: void;
 };
 
-export type DeleteChatSuggestionResponse =
-  DeleteChatSuggestionResponses[keyof DeleteChatSuggestionResponses];
+export type DeleteTokenResponse = DeleteTokenResponses[keyof DeleteTokenResponses];
+
+export type UpdateTokenData = {
+  body: ApiTokenUpdate;
+  path: {
+    /**
+     * Token Id
+     */
+    token_id: string;
+  };
+  query?: never;
+  url: '/api/v1/tokens/{token_id}';
+};
+
+export type UpdateTokenErrors = {
+  /**
+   * Not found
+   */
+  404: unknown;
+  /**
+   * Validation Error
+   */
+  422: HttpValidationError;
+};
+
+export type UpdateTokenError = UpdateTokenErrors[keyof UpdateTokenErrors];
+
+export type UpdateTokenResponses = {
+  /**
+   * Successful Response
+   */
+  200: ApiTokenResponse;
+};
+
+export type UpdateTokenResponse = UpdateTokenResponses[keyof UpdateTokenResponses];
 
 export type ListOauthServicesData = {
   body?: never;
@@ -4944,35 +5305,11 @@ export type UpdateConfiguredProviderResponses = {
 export type UpdateConfiguredProviderResponse =
   UpdateConfiguredProviderResponses[keyof UpdateConfiguredProviderResponses];
 
-export type AdminListConfiguredProvidersData = {
-  body?: never;
-  path?: never;
-  query?: never;
-  url: '/api/v1/discovery/admin/configured-providers';
-};
-
-export type AdminListConfiguredProvidersErrors = {
-  /**
-   * Not found
-   */
-  404: unknown;
-};
-
-export type AdminListConfiguredProvidersResponses = {
-  /**
-   * Successful Response
-   */
-  200: ConfiguredProvidersListResponse;
-};
-
-export type AdminListConfiguredProvidersResponse =
-  AdminListConfiguredProvidersResponses[keyof AdminListConfiguredProvidersResponses];
-
 export type GetAllProviderVersionsData = {
   body?: never;
   path?: never;
   query?: never;
-  url: '/api/v1/discovery/admin/discovery/versions';
+  url: '/api/v1/discovery/versions';
 };
 
 export type GetAllProviderVersionsErrors = {
@@ -4998,7 +5335,7 @@ export type GetDeprecatedProviderConfigsData = {
   query?: {
     environment_id?: string;
   };
-  url: '/api/v1/discovery/admin/discovery/versions/deprecated';
+  url: '/api/v1/discovery/versions/deprecated';
 };
 
 export type GetDeprecatedProviderConfigsErrors = {
@@ -5034,7 +5371,7 @@ export type MigrateProviderConfigData = {
     provider_id: string;
   };
   query?: never;
-  url: '/api/v1/discovery/admin/discovery/versions/{provider_id}/migrate';
+  url: '/api/v1/discovery/versions/{provider_id}/migrate';
 };
 
 export type MigrateProviderConfigErrors = {
@@ -5067,7 +5404,7 @@ export type MigrateAllDeprecatedConfigsData = {
   query?: {
     environment_id?: string;
   };
-  url: '/api/v1/discovery/admin/discovery/versions/migrate-all';
+  url: '/api/v1/discovery/versions/migrate-all';
 };
 
 export type MigrateAllDeprecatedConfigsErrors = {
