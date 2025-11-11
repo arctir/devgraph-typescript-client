@@ -1130,7 +1130,7 @@ export const updateModel = <ThrowOnError extends boolean = false>(options: Optio
 
 /**
  * List Prompts
- * List all prompts for the environment.
+ * List all prompt templates for the environment, optionally filtered by active status
  */
 export const listPrompts = <ThrowOnError extends boolean = false>(options?: Options<ListPromptsData, ThrowOnError>) => {
     return (options?.client ?? _heyApiClient).get<ListPromptsResponses, ListPromptsErrors, ThrowOnError>({
@@ -1168,7 +1168,7 @@ export const createPrompt = <ThrowOnError extends boolean = false>(options: Opti
 
 /**
  * Get System Default Prompt
- * Get the built-in system default prompt.
+ * Retrieve the system default prompt template
  */
 export const getSystemDefaultPrompt = <ThrowOnError extends boolean = false>(options?: Options<GetSystemDefaultPromptData, ThrowOnError>) => {
     return (options?.client ?? _heyApiClient).get<GetSystemDefaultPromptResponses, GetSystemDefaultPromptErrors, ThrowOnError>({
