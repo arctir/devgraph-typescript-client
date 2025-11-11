@@ -48,7 +48,7 @@ jobs:
           npx @hey-api/openapi-ts \
             --input openapi.yaml \
             --output src/generated \
-            --client axios
+            --client fetch
           echo "✓ Generated TypeScript client"
 
       - name: Update client version
