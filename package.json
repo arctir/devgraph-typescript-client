@@ -1,0 +1,38 @@
+{
+  "name": "@arctir/devgraph-client",
+  "version": "0.1.0",
+  "description": "Auto-generated TypeScript client for Devgraph API",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arctir/devgraph-typescript-client.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "devgraph",
+    "typescript",
+    "api-client",
+    "sdk"
+  ],
+  "author": "Arctir",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@hey-api/openapi-ts": "^0.80.1",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+}
