@@ -58,7 +58,7 @@ export const createEntityDefinition = <ThrowOnError extends boolean = false>(opt
 
 /**
  * Delete an entity definition
- * Soft deletes an entity definition, all its versions, and optionally marks associated entities as orphans
+ * Delete an entity definition, all its versions, and optionally mark associated entities as orphans
  */
 export const deleteEntityDefinition = <ThrowOnError extends boolean = false>(options: Options<DeleteEntityDefinitionData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).delete<DeleteEntityDefinitionResponses, DeleteEntityDefinitionErrors, ThrowOnError>({
@@ -234,6 +234,7 @@ export const deleteEntityRelation = <ThrowOnError extends boolean = false>(optio
 
 /**
  * Create Entity Relation
+ * Create a relation between two entities in the knowledge graph
  */
 export const createEntityRelation = <ThrowOnError extends boolean = false>(options: Options<CreateEntityRelationData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<CreateEntityRelationResponses, CreateEntityRelationErrors, ThrowOnError>({
@@ -275,7 +276,7 @@ export const createEntityRelationsBulk = <ThrowOnError extends boolean = false>(
 
 /**
  * Post Chat Title
- * Generate a title for a chat based on the first message.
+ * Generate a title for a chat based on the first message
  */
 export const createChatTitle = <ThrowOnError extends boolean = false>(options: Options<CreateChatTitleData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<CreateChatTitleResponses, CreateChatTitleErrors, ThrowOnError>({
@@ -296,7 +297,7 @@ export const createChatTitle = <ThrowOnError extends boolean = false>(options: O
 
 /**
  * Delete Chats Bulk
- * Bulk delete multiple chat sessions.
+ * Delete multiple chat sessions in bulk
  */
 export const deleteChatsBulk = <ThrowOnError extends boolean = false>(options: Options<DeleteChatsBulkData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).delete<DeleteChatsBulkResponses, DeleteChatsBulkErrors, ThrowOnError>({
@@ -317,6 +318,7 @@ export const deleteChatsBulk = <ThrowOnError extends boolean = false>(options: O
 
 /**
  * Get Chats
+ * List all chat sessions for the authenticated user
  */
 export const getChats = <ThrowOnError extends boolean = false>(options?: Options<GetChatsData, ThrowOnError>) => {
     return (options?.client ?? _heyApiClient).get<GetChatsResponses, GetChatsErrors, ThrowOnError>({
@@ -333,6 +335,7 @@ export const getChats = <ThrowOnError extends boolean = false>(options?: Options
 
 /**
  * Create Chat
+ * Create a new chat session
  */
 export const createChat = <ThrowOnError extends boolean = false>(options: Options<CreateChatData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<CreateChatResponses, CreateChatErrors, ThrowOnError>({
@@ -353,6 +356,7 @@ export const createChat = <ThrowOnError extends boolean = false>(options: Option
 
 /**
  * Delete Chat
+ * Delete a chat session by ID
  */
 export const deleteChat = <ThrowOnError extends boolean = false>(options: Options<DeleteChatData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).delete<DeleteChatResponses, DeleteChatErrors, ThrowOnError>({
@@ -369,6 +373,7 @@ export const deleteChat = <ThrowOnError extends boolean = false>(options: Option
 
 /**
  * Get Chat
+ * Retrieve a specific chat session by ID
  */
 export const getChat = <ThrowOnError extends boolean = false>(options: Options<GetChatData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).get<GetChatResponses, GetChatErrors, ThrowOnError>({
@@ -385,6 +390,7 @@ export const getChat = <ThrowOnError extends boolean = false>(options: Options<G
 
 /**
  * Update Chat
+ * Update an existing chat session
  */
 export const updateChat = <ThrowOnError extends boolean = false>(options: Options<UpdateChatData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).put<UpdateChatResponses, UpdateChatErrors, ThrowOnError>({
@@ -405,6 +411,7 @@ export const updateChat = <ThrowOnError extends boolean = false>(options: Option
 
 /**
  * Get Chat Messages
+ * Retrieve all messages from a specific chat session
  */
 export const getChatMessages = <ThrowOnError extends boolean = false>(options: Options<GetChatMessagesData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).get<GetChatMessagesResponses, GetChatMessagesErrors, ThrowOnError>({
@@ -421,6 +428,7 @@ export const getChatMessages = <ThrowOnError extends boolean = false>(options: O
 
 /**
  * Post Chat Messages
+ * Add one or more messages to a chat session
  */
 export const postChatMessages = <ThrowOnError extends boolean = false>(options: Options<PostChatMessagesData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<PostChatMessagesResponses, PostChatMessagesErrors, ThrowOnError>({
@@ -441,7 +449,7 @@ export const postChatMessages = <ThrowOnError extends boolean = false>(options: 
 
 /**
  * List Chat Suggestions
- * List chat suggestions. Returns system-wide suggestions + environment/user-specific ones.
+ * List chat suggestions including system-wide and user-specific ones
  */
 export const listChatSuggestions = <ThrowOnError extends boolean = false>(options?: Options<ListChatSuggestionsData, ThrowOnError>) => {
     return (options?.client ?? _heyApiClient).get<ListChatSuggestionsResponses, ListChatSuggestionsErrors, ThrowOnError>({
@@ -458,7 +466,7 @@ export const listChatSuggestions = <ThrowOnError extends boolean = false>(option
 
 /**
  * Create Chat Suggestion
- * Create a new chat suggestion for the environment.
+ * Create a new chat suggestion for the environment
  */
 export const createChatSuggestion = <ThrowOnError extends boolean = false>(options: Options<CreateChatSuggestionData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<CreateChatSuggestionResponses, CreateChatSuggestionErrors, ThrowOnError>({
@@ -479,7 +487,7 @@ export const createChatSuggestion = <ThrowOnError extends boolean = false>(optio
 
 /**
  * Delete Chat Suggestion
- * Delete a chat suggestion. Can only delete user's own suggestions (not system ones).
+ * Delete a chat suggestion owned by the user
  */
 export const deleteChatSuggestion = <ThrowOnError extends boolean = false>(options: Options<DeleteChatSuggestionData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).delete<DeleteChatSuggestionResponses, DeleteChatSuggestionErrors, ThrowOnError>({
@@ -496,7 +504,7 @@ export const deleteChatSuggestion = <ThrowOnError extends boolean = false>(optio
 
 /**
  * Post Chat Completions
- * Handle chat completions requests.
+ * Create a chat completion with optional streaming response
  */
 export const createChatCompletions = <ThrowOnError extends boolean = false>(options: Options<CreateChatCompletionsData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<CreateChatCompletionsResponses, CreateChatCompletionsErrors, ThrowOnError>({
@@ -517,6 +525,7 @@ export const createChatCompletions = <ThrowOnError extends boolean = false>(opti
 
 /**
  * Get Environments
+ * List all environments accessible to the authenticated user
  */
 export const getEnvironments = <ThrowOnError extends boolean = false>(options?: Options<GetEnvironmentsData, ThrowOnError>) => {
     return (options?.client ?? _heyApiClient).get<GetEnvironmentsResponses, GetEnvironmentsErrors, ThrowOnError>({
@@ -533,6 +542,7 @@ export const getEnvironments = <ThrowOnError extends boolean = false>(options?: 
 
 /**
  * Create Environment
+ * Create a new environment with associated Clerk organization
  */
 export const createEnvironment = <ThrowOnError extends boolean = false>(options: Options<CreateEnvironmentData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<CreateEnvironmentResponses, CreateEnvironmentErrors, ThrowOnError>({
@@ -569,13 +579,7 @@ export const getEnvironmentStatus = <ThrowOnError extends boolean = false>(optio
 
 /**
  * Delete Environment
- * Soft delete an environment.
- *
- * This marks the environment as deleted (sets deleted_at timestamp) which triggers
- * the Kubernetes controller to clean up all associated resources (namespace, database, etc.).
- * The environment record is retained for the configured retention period for potential recovery.
- *
- * For permanent GDPR-compliant deletion, use the Admin API endpoint.
+ * Delete an environment with grace period for recovery
  */
 export const deleteEnvironment = <ThrowOnError extends boolean = false>(options: Options<DeleteEnvironmentData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).delete<DeleteEnvironmentResponses, DeleteEnvironmentErrors, ThrowOnError>({
@@ -592,7 +596,7 @@ export const deleteEnvironment = <ThrowOnError extends boolean = false>(options:
 
 /**
  * List Environment Users
- * List all users in an environment (organization members).
+ * List all users in an environment
  */
 export const listEnvironmentUsers = <ThrowOnError extends boolean = false>(options: Options<ListEnvironmentUsersData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).get<ListEnvironmentUsersResponses, ListEnvironmentUsersErrors, ThrowOnError>({
@@ -609,7 +613,7 @@ export const listEnvironmentUsers = <ThrowOnError extends boolean = false>(optio
 
 /**
  * Create Environment User
- * Create a new environment user by adding them to the Clerk organization.
+ * Create a new environment user by adding them to the Clerk organization
  */
 export const createEnvironmentUser = <ThrowOnError extends boolean = false>(options: Options<CreateEnvironmentUserData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<CreateEnvironmentUserResponses, CreateEnvironmentUserErrors, ThrowOnError>({
@@ -630,7 +634,7 @@ export const createEnvironmentUser = <ThrowOnError extends boolean = false>(opti
 
 /**
  * Get Pending Invitations
- * Get all pending invitations for an environment (users who have been invited but haven't joined yet).
+ * Get all pending invitations for an environment
  */
 export const getPendingInvitations = <ThrowOnError extends boolean = false>(options: Options<GetPendingInvitationsData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).get<GetPendingInvitationsResponses, GetPendingInvitationsErrors, ThrowOnError>({
@@ -647,7 +651,7 @@ export const getPendingInvitations = <ThrowOnError extends boolean = false>(opti
 
 /**
  * Delete Environment User
- * Remove a user from an environment (organization).
+ * Remove a user from an environment
  */
 export const deleteEnvironmentUser = <ThrowOnError extends boolean = false>(options: Options<DeleteEnvironmentUserData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).delete<DeleteEnvironmentUserResponses, DeleteEnvironmentUserErrors, ThrowOnError>({
@@ -664,7 +668,7 @@ export const deleteEnvironmentUser = <ThrowOnError extends boolean = false>(opti
 
 /**
  * Get Environment User
- * Get a specific environment user.
+ * Get a specific environment user by ID
  */
 export const getEnvironmentUser = <ThrowOnError extends boolean = false>(options: Options<GetEnvironmentUserData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).get<GetEnvironmentUserResponses, GetEnvironmentUserErrors, ThrowOnError>({
@@ -681,7 +685,7 @@ export const getEnvironmentUser = <ThrowOnError extends boolean = false>(options
 
 /**
  * Update Environment User
- * Update an environment user's role.
+ * Update an environment user's role
  */
 export const updateEnvironmentUser = <ThrowOnError extends boolean = false>(options: Options<UpdateEnvironmentUserData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).put<UpdateEnvironmentUserResponses, UpdateEnvironmentUserErrors, ThrowOnError>({
@@ -702,7 +706,7 @@ export const updateEnvironmentUser = <ThrowOnError extends boolean = false>(opti
 
 /**
  * Invite Environment User
- * Invite a user to an environment (organization).
+ * Invite a user to an environment
  */
 export const inviteEnvironmentUser = <ThrowOnError extends boolean = false>(options: Options<InviteEnvironmentUserData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<InviteEnvironmentUserResponses, InviteEnvironmentUserErrors, ThrowOnError>({
@@ -723,7 +727,7 @@ export const inviteEnvironmentUser = <ThrowOnError extends boolean = false>(opti
 
 /**
  * Bulk Invite Environment Users
- * Bulk invite multiple users to an environment (organization).
+ * Bulk invite multiple users to an environment
  */
 export const bulkInviteEnvironmentUsers = <ThrowOnError extends boolean = false>(options: Options<BulkInviteEnvironmentUsersData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<BulkInviteEnvironmentUsersResponses, BulkInviteEnvironmentUsersErrors, ThrowOnError>({
@@ -744,7 +748,7 @@ export const bulkInviteEnvironmentUsers = <ThrowOnError extends boolean = false>
 
 /**
  * Delete Environment Invitation
- * Revoke a pending invitation to an environment (organization).
+ * Revoke a pending invitation to an environment
  */
 export const deleteEnvironmentInvitation = <ThrowOnError extends boolean = false>(options: Options<DeleteEnvironmentInvitationData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).delete<DeleteEnvironmentInvitationResponses, DeleteEnvironmentInvitationErrors, ThrowOnError>({
@@ -761,7 +765,7 @@ export const deleteEnvironmentInvitation = <ThrowOnError extends boolean = false
 
 /**
  * Get Mcpendpoints
- * List all MCP Endpoint configurations for the authenticated user and environment.
+ * List all MCP endpoint configurations for the authenticated user and environment
  */
 export const getMcpendpoints = <ThrowOnError extends boolean = false>(options?: Options<GetMcpendpointsData, ThrowOnError>) => {
     return (options?.client ?? _heyApiClient).get<GetMcpendpointsResponses, GetMcpendpointsErrors, ThrowOnError>({
@@ -778,7 +782,7 @@ export const getMcpendpoints = <ThrowOnError extends boolean = false>(options?: 
 
 /**
  * Create Mcpendpoint
- * Create a new MCP Endpoint configuration.
+ * Create a new MCP endpoint configuration
  */
 export const createMcpendpoint = <ThrowOnError extends boolean = false>(options: Options<CreateMcpendpointData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<CreateMcpendpointResponses, CreateMcpendpointErrors, ThrowOnError>({
@@ -799,7 +803,7 @@ export const createMcpendpoint = <ThrowOnError extends boolean = false>(options:
 
 /**
  * Delete Mcpendpoint
- * Delete a specific MCP Endpoint configuration by ID.
+ * Delete a specific MCP endpoint configuration by ID
  */
 export const deleteMcpendpoint = <ThrowOnError extends boolean = false>(options: Options<DeleteMcpendpointData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).delete<DeleteMcpendpointResponses, DeleteMcpendpointErrors, ThrowOnError>({
@@ -816,7 +820,7 @@ export const deleteMcpendpoint = <ThrowOnError extends boolean = false>(options:
 
 /**
  * Get Mcpendpoint
- * Get a specific MCP Endpoint configuration by ID.
+ * Get a specific MCP endpoint configuration by ID
  */
 export const getMcpendpoint = <ThrowOnError extends boolean = false>(options: Options<GetMcpendpointData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).get<GetMcpendpointResponses, GetMcpendpointErrors, ThrowOnError>({
@@ -833,7 +837,7 @@ export const getMcpendpoint = <ThrowOnError extends boolean = false>(options: Op
 
 /**
  * Update Mcpendpoint
- * Update a specific MCP Endpoint configuration by ID.
+ * Update a specific MCP endpoint configuration by ID
  */
 export const updateMcpendpoint = <ThrowOnError extends boolean = false>(options: Options<UpdateMcpendpointData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).put<UpdateMcpendpointResponses, UpdateMcpendpointErrors, ThrowOnError>({
@@ -854,8 +858,7 @@ export const updateMcpendpoint = <ThrowOnError extends boolean = false>(options:
 
 /**
  * List Mcpendpoint Tools
- * List all available tools from a specific MCP Endpoint.
- * This interrogates the MCP server to discover its available tools.
+ * List all available tools from a specific MCP endpoint
  */
 export const listMcpendpointTools = <ThrowOnError extends boolean = false>(options: Options<ListMcpendpointToolsData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).get<ListMcpendpointToolsResponses, ListMcpendpointToolsErrors, ThrowOnError>({
@@ -872,7 +875,7 @@ export const listMcpendpointTools = <ThrowOnError extends boolean = false>(optio
 
 /**
  * Create Mcp Tool Association
- * Create an association between an MCP tool and an entity definition.
+ * Create an association between an MCP tool and an entity definition
  */
 export const createMcpToolAssociation = <ThrowOnError extends boolean = false>(options: Options<CreateMcpToolAssociationData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<CreateMcpToolAssociationResponses, CreateMcpToolAssociationErrors, ThrowOnError>({
@@ -893,7 +896,7 @@ export const createMcpToolAssociation = <ThrowOnError extends boolean = false>(o
 
 /**
  * Get Entity Tools
- * Get all MCP tools associated with an entity definition.
+ * Get all MCP tools associated with an entity definition
  */
 export const getEntityTools = <ThrowOnError extends boolean = false>(options: Options<GetEntityToolsData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).get<GetEntityToolsResponses, GetEntityToolsErrors, ThrowOnError>({
@@ -910,7 +913,7 @@ export const getEntityTools = <ThrowOnError extends boolean = false>(options: Op
 
 /**
  * Get Mcp Endpoint Entity Types
- * Get all entity types associated with an MCP endpoint's tools.
+ * Get all entity types associated with an MCP endpoint's tools
  */
 export const getMcpEndpointEntityTypes = <ThrowOnError extends boolean = false>(options: Options<GetMcpEndpointEntityTypesData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).get<GetMcpEndpointEntityTypesResponses, GetMcpEndpointEntityTypesErrors, ThrowOnError>({
@@ -927,7 +930,7 @@ export const getMcpEndpointEntityTypes = <ThrowOnError extends boolean = false>(
 
 /**
  * Delete Mcp Tool Association
- * Delete an MCP tool-entity association.
+ * Delete an MCP tool-entity association
  */
 export const deleteMcpToolAssociation = <ThrowOnError extends boolean = false>(options: Options<DeleteMcpToolAssociationData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).delete<DeleteMcpToolAssociationResponses, DeleteMcpToolAssociationErrors, ThrowOnError>({
@@ -944,7 +947,7 @@ export const deleteMcpToolAssociation = <ThrowOnError extends boolean = false>(o
 
 /**
  * Get Modelproviders
- * List all Model Provider configurations for the authenticated user and environment.
+ * List all model provider configurations for the authenticated user and environment
  */
 export const getModelproviders = <ThrowOnError extends boolean = false>(options?: Options<GetModelprovidersData, ThrowOnError>) => {
     return (options?.client ?? _heyApiClient).get<GetModelprovidersResponses, GetModelprovidersErrors, ThrowOnError>({
@@ -961,7 +964,7 @@ export const getModelproviders = <ThrowOnError extends boolean = false>(options?
 
 /**
  * Create Modelprovider
- * Create a new Model Provider configuration.
+ * Create a new model provider configuration
  */
 export const createModelprovider = <ThrowOnError extends boolean = false>(options: Options<CreateModelproviderData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<CreateModelproviderResponses, CreateModelproviderErrors, ThrowOnError>({
@@ -982,7 +985,7 @@ export const createModelprovider = <ThrowOnError extends boolean = false>(option
 
 /**
  * Delete Modelprovider
- * Delete a specific Model Provider configuration by ID.
+ * Delete a specific model provider configuration by ID
  */
 export const deleteModelprovider = <ThrowOnError extends boolean = false>(options: Options<DeleteModelproviderData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).delete<DeleteModelproviderResponses, DeleteModelproviderErrors, ThrowOnError>({
@@ -999,7 +1002,7 @@ export const deleteModelprovider = <ThrowOnError extends boolean = false>(option
 
 /**
  * Get Modelprovider
- * Get a specific Model Provider configuration by ID.
+ * Get a specific model provider configuration by ID
  */
 export const getModelprovider = <ThrowOnError extends boolean = false>(options: Options<GetModelproviderData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).get<GetModelproviderResponses, GetModelproviderErrors, ThrowOnError>({
@@ -1016,7 +1019,7 @@ export const getModelprovider = <ThrowOnError extends boolean = false>(options: 
 
 /**
  * Update Modelprovider
- * Update a specific Model Provider configuration by ID.
+ * Update a specific model provider configuration by ID
  */
 export const updateModelprovider = <ThrowOnError extends boolean = false>(options: Options<UpdateModelproviderData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).put<UpdateModelproviderResponses, UpdateModelproviderErrors, ThrowOnError>({
@@ -1075,7 +1078,7 @@ export const createModel = <ThrowOnError extends boolean = false>(options: Optio
 
 /**
  * Delete Model
- * Soft delete an AI model configuration by name
+ * Delete an AI model configuration by name
  */
 export const deleteModel = <ThrowOnError extends boolean = false>(options: Options<DeleteModelData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).delete<DeleteModelResponses, DeleteModelErrors, ThrowOnError>({
@@ -1185,7 +1188,7 @@ export const getSystemDefaultPrompt = <ThrowOnError extends boolean = false>(opt
 
 /**
  * Delete Prompt
- * Soft delete a prompt template by ID
+ * Delete a prompt template by ID
  */
 export const deletePrompt = <ThrowOnError extends boolean = false>(options: Options<DeletePromptData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).delete<DeletePromptResponses, DeletePromptErrors, ThrowOnError>({
@@ -1240,6 +1243,7 @@ export const updatePrompt = <ThrowOnError extends boolean = false>(options: Opti
 
 /**
  * Get Subscriptions
+ * List all subscriptions for the authenticated user
  */
 export const getSubscriptions = <ThrowOnError extends boolean = false>(options?: Options<GetSubscriptionsData, ThrowOnError>) => {
     return (options?.client ?? _heyApiClient).get<GetSubscriptionsResponses, GetSubscriptionsErrors, ThrowOnError>({
@@ -1256,7 +1260,7 @@ export const getSubscriptions = <ThrowOnError extends boolean = false>(options?:
 
 /**
  * Get Entitlements
- * Get all entitlements and current usage for the authenticated user.
+ * Get all entitlements and current usage for the authenticated user
  */
 export const getEntitlements = <ThrowOnError extends boolean = false>(options?: Options<GetEntitlementsData, ThrowOnError>) => {
     return (options?.client ?? _heyApiClient).get<GetEntitlementsResponses, GetEntitlementsErrors, ThrowOnError>({
@@ -1273,10 +1277,7 @@ export const getEntitlements = <ThrowOnError extends boolean = false>(options?: 
 
 /**
  * Check Entitlement
- * Check a specific entitlement for the authenticated user.
- *
- * For numeric limits (e.g., max_environments), returns current usage and remaining quota.
- * For boolean features (e.g., enable_sso), returns whether the feature is enabled.
+ * Check a specific entitlement for the authenticated user
  */
 export const checkEntitlement = <ThrowOnError extends boolean = false>(options: Options<CheckEntitlementData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).get<CheckEntitlementResponses, CheckEntitlementErrors, ThrowOnError>({
@@ -1293,7 +1294,7 @@ export const checkEntitlement = <ThrowOnError extends boolean = false>(options: 
 
 /**
  * Get Tokens
- * Get all API tokens for the authenticated user.
+ * List all API tokens for the authenticated user
  */
 export const getTokens = <ThrowOnError extends boolean = false>(options?: Options<GetTokensData, ThrowOnError>) => {
     return (options?.client ?? _heyApiClient).get<GetTokensResponses, GetTokensErrors, ThrowOnError>({
@@ -1310,6 +1311,7 @@ export const getTokens = <ThrowOnError extends boolean = false>(options?: Option
 
 /**
  * Create Token
+ * Create a new API token for the authenticated user
  */
 export const createToken = <ThrowOnError extends boolean = false>(options: Options<CreateTokenData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<CreateTokenResponses, CreateTokenErrors, ThrowOnError>({
@@ -1330,7 +1332,7 @@ export const createToken = <ThrowOnError extends boolean = false>(options: Optio
 
 /**
  * Delete Token
- * Delete a specific API token by ID.
+ * Delete an API token
  */
 export const deleteToken = <ThrowOnError extends boolean = false>(options: Options<DeleteTokenData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).delete<DeleteTokenResponses, DeleteTokenErrors, ThrowOnError>({
@@ -1347,7 +1349,7 @@ export const deleteToken = <ThrowOnError extends boolean = false>(options: Optio
 
 /**
  * Update Token
- * Update a specific API token by ID.
+ * Update an existing API token
  */
 export const updateToken = <ThrowOnError extends boolean = false>(options: Options<UpdateTokenData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).put<UpdateTokenResponses, UpdateTokenErrors, ThrowOnError>({
@@ -1368,6 +1370,7 @@ export const updateToken = <ThrowOnError extends boolean = false>(options: Optio
 
 /**
  * List Oauth Services
+ * List all OAuth service configurations
  */
 export const listOauthServices = <ThrowOnError extends boolean = false>(options?: Options<ListOauthServicesData, ThrowOnError>) => {
     return (options?.client ?? _heyApiClient).get<ListOauthServicesResponses, ListOauthServicesErrors, ThrowOnError>({
@@ -1384,6 +1387,7 @@ export const listOauthServices = <ThrowOnError extends boolean = false>(options?
 
 /**
  * Create Oauth Service
+ * Create a new OAuth service configuration
  */
 export const createOauthService = <ThrowOnError extends boolean = false>(options: Options<CreateOauthServiceData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<CreateOauthServiceResponses, CreateOauthServiceErrors, ThrowOnError>({
@@ -1404,6 +1408,7 @@ export const createOauthService = <ThrowOnError extends boolean = false>(options
 
 /**
  * Delete Oauth Service
+ * Delete an OAuth service configuration
  */
 export const deleteOauthService = <ThrowOnError extends boolean = false>(options: Options<DeleteOauthServiceData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).delete<DeleteOauthServiceResponses, DeleteOauthServiceErrors, ThrowOnError>({
@@ -1420,6 +1425,7 @@ export const deleteOauthService = <ThrowOnError extends boolean = false>(options
 
 /**
  * Get Oauth Service
+ * Get a specific OAuth service configuration by ID
  */
 export const getOauthService = <ThrowOnError extends boolean = false>(options: Options<GetOauthServiceData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).get<GetOauthServiceResponses, GetOauthServiceErrors, ThrowOnError>({
@@ -1436,6 +1442,7 @@ export const getOauthService = <ThrowOnError extends boolean = false>(options: O
 
 /**
  * Update Oauth Service
+ * Update an existing OAuth service configuration
  */
 export const updateOauthService = <ThrowOnError extends boolean = false>(options: Options<UpdateOauthServiceData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).put<UpdateOauthServiceResponses, UpdateOauthServiceErrors, ThrowOnError>({
@@ -1456,6 +1463,7 @@ export const updateOauthService = <ThrowOnError extends boolean = false>(options
 
 /**
  * Get Authorization Url
+ * Generate an OAuth authorization URL for a service
  */
 export const getOauthAuthorizationUrl = <ThrowOnError extends boolean = false>(options: Options<GetOauthAuthorizationUrlData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<GetOauthAuthorizationUrlResponses, GetOauthAuthorizationUrlErrors, ThrowOnError>({
@@ -1476,6 +1484,7 @@ export const getOauthAuthorizationUrl = <ThrowOnError extends boolean = false>(o
 
 /**
  * Exchange Code For Token
+ * Exchange an authorization code for an access token
  */
 export const exchangeOauthToken = <ThrowOnError extends boolean = false>(options: Options<ExchangeOauthTokenData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<ExchangeOauthTokenResponses, ExchangeOauthTokenErrors, ThrowOnError>({
@@ -1496,6 +1505,7 @@ export const exchangeOauthToken = <ThrowOnError extends boolean = false>(options
 
 /**
  * List User Tokens
+ * List all OAuth tokens for the authenticated user
  */
 export const listOauthTokens = <ThrowOnError extends boolean = false>(options?: Options<ListOauthTokensData, ThrowOnError>) => {
     return (options?.client ?? _heyApiClient).get<ListOauthTokensResponses, ListOauthTokensErrors, ThrowOnError>({
@@ -1512,6 +1522,7 @@ export const listOauthTokens = <ThrowOnError extends boolean = false>(options?: 
 
 /**
  * Revoke Token
+ * Revoke an OAuth token for a service
  */
 export const revokeOauthToken = <ThrowOnError extends boolean = false>(options: Options<RevokeOauthTokenData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).delete<RevokeOauthTokenResponses, RevokeOauthTokenErrors, ThrowOnError>({
@@ -1528,10 +1539,7 @@ export const revokeOauthToken = <ThrowOnError extends boolean = false>(options: 
 
 /**
  * List Discovery Providers
- * List all available discovery provider types with their configuration schemas.
- *
- * This endpoint discovers all registered discovery providers using the plugin system
- * and returns their metadata including JSON schemas for configuration.
+ * List all available discovery provider types with their configuration schemas
  */
 export const listDiscoveryProviders = <ThrowOnError extends boolean = false>(options?: Options<ListDiscoveryProvidersData, ThrowOnError>) => {
     return (options?.client ?? _heyApiClient).get<ListDiscoveryProvidersResponses, ListDiscoveryProvidersErrors, ThrowOnError>({
@@ -1548,13 +1556,7 @@ export const listDiscoveryProviders = <ThrowOnError extends boolean = false>(opt
 
 /**
  * Get Discovery Provider Config Schema
- * Get the configuration schema for a specific discovery provider type.
- *
- * Args:
- * provider_type: The type identifier of the provider (e.g., 'github', 'gitlab')
- *
- * Returns:
- * JSON schema for the provider's configuration
+ * Get the configuration schema for a specific discovery provider type
  */
 export const getDiscoveryProviderConfigSchema = <ThrowOnError extends boolean = false>(options: Options<GetDiscoveryProviderConfigSchemaData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).get<GetDiscoveryProviderConfigSchemaResponses, GetDiscoveryProviderConfigSchemaErrors, ThrowOnError>({
@@ -1613,7 +1615,7 @@ export const createConfiguredProvider = <ThrowOnError extends boolean = false>(o
 
 /**
  * Delete Configured Provider
- * Delete a configured discovery provider.
+ * Delete a configured discovery provider
  */
 export const deleteConfiguredProvider = <ThrowOnError extends boolean = false>(options: Options<DeleteConfiguredProviderData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).delete<DeleteConfiguredProviderResponses, DeleteConfiguredProviderErrors, ThrowOnError>({
@@ -1724,7 +1726,7 @@ export const migrateProviderConfig = <ThrowOnError extends boolean = false>(opti
 
 /**
  * Migrate All Deprecated Configs
- * Batch migrate all configs using deprecated versions.
+ * Batch migrate all configs using deprecated versions
  */
 export const migrateAllDeprecatedConfigs = <ThrowOnError extends boolean = false>(options?: Options<MigrateAllDeprecatedConfigsData, ThrowOnError>) => {
     return (options?.client ?? _heyApiClient).post<MigrateAllDeprecatedConfigsResponses, MigrateAllDeprecatedConfigsErrors, ThrowOnError>({
