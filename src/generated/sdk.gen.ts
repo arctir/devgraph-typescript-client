@@ -58,7 +58,7 @@ export const createEntityDefinition = <ThrowOnError extends boolean = false>(opt
 
 /**
  * Delete an entity definition
- * Deletes an entity definition and all its versions. Requires 'delete:entitydefinitions' permission.
+ * Soft deletes an entity definition, all its versions, and optionally marks associated entities as orphans
  */
 export const deleteEntityDefinition = <ThrowOnError extends boolean = false>(options: Options<DeleteEntityDefinitionData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).delete<DeleteEntityDefinitionResponses, DeleteEntityDefinitionErrors, ThrowOnError>({
