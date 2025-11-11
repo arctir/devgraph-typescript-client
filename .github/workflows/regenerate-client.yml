@@ -47,8 +47,7 @@ jobs:
           npm install
           npx @hey-api/openapi-ts \
             --input openapi.yaml \
-            --output src/generated \
-            --client fetch
+            --output src/generated
           echo "✓ Generated TypeScript client"
 
       - name: Update client version
