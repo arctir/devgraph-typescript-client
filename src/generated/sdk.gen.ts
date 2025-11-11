@@ -1202,7 +1202,7 @@ export const deletePrompt = <ThrowOnError extends boolean = false>(options: Opti
 
 /**
  * Get Prompt
- * Get a specific prompt by ID.
+ * Retrieve a specific prompt template by ID
  */
 export const getPrompt = <ThrowOnError extends boolean = false>(options: Options<GetPromptData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).get<GetPromptResponses, GetPromptErrors, ThrowOnError>({
