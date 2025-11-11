@@ -1219,7 +1219,7 @@ export const getPrompt = <ThrowOnError extends boolean = false>(options: Options
 
 /**
  * Update Prompt
- * Update a specific prompt by ID.
+ * Update an existing prompt template by ID
  */
 export const updatePrompt = <ThrowOnError extends boolean = false>(options: Options<UpdatePromptData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).put<UpdatePromptResponses, UpdatePromptErrors, ThrowOnError>({
