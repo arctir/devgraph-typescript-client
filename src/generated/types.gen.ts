@@ -4426,8 +4426,10 @@ export type DeletePromptResponses = {
     /**
      * Successful Response
      */
-    200: unknown;
+    204: void;
 };
+
+export type DeletePromptResponse = DeletePromptResponses[keyof DeletePromptResponses];
 
 export type GetPromptData = {
     body?: never;

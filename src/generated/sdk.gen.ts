@@ -1185,7 +1185,7 @@ export const getSystemDefaultPrompt = <ThrowOnError extends boolean = false>(opt
 
 /**
  * Delete Prompt
- * Delete a specific prompt by ID.
+ * Soft delete a prompt template by ID
  */
 export const deletePrompt = <ThrowOnError extends boolean = false>(options: Options<DeletePromptData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).delete<DeletePromptResponses, DeletePromptErrors, ThrowOnError>({
