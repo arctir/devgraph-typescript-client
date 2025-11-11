@@ -1147,7 +1147,7 @@ export const listPrompts = <ThrowOnError extends boolean = false>(options?: Opti
 
 /**
  * Create Prompt
- * Create a new prompt for the environment.
+ * Create a new prompt template in the environment
  */
 export const createPrompt = <ThrowOnError extends boolean = false>(options: Options<CreatePromptData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<CreatePromptResponses, CreatePromptErrors, ThrowOnError>({
