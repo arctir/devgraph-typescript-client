@@ -2793,6 +2793,104 @@ export type CreateEntityRelationsBulkResponses = {
 
 export type CreateEntityRelationsBulkResponse = CreateEntityRelationsBulkResponses[keyof CreateEntityRelationsBulkResponses];
 
+export type ListChatSuggestionsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Active Only
+         */
+        active_only?: boolean;
+    };
+    url: '/api/v1/chats/suggestions';
+};
+
+export type ListChatSuggestionsErrors = {
+    /**
+     * Not found
+     */
+    404: unknown;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type ListChatSuggestionsError = ListChatSuggestionsErrors[keyof ListChatSuggestionsErrors];
+
+export type ListChatSuggestionsResponses = {
+    /**
+     * Response List Chat Suggestions
+     * Successful Response
+     */
+    200: Array<ChatSuggestionResponse>;
+};
+
+export type ListChatSuggestionsResponse = ListChatSuggestionsResponses[keyof ListChatSuggestionsResponses];
+
+export type CreateChatSuggestionData = {
+    body: ChatSuggestionCreate;
+    path?: never;
+    query?: never;
+    url: '/api/v1/chats/suggestions';
+};
+
+export type CreateChatSuggestionErrors = {
+    /**
+     * Not found
+     */
+    404: unknown;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type CreateChatSuggestionError = CreateChatSuggestionErrors[keyof CreateChatSuggestionErrors];
+
+export type CreateChatSuggestionResponses = {
+    /**
+     * Successful Response
+     */
+    201: ChatSuggestionResponse;
+};
+
+export type CreateChatSuggestionResponse = CreateChatSuggestionResponses[keyof CreateChatSuggestionResponses];
+
+export type DeleteChatSuggestionData = {
+    body?: never;
+    path: {
+        /**
+         * Suggestion Id
+         */
+        suggestion_id: string;
+    };
+    query?: never;
+    url: '/api/v1/chats/suggestions/{suggestion_id}';
+};
+
+export type DeleteChatSuggestionErrors = {
+    /**
+     * Not found
+     */
+    404: unknown;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type DeleteChatSuggestionError = DeleteChatSuggestionErrors[keyof DeleteChatSuggestionErrors];
+
+export type DeleteChatSuggestionResponses = {
+    /**
+     * Successful Response
+     */
+    204: void;
+};
+
+export type DeleteChatSuggestionResponse = DeleteChatSuggestionResponses[keyof DeleteChatSuggestionResponses];
+
 export type CreateChatTitleData = {
     body: ChatTitleRequest;
     path?: never;
@@ -3100,104 +3198,6 @@ export type PostChatMessagesResponses = {
 };
 
 export type PostChatMessagesResponse = PostChatMessagesResponses[keyof PostChatMessagesResponses];
-
-export type ListChatSuggestionsData = {
-    body?: never;
-    path?: never;
-    query?: {
-        /**
-         * Active Only
-         */
-        active_only?: boolean;
-    };
-    url: '/api/v1/chats/suggestions';
-};
-
-export type ListChatSuggestionsErrors = {
-    /**
-     * Not found
-     */
-    404: unknown;
-    /**
-     * Validation Error
-     */
-    422: HttpValidationError;
-};
-
-export type ListChatSuggestionsError = ListChatSuggestionsErrors[keyof ListChatSuggestionsErrors];
-
-export type ListChatSuggestionsResponses = {
-    /**
-     * Response List Chat Suggestions
-     * Successful Response
-     */
-    200: Array<ChatSuggestionResponse>;
-};
-
-export type ListChatSuggestionsResponse = ListChatSuggestionsResponses[keyof ListChatSuggestionsResponses];
-
-export type CreateChatSuggestionData = {
-    body: ChatSuggestionCreate;
-    path?: never;
-    query?: never;
-    url: '/api/v1/chats/suggestions';
-};
-
-export type CreateChatSuggestionErrors = {
-    /**
-     * Not found
-     */
-    404: unknown;
-    /**
-     * Validation Error
-     */
-    422: HttpValidationError;
-};
-
-export type CreateChatSuggestionError = CreateChatSuggestionErrors[keyof CreateChatSuggestionErrors];
-
-export type CreateChatSuggestionResponses = {
-    /**
-     * Successful Response
-     */
-    201: ChatSuggestionResponse;
-};
-
-export type CreateChatSuggestionResponse = CreateChatSuggestionResponses[keyof CreateChatSuggestionResponses];
-
-export type DeleteChatSuggestionData = {
-    body?: never;
-    path: {
-        /**
-         * Suggestion Id
-         */
-        suggestion_id: string;
-    };
-    query?: never;
-    url: '/api/v1/chats/suggestions/{suggestion_id}';
-};
-
-export type DeleteChatSuggestionErrors = {
-    /**
-     * Not found
-     */
-    404: unknown;
-    /**
-     * Validation Error
-     */
-    422: HttpValidationError;
-};
-
-export type DeleteChatSuggestionError = DeleteChatSuggestionErrors[keyof DeleteChatSuggestionErrors];
-
-export type DeleteChatSuggestionResponses = {
-    /**
-     * Successful Response
-     */
-    204: void;
-};
-
-export type DeleteChatSuggestionResponse = DeleteChatSuggestionResponses[keyof DeleteChatSuggestionResponses];
 
 export type CreateChatCompletionsData = {
     body: ChatCompletionRequest;
