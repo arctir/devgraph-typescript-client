@@ -286,7 +286,7 @@ export const listChatSuggestions = <ThrowOnError extends boolean = false>(option
                 type: 'http'
             }
         ],
-        url: '/api/v1/chats/suggestions',
+        url: '/api/v1/chat/suggestions',
         ...options
     });
 };
@@ -303,7 +303,7 @@ export const createChatSuggestion = <ThrowOnError extends boolean = false>(optio
                 type: 'http'
             }
         ],
-        url: '/api/v1/chats/suggestions',
+        url: '/api/v1/chat/suggestions',
         ...options,
         headers: {
             'Content-Type': 'application/json',
@@ -324,7 +324,7 @@ export const deleteChatSuggestion = <ThrowOnError extends boolean = false>(optio
                 type: 'http'
             }
         ],
-        url: '/api/v1/chats/suggestions/{suggestion_id}',
+        url: '/api/v1/chat/suggestions/{suggestion_id}',
         ...options
     });
 };

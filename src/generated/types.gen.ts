@@ -2802,7 +2802,7 @@ export type ListChatSuggestionsData = {
          */
         active_only?: boolean;
     };
-    url: '/api/v1/chats/suggestions';
+    url: '/api/v1/chat/suggestions';
 };
 
 export type ListChatSuggestionsErrors = {
@@ -2832,7 +2832,7 @@ export type CreateChatSuggestionData = {
     body: ChatSuggestionCreate;
     path?: never;
     query?: never;
-    url: '/api/v1/chats/suggestions';
+    url: '/api/v1/chat/suggestions';
 };
 
 export type CreateChatSuggestionErrors = {
@@ -2866,7 +2866,7 @@ export type DeleteChatSuggestionData = {
         suggestion_id: string;
     };
     query?: never;
-    url: '/api/v1/chats/suggestions/{suggestion_id}';
+    url: '/api/v1/chat/suggestions/{suggestion_id}';
 };
 
 export type DeleteChatSuggestionErrors = {
