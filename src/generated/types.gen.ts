@@ -2011,6 +2011,23 @@ export type ProviderVersionInfo = {
 };
 
 /**
+ * RendererManifest
+ * Manifest describing an allowed renderer domain.
+ */
+export type RendererManifest = {
+    /**
+     * Domain
+     */
+    domain: string;
+    /**
+     * Trusted
+     */
+    trusted: boolean;
+    capabilities?: Array<string>;
+    expiresAt?: number;
+};
+
+/**
  * ResponseFormat
  */
 export type ResponseFormat = {
@@ -2514,6 +2531,11 @@ export type GetEntityByUidData = {
          * Namespace
          */
         namespace?: string;
+        /**
+         * Depth
+         * Number of relationship hops to traverse (1-5). Higher values return more related entities but may be slower.
+         */
+        depth?: number;
     };
     url: '/api/v1/entities/uid/{uid}';
 };
@@ -4498,6 +4520,23 @@ export type UpdatePromptResponses = {
 };
 
 export type UpdatePromptResponse = UpdatePromptResponses[keyof UpdatePromptResponses];
+
+export type GetRendererAllowlistApiV1RenderersAllowlistGetData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/renderers/allowlist';
+};
+
+export type GetRendererAllowlistApiV1RenderersAllowlistGetResponses = {
+    /**
+     * Response Get Renderer Allowlist Api V1 Renderers Allowlist Get
+     * Successful Response
+     */
+    200: Array<RendererManifest>;
+};
+
+export type GetRendererAllowlistApiV1RenderersAllowlistGetResponse = GetRendererAllowlistApiV1RenderersAllowlistGetResponses[keyof GetRendererAllowlistApiV1RenderersAllowlistGetResponses];
 
 export type GetSubscriptionsData = {
     body?: never;
