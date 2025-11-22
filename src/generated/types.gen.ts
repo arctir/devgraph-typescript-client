@@ -1494,6 +1494,47 @@ export type McpToolEntityAssociationResponse = {
 };
 
 /**
+ * MCPToolInfo
+ * Information about a single MCP tool.
+ */
+export type McpToolInfo = {
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Original Name
+     */
+    original_name: string;
+    description?: string;
+};
+
+/**
+ * MCPToolsResponse
+ * Response containing all MCP tools grouped by server.
+ */
+export type McpToolsResponse = {
+    /**
+     * Tools
+     */
+    tools: {
+        [key: string]: Array<McpToolInfo>;
+    };
+    /**
+     * Total Tools
+     */
+    total_tools: number;
+    /**
+     * Total Endpoints
+     */
+    total_endpoints: number;
+    /**
+     * Load Time
+     */
+    load_time?: number;
+};
+
+/**
  * MessageRole
  * Message role.
  */
@@ -3887,6 +3928,29 @@ export type ListMcpendpointToolsResponses = {
 };
 
 export type ListMcpendpointToolsResponse = ListMcpendpointToolsResponses[keyof ListMcpendpointToolsResponses];
+
+export type ListAllMcpToolsData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/mcp/tools';
+};
+
+export type ListAllMcpToolsErrors = {
+    /**
+     * Not found
+     */
+    404: unknown;
+};
+
+export type ListAllMcpToolsResponses = {
+    /**
+     * Successful Response
+     */
+    200: McpToolsResponse;
+};
+
+export type ListAllMcpToolsResponse = ListAllMcpToolsResponses[keyof ListAllMcpToolsResponses];
 
 export type CreateMcpToolAssociationData = {
     body: McpToolEntityAssociationCreate;
