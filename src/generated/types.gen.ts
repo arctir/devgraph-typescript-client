@@ -1368,6 +1368,10 @@ export type McpEndpointCreate = {
     active?: boolean;
     allowed_tools?: Array<string>;
     denied_tools?: Array<string>;
+    /**
+     * Allow Renderers
+     */
+    allow_renderers?: boolean;
 };
 
 /**
@@ -1412,6 +1416,10 @@ export type McpEndpointResponse = {
     active?: boolean;
     allowed_tools?: Array<string>;
     denied_tools?: Array<string>;
+    /**
+     * Allow Renderers
+     */
+    allow_renderers?: boolean;
 };
 
 /**
@@ -1431,6 +1439,7 @@ export type McpEndpointUpdate = {
     active?: boolean;
     allowed_tools?: Array<string>;
     denied_tools?: Array<string>;
+    allow_renderers?: boolean;
 };
 
 /**

@@ -1262,13 +1262,17 @@ export const updatePrompt = <ThrowOnError extends boolean = false>(options: Opti
  * Get Renderer Allowlist
  * Get the list of allowed renderer domains.
  *
- * In production, this could be loaded from:
- * - Database
- * - Environment variables
- * - External config service
+ * Returns static allowlist plus dynamically loaded domains from
+ * MCP endpoints with allow_renderers enabled.
  */
 export const getRendererAllowlistApiV1RenderersAllowlistGet = <ThrowOnError extends boolean = false>(options?: Options<GetRendererAllowlistApiV1RenderersAllowlistGetData, ThrowOnError>) => {
     return (options?.client ?? _heyApiClient).get<GetRendererAllowlistApiV1RenderersAllowlistGetResponses, unknown, ThrowOnError>({
+        security: [
+            {
+                scheme: 'bearer',
+                type: 'http'
+            }
+        ],
         url: '/api/v1/renderers/allowlist',
         ...options
     });
