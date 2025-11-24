@@ -1180,6 +1180,25 @@ export type EnvironmentCreate = {
 };
 
 /**
+ * EnvironmentDiscoverySettingsResponse
+ */
+export type EnvironmentDiscoverySettingsResponse = {
+    /**
+     * Discovery Enabled
+     */
+    discovery_enabled: boolean;
+    discovery_image_id?: string;
+};
+
+/**
+ * EnvironmentDiscoverySettingsUpdate
+ */
+export type EnvironmentDiscoverySettingsUpdate = {
+    discovery_enabled?: boolean;
+    discovery_image_id?: string;
+};
+
+/**
  * EnvironmentResponse
  */
 export type EnvironmentResponse = {
@@ -3420,6 +3439,74 @@ export type DeleteEnvironmentResponses = {
 };
 
 export type DeleteEnvironmentResponse = DeleteEnvironmentResponses[keyof DeleteEnvironmentResponses];
+
+export type GetEnvironmentDiscoverySettingsData = {
+    body?: never;
+    path: {
+        /**
+         * Env Id
+         */
+        env_id: string;
+    };
+    query?: never;
+    url: '/api/v1/environments/{env_id}/discovery-settings';
+};
+
+export type GetEnvironmentDiscoverySettingsErrors = {
+    /**
+     * Not found
+     */
+    404: unknown;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetEnvironmentDiscoverySettingsError = GetEnvironmentDiscoverySettingsErrors[keyof GetEnvironmentDiscoverySettingsErrors];
+
+export type GetEnvironmentDiscoverySettingsResponses = {
+    /**
+     * Successful Response
+     */
+    200: EnvironmentDiscoverySettingsResponse;
+};
+
+export type GetEnvironmentDiscoverySettingsResponse = GetEnvironmentDiscoverySettingsResponses[keyof GetEnvironmentDiscoverySettingsResponses];
+
+export type UpdateEnvironmentDiscoverySettingsData = {
+    body: EnvironmentDiscoverySettingsUpdate;
+    path: {
+        /**
+         * Env Id
+         */
+        env_id: string;
+    };
+    query?: never;
+    url: '/api/v1/environments/{env_id}/discovery-settings';
+};
+
+export type UpdateEnvironmentDiscoverySettingsErrors = {
+    /**
+     * Not found
+     */
+    404: unknown;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type UpdateEnvironmentDiscoverySettingsError = UpdateEnvironmentDiscoverySettingsErrors[keyof UpdateEnvironmentDiscoverySettingsErrors];
+
+export type UpdateEnvironmentDiscoverySettingsResponses = {
+    /**
+     * Successful Response
+     */
+    200: EnvironmentDiscoverySettingsResponse;
+};
+
+export type UpdateEnvironmentDiscoverySettingsResponse = UpdateEnvironmentDiscoverySettingsResponses[keyof UpdateEnvironmentDiscoverySettingsResponses];
 
 export type ListEnvironmentUsersData = {
     body?: never;
