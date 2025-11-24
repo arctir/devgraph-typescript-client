@@ -732,6 +732,51 @@ export type DeprecatedProvidersResponse = {
 };
 
 /**
+ * DiscoveryImageListResponse
+ * Response for listing discovery images.
+ */
+export type DiscoveryImageListResponse = {
+    /**
+     * Images
+     */
+    images: Array<DiscoveryImageResponse>;
+    /**
+     * Count
+     */
+    count: number;
+};
+
+/**
+ * DiscoveryImageResponse
+ * Response for a discovery image.
+ */
+export type DiscoveryImageResponse = {
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Image
+     */
+    image: string;
+    /**
+     * Tag
+     */
+    tag: string;
+    digest: string;
+    description: string;
+    /**
+     * Is Default
+     */
+    is_default: boolean;
+    approved_by: string;
+    /**
+     * Approved At
+     */
+    approved_at: string;
+};
+
+/**
  * DiscoveryProviderMetadata
  * Metadata about a discovery provider.
  */
@@ -5506,6 +5551,29 @@ export type MigrateAllDeprecatedConfigsResponses = {
 };
 
 export type MigrateAllDeprecatedConfigsResponse = MigrateAllDeprecatedConfigsResponses[keyof MigrateAllDeprecatedConfigsResponses];
+
+export type ListDiscoveryImagesData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/discovery/images';
+};
+
+export type ListDiscoveryImagesErrors = {
+    /**
+     * Not found
+     */
+    404: unknown;
+};
+
+export type ListDiscoveryImagesResponses = {
+    /**
+     * Successful Response
+     */
+    200: DiscoveryImageListResponse;
+};
+
+export type ListDiscoveryImagesResponse = ListDiscoveryImagesResponses[keyof ListDiscoveryImagesResponses];
 
 export type ClientOptions = {
     baseUrl: `${string}://openapi.yaml` | (string & {});
