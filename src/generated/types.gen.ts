@@ -774,6 +774,11 @@ export type DiscoveryImageResponse = {
      * Approved At
      */
     approved_at: string;
+    /**
+     * Molecules
+     * Molecules in this image
+     */
+    molecules?: Array<MoleculeData>;
 };
 
 /**
@@ -799,7 +804,7 @@ export type DiscoveryProviderMetadata = {
     config_schema: {
         [key: string]: unknown;
     };
-    logo?: string;
+    logo?: unknown;
 };
 
 /**
@@ -1073,6 +1078,13 @@ export type EntityRelation = {
     relation: string;
     source: EntityReference;
     target: EntityReference;
+    metadata?: RelationMetadata;
+    /**
+     * Spec
+     */
+    spec?: {
+        [key: string]: unknown;
+    };
 };
 
 /**
@@ -1089,6 +1101,13 @@ export type EntityRelationResponse = {
     relation: string;
     source: EntityReferenceResponse;
     target: EntityReferenceResponse;
+    metadata?: RelationMetadata;
+    /**
+     * Spec
+     */
+    spec?: {
+        [key: string]: unknown;
+    };
 };
 
 /**
@@ -1733,6 +1752,66 @@ export type ModelUpdate = {
 };
 
 /**
+ * MoleculeData
+ * Molecule metadata from discovery pod.
+ */
+export type MoleculeData = {
+    /**
+     * Name
+     * Machine-readable molecule name
+     */
+    name: string;
+    /**
+     * Version
+     * Semantic version
+     */
+    version: string;
+    /**
+     * Display Name
+     * Human-readable name
+     */
+    display_name: string;
+    description?: string;
+    /**
+     * Capabilities
+     * Capabilities like discovery, mcp
+     */
+    capabilities?: Array<string>;
+    /**
+     * Entity Types
+     * Entity types created
+     */
+    entity_types?: Array<string>;
+    /**
+     * Relation Types
+     * Relation types created
+     */
+    relation_types?: Array<string>;
+    /**
+     * Requires Auth
+     * Whether auth is required
+     */
+    requires_auth?: boolean;
+    /**
+     * Auth Types
+     * Supported auth types
+     */
+    auth_types?: Array<string>;
+    homepage_url?: string;
+    docs_url?: string;
+    /**
+     * Deprecated
+     * Whether deprecated
+     */
+    deprecated?: boolean;
+    replacement?: string;
+    config_schema?: {
+        [key: string]: unknown;
+    };
+    logo?: unknown;
+};
+
+/**
  * NullBooleanEnum
  */
 export type NullBooleanEnum = 'null' | 'true' | 'false';
@@ -1932,6 +2011,27 @@ export type OAuthTokenResponse = {
 };
 
 /**
+ * OIDCConfigurationResponse
+ * OIDC configuration for CLI authentication.
+ *
+ * This provides the necessary information for the CLI to authenticate
+ * users via the configured OIDC provider (e.g., Clerk).
+ */
+export type OidcConfigurationResponse = {
+    /**
+     * Issuer Url
+     */
+    issuer_url: string;
+    /**
+     * Client Id
+     */
+    client_id: string;
+    authorization_endpoint?: string;
+    token_endpoint?: string;
+    jwks_uri?: string;
+};
+
+/**
  * OpenAIModelProviderCreate
  */
 export type OpenAiModelProviderCreate = {
@@ -2122,6 +2222,25 @@ export type ProviderVersionInfo = {
     removal_at?: string;
     deprecation_message?: string;
     days_until_removal?: number;
+};
+
+/**
+ * RelationMetadata
+ * Metadata for a relation, following Kubernetes-style conventions.
+ */
+export type RelationMetadata = {
+    /**
+     * Labels
+     */
+    labels?: {
+        [key: string]: string;
+    };
+    /**
+     * Annotations
+     */
+    annotations?: {
+        [key: string]: string;
+    };
 };
 
 /**
@@ -2865,6 +2984,53 @@ export type DeleteEntityRelationResponses = {
 };
 
 export type DeleteEntityRelationResponse = DeleteEntityRelationResponses[keyof DeleteEntityRelationResponses];
+
+export type ListEntityRelationsData = {
+    body?: never;
+    path?: never;
+    query: {
+        /**
+         * Namespace
+         */
+        namespace: string;
+        /**
+         * Filter by managed-by label
+         */
+        managed_by?: string;
+        /**
+         * Filter by source-type label
+         */
+        source_type?: string;
+        /**
+         * Filter by relation type
+         */
+        relation_type?: string;
+    };
+    url: '/api/v1/entities/relations';
+};
+
+export type ListEntityRelationsErrors = {
+    /**
+     * Not found
+     */
+    404: unknown;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type ListEntityRelationsError = ListEntityRelationsErrors[keyof ListEntityRelationsErrors];
+
+export type ListEntityRelationsResponses = {
+    /**
+     * Response List Entity Relations
+     * Successful Response
+     */
+    200: Array<EntityRelationResponse>;
+};
+
+export type ListEntityRelationsResponse = ListEntityRelationsResponses[keyof ListEntityRelationsResponses];
 
 export type CreateEntityRelationData = {
     body: EntityRelation;
@@ -4944,6 +5110,29 @@ export type UpdateTokenResponses = {
 };
 
 export type UpdateTokenResponse = UpdateTokenResponses[keyof UpdateTokenResponses];
+
+export type GetOidcConfigurationData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/oauth/oidc-config';
+};
+
+export type GetOidcConfigurationErrors = {
+    /**
+     * Not found
+     */
+    404: unknown;
+};
+
+export type GetOidcConfigurationResponses = {
+    /**
+     * Successful Response
+     */
+    200: OidcConfigurationResponse;
+};
+
+export type GetOidcConfigurationResponse = GetOidcConfigurationResponses[keyof GetOidcConfigurationResponses];
 
 export type ListOauthServicesData = {
     body?: never;
