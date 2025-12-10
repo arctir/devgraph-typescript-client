@@ -2751,6 +2751,55 @@ export type CreateEntitiesBulkResponses = {
 
 export type CreateEntitiesBulkResponse = CreateEntitiesBulkResponses[keyof CreateEntitiesBulkResponses];
 
+export type GetEntitiesByUidBatchData = {
+    body?: never;
+    path?: never;
+    query: {
+        /**
+         * Uids
+         * List of entity UIDs to fetch
+         */
+        uids: Array<string>;
+        /**
+         * Namespace
+         * Namespace to query
+         */
+        namespace?: string;
+        /**
+         * Depth
+         * Number of relationship hops to traverse (0-5). 0 = no relationships.
+         */
+        depth?: number;
+        /**
+         * Comma-separated list of fields to include (e.g., 'name,kind,spec.url'). If not specified, returns all fields.
+         */
+        fields?: string;
+    };
+    url: '/api/v1/entities/uid/batch';
+};
+
+export type GetEntitiesByUidBatchErrors = {
+    /**
+     * Not found
+     */
+    404: unknown;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetEntitiesByUidBatchError = GetEntitiesByUidBatchErrors[keyof GetEntitiesByUidBatchErrors];
+
+export type GetEntitiesByUidBatchResponses = {
+    /**
+     * Successful Response
+     */
+    200: EntityResultSetResponse;
+};
+
+export type GetEntitiesByUidBatchResponse = GetEntitiesByUidBatchResponses[keyof GetEntitiesByUidBatchResponses];
+
 export type GetEntityByUidData = {
     body?: never;
     path: {
@@ -2766,9 +2815,13 @@ export type GetEntityByUidData = {
         namespace?: string;
         /**
          * Depth
-         * Number of relationship hops to traverse (1-5). Higher values return more related entities but may be slower.
+         * Number of relationship hops to traverse (0-5). 0 = no relationships.
          */
         depth?: number;
+        /**
+         * Comma-separated list of fields to include (e.g., 'name,kind,spec.url'). If not specified, returns all fields.
+         */
+        fields?: string;
     };
     url: '/api/v1/entities/uid/{uid}';
 };
