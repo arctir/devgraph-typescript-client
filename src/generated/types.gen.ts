@@ -2272,6 +2272,54 @@ export type ResponseFormat = {
 };
 
 /**
+ * ScopeInfo
+ * Information about a single scope.
+ */
+export type ScopeInfo = {
+    /**
+     * Description
+     */
+    description: string;
+    /**
+     * Resource
+     */
+    resource: string;
+    /**
+     * Action
+     */
+    action: string;
+    /**
+     * Minimum Role
+     */
+    minimum_role: string;
+};
+
+/**
+ * ScopesResponse
+ * Response model for the scopes metadata endpoint.
+ */
+export type ScopesResponse = {
+    /**
+     * Scopes
+     */
+    scopes: {
+        [key: string]: ScopeInfo;
+    };
+    /**
+     * Resource Groups
+     */
+    resource_groups: {
+        [key: string]: Array<string>;
+    };
+    /**
+     * Roles
+     */
+    roles: {
+        [key: string]: Array<string>;
+    };
+};
+
+/**
  * SubscriptionResponse
  */
 export type SubscriptionResponse = {
@@ -2333,6 +2381,27 @@ export type ThinkingBlock = {
     additional_information?: {
         [key: string]: unknown;
     };
+};
+
+/**
+ * TokenIntrospectionResponse
+ * Response model for token introspection endpoint.
+ */
+export type TokenIntrospectionResponse = {
+    /**
+     * Active
+     */
+    active: boolean;
+    user?: string;
+    environment?: string;
+    /**
+     * Scopes
+     */
+    scopes: Array<string>;
+    /**
+     * Token Type
+     */
+    token_type?: string;
 };
 
 /**
@@ -2485,6 +2554,52 @@ export type XaiModelProviderResponse = {
      */
     default?: boolean;
 };
+
+export type GetScopesMetadataData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/auth/scopes';
+};
+
+export type GetScopesMetadataErrors = {
+    /**
+     * Not found
+     */
+    404: unknown;
+};
+
+export type GetScopesMetadataResponses = {
+    /**
+     * Successful Response
+     */
+    200: ScopesResponse;
+};
+
+export type GetScopesMetadataResponse = GetScopesMetadataResponses[keyof GetScopesMetadataResponses];
+
+export type IntrospectTokenData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/auth/token/introspect';
+};
+
+export type IntrospectTokenErrors = {
+    /**
+     * Not found
+     */
+    404: unknown;
+};
+
+export type IntrospectTokenResponses = {
+    /**
+     * Successful Response
+     */
+    200: TokenIntrospectionResponse;
+};
+
+export type IntrospectTokenResponse = IntrospectTokenResponses[keyof IntrospectTokenResponses];
 
 export type GetEntityDefinitionsData = {
     body?: never;
